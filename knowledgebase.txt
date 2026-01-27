@@ -1,0 +1,4873 @@
+================================================================================
+SAVEETHA LABS - COMPLETE MASTER KNOWLEDGE BASE
+FULL SOURCE DATA AND METADATA INDEX
+================================================================================
+
+NAME: BTA01-BiologyAndEnvironmentalScienceForEngineers
+URL: https://github.com/saveetha-labs/BTA01-BiologyAndEnvironmentalScienceForEngineers
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA02-CProgramming
+URL: https://github.com/saveetha-labs/CSA02-CProgramming
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA03-DataStructures
+URL: https://github.com/saveetha-labs/CSA03-DataStructures
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA04-OperatingSystems
+URL: https://github.com/saveetha-labs/CSA04-OperatingSystems
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA05-DatabaseManagementSystems
+URL: https://github.com/saveetha-labs/CSA05-DatabaseManagementSystems
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA06-DesignAndAnalysisOfAlgorithms
+URL: https://github.com/saveetha-labs/CSA06-DesignAndAnalysisOfAlgorithms
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA07-ComputerNetworks
+URL: https://github.com/saveetha-labs/CSA07-ComputerNetworks
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA08-PythonProgramming
+URL: https://github.com/saveetha-labs/CSA08-PythonProgramming
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA09-ProgrammingInJava
+URL: https://github.com/saveetha-labs/CSA09-ProgrammingInJava
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA10-SoftwareEngineering
+URL: https://github.com/saveetha-labs/CSA10-SoftwareEngineering
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA11-ObjectOrientedAnalysisAndDesign
+URL: https://github.com/saveetha-labs/CSA11-ObjectOrientedAnalysisAndDesign
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA12-ComputerArchitecture
+URL: https://github.com/saveetha-labs/CSA12-ComputerArchitecture
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA13-Theory-of-Computation
+URL: https://github.com/saveetha-labs/CSA13-Theory-of-Computation
+RESOURCE SUMMARY: Contains 57 files (1 .docx, 16 .c, 4 .cpp, 36 .noext)
+----------------------------------------
+
+FILE: TOC_Lab_Manual (1).docx
+--------------------
+[BINARY FILE: TOC_Lab_Manual (1).docx | SIZE: 1031305 bytes]
+--------------------
+
+FILE: programs\cfa A101A.c
+--------------------
+#include<stdio.h>
+#include<conio.h>
+int check(char *c,int l){
+	for(int i=0;i<l;i++){
+	if(!(c[i]=='0'||c[i]=='1'))	
+	return 0;
+	}
+}
+int main(){
+	char c[100];
+	printf("enter a string : ");
+	scanf("%s",c);
+	int l=strlen(c),invalid=0;
+	
+	if(check(c,l)){
+		for(int i=0;i<l-2;i++){
+			if(c[i]=='1'&&c[i+1]=='0'&&c[i+2]=='1')	{
+				printf("Aceepted");
+				break;
+			}
+				
+		}
+	}
+}
+--------------------
+
+FILE: programs\cfg 0A0 1A1.c
+--------------------
+#include<stdio.h>
+#include<conio.h>
+int check(char *c,int l){
+	for(int i=1;i<l-2;i++){
+	if(!(c[i]=='0'||c[i]=='1'))	
+	return 0;
+	}
+}
+int main(){
+	char c[100];
+	printf("enter a string : ");
+	scanf("%s",c);
+	int l=strlen(c),invalid=0;
+	if( (c[0]=='0'&&c[l-1]=='0')   ||   (c[0]=='1'&&c[l-1]=='1') ){
+		if(check(c,l))
+		printf("Accepted");
+		else
+		printf("NOt accepted");
+	}
+	else
+	printf("Not Accepted");
+}
+--------------------
+
+FILE: programs\CFG 0A0.c
+--------------------
+#include<stdio.h>
+#include<conio.h>
+int check(char *c,int l){
+	for(int i=1;i<l-2;i++){
+	if(!(c[i]=='0'||c[i]=='1'))	
+	return 0;
+	}
+}
+int main(){
+	char c[100];
+	printf("enter a string : ");
+	scanf("%s",c);
+	int l=strlen(c),invalid=0;
+	if(c[0]=='0'&&c[l-1]=='0'){
+		if(check(c,l))
+		printf("Accepted");
+		else
+		printf("NOt accepted");
+	}
+	else
+	printf("Not Accepted");
+}
+--------------------
+
+FILE: programs\cfg 0A1.c
+--------------------
+#include<stdio.h>
+#include<conio.h>
+int check(char *c,int l){
+	for(int i=1;i<l-2;i++){
+	if(!(c[i]=='0'||c[i]=='1'))	
+	return 0;
+	}
+}
+int main(){
+	char c[100];
+	printf("enter a string : ");
+	scanf("%s",c);
+	int l=strlen(c),invalid=0;
+	if(c[0]=='0'&&c[l-1]=='1'){
+		printf("SAtisfied");
+		if(check(c,l))
+		printf("Accepted");
+		else
+		printf("NOt accepted");
+	}
+	else
+	printf("Not Accepted");
+}
+--------------------
+
+FILE: programs\dfa start with a and end with a.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int t[3][2]={ { 1,3},{1,2},{1,2}};
+	char c[100];
+	int p=0,n=0,invalid=0;
+	printf("enter a string : ");
+	scanf("%s",c);
+	for(int i =0;i<strlen(c);i++){
+		if(c[i]=='a'){
+		printf("P=%d",p );
+		n= t[p][0];
+		p=n;
+		printf("N=%d\n",n );
+	}
+		else{
+		
+		n=t[p][1];
+		p=n;
+		}
+		
+	}
+	if(p==1)
+	printf("Accepted");
+	else
+	printf("not accepted");
+}
+--------------------
+
+FILE: programs\dfa start with a and end with b.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int main(){
+	int t[3][2]={ { 1,0},{1,2},{1,0}};
+	char c[100];
+	int p=0,n=0,invalid=0;
+	printf("enter a string : ");
+	scanf("%s",c);
+	for(int i =0;i<strlen(c);i++){
+		if(c[i]=='a'){
+		printf("P=%d",p );
+		n= t[p][0];
+		p=n;
+		printf("N=%d\n",n );
+	}
+		else{
+		n=t[p][1];
+		p=n;
+		}
+		
+	}
+	if(p==2)
+	printf("Accepted");
+	else
+	printf("not accepted");
+}
+--------------------
+
+FILE: programs\e closure.cpp
+--------------------
+#include <stdio.h>
+#define MAX_STATES 100
+int epsilonTransitions[MAX_STATES][MAX_STATES]; 
+int numStates;
+void findEpsilonClosure(int state, int closure[]) {
+    closure[state] = 1;
+    for (int i = 0; i < numStates; i++) {
+        if (epsilonTransitions[state][i] && !closure[i]) {
+            findEpsilonClosure(i, closure);
+        }
+    }
+}
+int main() {
+    printf("Enter the number of states in the NFA: ");
+    scanf("%d", &numStates);
+    for (int i = 0; i < numStates; i++) {
+        for (int j = 0; j < numStates; j++) {
+            epsilonTransitions[i][j] = 0;
+        }
+    }
+
+    printf("Enter epsilon transitions (state1 state2) (-1 -1 to stop):\n");
+    while (1) {
+        int from, to;
+        scanf("%d %d", &from, &to);
+        if (from == -1 && to == -1) break;
+        epsilonTransitions[from][to] = 1;
+    }
+    for (int state = 0; state < numStates; state++) {
+        int closure[MAX_STATES] = {0};
+        findEpsilonClosure(state, closure);
+
+        printf("Epsilon-closure of state %d: { ", state);
+        for (int i = 0; i < numStates; i++) {
+            if (closure[i]) {
+                printf("%d ", i);
+            }
+        }
+        printf("}\n");
+    }
+    return 0;
+}
+
+--------------------
+
+FILE: programs\g.cpp
+--------------------
+#include<stdio.h>
+int main(int argc, char *argv[]){ 
+ char a = 'P';
+ char b = 'x';
+ char c = (a  &  b) + '*';
+ char d = (a | b) - '-';
+ char e = (a ^ b) + '+'; 
+ printf("%c %c %c \n", c, d, e); 
+ return 0;
+}
+--------------------
+
+FILE: programs\nfa 0 1.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_STATES 10
+
+bool simulateNFA(char* input) {
+    int length = strlen(input);
+    if (length < 2) {
+        return false;
+    }
+    if (input[0] == '0' && input[length - 1] == '1') {
+        return true;
+    }
+    return false; 
+}
+int main() {
+    char input[100];
+    printf("Enter a binary string (only 0s and 1s): ");
+    scanf("%s", input);
+    for (int i = 0; i < strlen(input); i++) {
+        if (input[i] != '0' && input[i] != '1') {
+            printf("Invalid input! Only binary strings (0 and 1) are allowed.\n");
+            return 1;
+        }
+    }
+    if (simulateNFA(input)) {
+        printf("The string '%s' is accepted by the NFA.\n", input);
+    } else {
+        printf("The string '%s' is rejected by the NFA.\n", input);
+    }
+
+    return 0;
+}
+
+--------------------
+
+FILE: programs\nfa e closure.cpp
+--------------------
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_STATES 100
+
+int epsilonTransitions[MAX_STATES][MAX_STATES]; // Adjacency matrix for epsilon transitions
+bool epsilonClosure[MAX_STATES][MAX_STATES];    // To store epsilon closure
+int numStates;                                  // Number of states
+
+// Function to perform DFS for finding epsilon closure
+void findEpsilonClosure(int state, int closureState) {
+    for (int nextState = 0; nextState < numStates; nextState++) {
+        if (epsilonTransitions[state][nextState] && !epsilonClosure[closureState][nextState]) {
+            epsilonClosure[closureState][nextState] = true;
+            findEpsilonClosure(nextState, closureState); // Recursive DFS
+        }
+    }
+}
+
+int main() {
+    int numTransitions;
+    printf("Enter the number of states: ");
+    scanf("%d", &numStates);
+
+    printf("Enter the number of epsilon transitions: ");
+    scanf("%d", &numTransitions);
+
+    // Initialize the adjacency matrix and epsilon closure
+    for (int i = 0; i < numStates; i++) {
+        for (int j = 0; j < numStates; j++) {
+            epsilonTransitions[i][j] = 0;
+            epsilonClosure[i][j] = (i == j); // Start with each state in its own closure
+        }
+    }
+
+    printf("Enter the epsilon transitions (from to):\n");
+    for (int i = 0; i < numTransitions; i++) {
+        int from, to;
+        scanf("%d %d", &from, &to);
+        epsilonTransitions[from][to] = 1; // Mark the epsilon transition
+    }
+
+    // Calculate epsilon closure for each state
+    for (int i = 0; i < numStates; i++) {
+        findEpsilonClosure(i, i);
+    }
+
+    // Print the epsilon closures
+    printf("Epsilon closures:\n");
+    for (int i = 0; i < numStates; i++) {
+        printf("Epsilon closure of state %d: { ", i);
+        for (int j = 0; j < numStates; j++) {
+            if (epsilonClosure[i][j]) {
+                printf("%d ", j);
+            }
+        }
+        printf("}\n");
+    }
+
+    return 0;
+}
+
+--------------------
+
+FILE: programs\p.cpp
+--------------------
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n=5,i,j,k,c=1,c2=0,s,l;
+	for(i=1;i<=n;i++){
+		for(int s=n;s>=i;s--)
+			cout<<" ";
+		for(j=i;j>=1;j--)
+			cout<<c++;
+			
+			c2=c-2;
+			c=i+1;
+		for(l=i;l>1;l--)
+		cout<<c2--;
+		cout<<endl;
+		
+	}
+}
+--------------------
+
+FILE: s1\a,ac,bac
+--------------------
+[BINARY FILE: a,ac,bac | SIZE: 344 bytes]
+--------------------
+
+FILE: s1\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s1\aabb Tm
+--------------------
+[BINARY FILE: aabb Tm | SIZE: 947 bytes]
+--------------------
+
+FILE: s1\dfa.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char c[100];
+    printf(" Enter a string :");
+    scanf("%s" , c);
+    int l=strlen(c);
+    if(c[0]=='a'&&c[l-1]=='a' )
+    printf("Accept");
+    else
+    printf("Don't Accept");
+}
+--------------------
+
+FILE: s10\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s10\even a's
+--------------------
+[BINARY FILE: even a's | SIZE: 282 bytes]
+--------------------
+
+FILE: s10\tm a^n b^2n
+--------------------
+[BINARY FILE: tm a^n b^2n | SIZE: 1060 bytes]
+--------------------
+
+FILE: s11\a,ac,bac
+--------------------
+[BINARY FILE: a,ac,bac | SIZE: 344 bytes]
+--------------------
+
+FILE: s11\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s11\palindrome ababa
+--------------------
+[BINARY FILE: palindrome ababa | SIZE: 1277 bytes]
+--------------------
+
+FILE: s12\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s12\odd a's
+--------------------
+[BINARY FILE: odd a's | SIZE: 282 bytes]
+--------------------
+
+FILE: s12\tm addition
+--------------------
+[BINARY FILE: tm addition | SIZE: 1051 bytes]
+--------------------
+
+FILE: s2\aabb Tm
+--------------------
+[BINARY FILE: aabb Tm | SIZE: 947 bytes]
+--------------------
+
+FILE: s2\aabbbb pda
+--------------------
+[BINARY FILE: aabbbb pda | SIZE: 623 bytes]
+--------------------
+
+FILE: s2\dfa.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char c[100];
+    printf(" Enter a string :");
+    scanf("%s" , c);
+    int l=strlen(c);
+    if(c[0]!='0' || c[l-1]!='1')
+    printf("Don't Accept");
+    else
+    printf("Accept");
+}
+
+--------------------
+
+FILE: s2\start with a or b dfa
+--------------------
+[BINARY FILE: start with a or b dfa | SIZE: 330 bytes]
+--------------------
+
+FILE: s3\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s3\CFG 0A1.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+int checkSubstring(char *str, int start, int end) {
+    if (start >= end) {
+        return 1; 
+    }
+    if (str[start] == '0' || str[start] == '1') {
+        return checkSubstring(str, start + 1, end);
+    }
+    return 0;
+}
+int checkString(char *str, int start, int end) {
+    if (end - start < 2) {
+        return 0;
+    }
+    if (str[start] == '0' && str[end - 1] == '1') {
+        return checkSubstring(str, start + 1, end - 1);
+    }
+    return 0;
+}
+int main() {
+    char str[100];
+   printf("Enter a string: ");
+    scanf("%s", str);
+    int len = strlen(str);
+    if (checkString(str, 0, len)) {
+        printf("The string belongs to the language.\n");
+    } else {
+        printf("The string does not belong to the language.\n");
+    }
+    return 0;
+}
+
+--------------------
+
+FILE: s3\even a's
+--------------------
+[BINARY FILE: even a's | SIZE: 282 bytes]
+--------------------
+
+FILE: s3\tm a^n b^2n
+--------------------
+[BINARY FILE: tm a^n b^2n | SIZE: 1060 bytes]
+--------------------
+
+FILE: s4\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s4\e closure.c
+--------------------
+#include <stdio.h>
+#define MAX_STATES 100
+int epsilonTransitions[MAX_STATES][MAX_STATES]; 
+int numStates;
+void findEpsilonClosure(int state, int closure[]) {
+    closure[state] = 1;
+    for (int i = 0; i < numStates; i++) {
+        if (epsilonTransitions[state][i] && !closure[i]) {
+            findEpsilonClosure(i, closure);
+        }
+    }
+}
+int main() {
+    printf("Enter the number of states in the NFA: ");
+    scanf("%d", &numStates);
+    for (int i = 0; i < numStates; i++) {
+        for (int j = 0; j < numStates; j++) {
+            epsilonTransitions[i][j] = 0;
+        }
+    }
+
+    printf("Enter epsilon transitions (state1 state2) (-1 -1 to stop):\n");
+    while (1) {
+        int from, to;
+        scanf("%d %d", &from, &to);
+        if (from == -1 && to == -1) break;
+        epsilonTransitions[from][to] = 1;
+    }
+    for (int state = 0; state < numStates; state++) {
+        int closure[MAX_STATES] = {0};
+        findEpsilonClosure(state, closure);
+
+        printf("Epsilon-closure of state %d: { ", state);
+        for (int i = 0; i < numStates; i++) {
+            if (closure[i]) {
+                printf("%d ", i);
+            }
+        }
+        printf("}\n");
+    }
+    return 0;
+}
+
+--------------------
+
+FILE: s4\odd a's
+--------------------
+[BINARY FILE: odd a's | SIZE: 282 bytes]
+--------------------
+
+FILE: s4\tm addition
+--------------------
+[BINARY FILE: tm addition | SIZE: 1051 bytes]
+--------------------
+
+FILE: s5\a,ac,bac
+--------------------
+[BINARY FILE: a,ac,bac | SIZE: 344 bytes]
+--------------------
+
+FILE: s5\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s5\CFG 0A0 1A1.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int checksubstring(char *c, int s, int l){
+	for(int i=s;i<=l;i++){
+		if(!(c[s]=='0'||c[s]=='1'))
+		return 0;
+	}
+	return 1;
+}
+int main(){
+	char c[100];
+	printf("Enter a string :");
+	scanf("%s",c);
+	int l=strlen(c);
+	if(l<2)
+		printf("Not Accepted");
+	 
+	else{
+		if((c[0]=='0' && c[l-1]=='0')||(c[0] =='1'&&c[l-1]=='1' )){
+			printf("loop");
+			if(checksubstring(c,1,l-2))
+			 	printf("Accepted");
+			else
+			printf("not accepted");
+		}
+			else
+			printf("not accepted");
+	}
+--------------------
+
+FILE: s5\palindrome ababa
+--------------------
+[BINARY FILE: palindrome ababa | SIZE: 1277 bytes]
+--------------------
+
+FILE: s6\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s6\cfg 0A0.c
+--------------------
+#include<stdio.h>
+#include<string.h>
+int checksubstring(char *c, int s, int l){
+	for(int i=s;i<=l;i++){
+		if(!(c[s]=='0'||c[s]=='1'))
+		return 0;
+	}
+	return 1;
+}
+int main(){
+	char c[100];
+	printf("Enter a string :");
+	scanf("%s",c);
+	int l=strlen(c);
+	if(l<2)
+		printf("Not Accepted");
+	 
+	else{
+		if(c[0]=='0' && c[l-1]=='0'){
+			
+			if(checksubstring(c,1,l-2))
+			 	printf("Accepted");
+			else
+			printf("not accepted");
+		}
+			else
+			printf("not accepted");
+	}
+}
+--------------------
+
+FILE: s6\odd a's
+--------------------
+[BINARY FILE: odd a's | SIZE: 282 bytes]
+--------------------
+
+FILE: s6\tm addition
+--------------------
+[BINARY FILE: tm addition | SIZE: 1051 bytes]
+--------------------
+
+FILE: s7\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s7\cfg 0S1.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+int isValid(char *str, int start, int end) {
+    if (start > end) {
+        return 1;
+    }
+    if (str[start] == '0' && str[end] == '1') {
+        return isValid(str, start + 1, end - 1);
+    }
+    return 0;
+}
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+    int length = strlen(str);
+    if (isValid(str, 0, length - 1)) {
+        printf("The string belongs to the language defined by the CFG.\n");
+    } else {
+        printf("The string does not belong to the language defined by the CFG.\n");
+    }
+    return 0;
+}
+--------------------
+
+FILE: s7\dfa endwith ab
+--------------------
+[BINARY FILE: dfa endwith ab | SIZE: 569 bytes]
+--------------------
+
+FILE: s7\tm subtraction
+--------------------
+[BINARY FILE: tm subtraction | SIZE: 1077 bytes]
+--------------------
+
+FILE: s8\a,ac,bac
+--------------------
+[BINARY FILE: a,ac,bac | SIZE: 344 bytes]
+--------------------
+
+FILE: s8\aabb pda
+--------------------
+[BINARY FILE: aabb pda | SIZE: 526 bytes]
+--------------------
+
+FILE: s8\aabb Tm
+--------------------
+[BINARY FILE: aabb Tm | SIZE: 947 bytes]
+--------------------
+
+FILE: s8\CFG A101A.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+bool isDerivedFromA(const char *str, int start, int end) {
+    if (start > end) {
+        return true;
+    }
+    if (str[start] == '0' || str[start] == '1') {
+        return isDerivedFromA(str, start + 1, end);
+    }
+    return false;
+}
+bool isDerivedFromS(const char *str, int length) {
+    for (int i = 0; i <= length - 3; i++) {
+        if (str[i] == '1' && str[i + 1] == '0' && str[i + 2] == '1') {
+            if (isDerivedFromA(str, 0, i - 1)) {
+                if (isDerivedFromA(str, i + 3, length - 1)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+int main() {
+    char input[100];
+    printf("Enter a string: ");
+    scanf("%s", input);
+    int length = strlen(input);
+    if (isDerivedFromS(input, length)) {
+        printf("The string \"%s\" belongs to the language defined by the CFG.\n", input);
+    } else {
+        printf("The string \"%s\" does not belong to the language defined by the CFG.\n", input);
+    }
+    return 0;
+}
+--------------------
+
+FILE: s9\aabb Tm
+--------------------
+[BINARY FILE: aabb Tm | SIZE: 947 bytes]
+--------------------
+
+FILE: s9\aabbbb pda
+--------------------
+[BINARY FILE: aabbbb pda | SIZE: 623 bytes]
+--------------------
+
+FILE: s9\nfa aAb.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+bool checkString(const char *str) {
+    int length = strlen(str);
+    if (length < 2) {
+        return false;
+    }
+    if (str[0] == 'b' && str[length - 1] == 'a') {
+        return true;
+    } else {
+        return false;
+    }
+}
+int main() {
+    char input[100];
+    printf("Enter a string: ");
+    scanf("%s", input);
+    if (checkString(input)) {
+        printf("The string \"%s\" is accepted by the NFA.\n", input);
+    } else {
+        printf("The string \"%s\" is not accepted by the NFA.\n", input);
+    }
+    return 0;
+}
+
+--------------------
+
+FILE: s9\start with a or b dfa
+--------------------
+[BINARY FILE: start with a or b dfa | SIZE: 330 bytes]
+--------------------
+
+################################################################################
+
+NAME: CSA14-CompilerDesign
+URL: https://github.com/saveetha-labs/CSA14-CompilerDesign
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA15-CloudComputingAndBigDataAnalytics
+URL: https://github.com/saveetha-labs/CSA15-CloudComputingAndBigDataAnalytics
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA16-DataWarehousingAndDataMining
+URL: https://github.com/saveetha-labs/CSA16-DataWarehousingAndDataMining
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA17
+URL: https://github.com/saveetha-labs/CSA17
+RESOURCE SUMMARY: Contains 67 files (36 .png, 16 .py, 14 .pl, 1 .html)
+----------------------------------------
+
+FILE: Screenshot (162).png
+--------------------
+[BINARY FILE: Screenshot (162).png | SIZE: 200099 bytes]
+--------------------
+
+FILE: Screenshot (163).png
+--------------------
+[BINARY FILE: Screenshot (163).png | SIZE: 213897 bytes]
+--------------------
+
+FILE: Screenshot (164).png
+--------------------
+[BINARY FILE: Screenshot (164).png | SIZE: 200969 bytes]
+--------------------
+
+FILE: Screenshot (165).png
+--------------------
+[BINARY FILE: Screenshot (165).png | SIZE: 214742 bytes]
+--------------------
+
+FILE: Screenshot (166).png
+--------------------
+[BINARY FILE: Screenshot (166).png | SIZE: 182352 bytes]
+--------------------
+
+FILE: Screenshot (167).png
+--------------------
+[BINARY FILE: Screenshot (167).png | SIZE: 191606 bytes]
+--------------------
+
+FILE: Screenshot (168).png
+--------------------
+[BINARY FILE: Screenshot (168).png | SIZE: 178854 bytes]
+--------------------
+
+FILE: Screenshot (169).png
+--------------------
+[BINARY FILE: Screenshot (169).png | SIZE: 197564 bytes]
+--------------------
+
+FILE: Screenshot (170).png
+--------------------
+[BINARY FILE: Screenshot (170).png | SIZE: 186029 bytes]
+--------------------
+
+FILE: Screenshot (171).png
+--------------------
+[BINARY FILE: Screenshot (171).png | SIZE: 198289 bytes]
+--------------------
+
+FILE: Screenshot (172).png
+--------------------
+[BINARY FILE: Screenshot (172).png | SIZE: 166185 bytes]
+--------------------
+
+FILE: Screenshot (173).png
+--------------------
+[BINARY FILE: Screenshot (173).png | SIZE: 187876 bytes]
+--------------------
+
+FILE: Screenshot (174).png
+--------------------
+[BINARY FILE: Screenshot (174).png | SIZE: 176575 bytes]
+--------------------
+
+FILE: Screenshot (175).png
+--------------------
+[BINARY FILE: Screenshot (175).png | SIZE: 189417 bytes]
+--------------------
+
+FILE: Screenshot (176).png
+--------------------
+[BINARY FILE: Screenshot (176).png | SIZE: 211995 bytes]
+--------------------
+
+FILE: Screenshot (177).png
+--------------------
+[BINARY FILE: Screenshot (177).png | SIZE: 251533 bytes]
+--------------------
+
+FILE: Screenshot (178).png
+--------------------
+[BINARY FILE: Screenshot (178).png | SIZE: 205144 bytes]
+--------------------
+
+FILE: Screenshot (179).png
+--------------------
+[BINARY FILE: Screenshot (179).png | SIZE: 200923 bytes]
+--------------------
+
+FILE: Screenshot (180).png
+--------------------
+[BINARY FILE: Screenshot (180).png | SIZE: 181875 bytes]
+--------------------
+
+FILE: Screenshot (181).png
+--------------------
+[BINARY FILE: Screenshot (181).png | SIZE: 151761 bytes]
+--------------------
+
+FILE: Screenshot (182).png
+--------------------
+[BINARY FILE: Screenshot (182).png | SIZE: 183225 bytes]
+--------------------
+
+FILE: Screenshot (183).png
+--------------------
+[BINARY FILE: Screenshot (183).png | SIZE: 213824 bytes]
+--------------------
+
+FILE: Screenshot (184).png
+--------------------
+[BINARY FILE: Screenshot (184).png | SIZE: 162898 bytes]
+--------------------
+
+FILE: Screenshot (185).png
+--------------------
+[BINARY FILE: Screenshot (185).png | SIZE: 179186 bytes]
+--------------------
+
+FILE: Screenshot (186).png
+--------------------
+[BINARY FILE: Screenshot (186).png | SIZE: 197209 bytes]
+--------------------
+
+FILE: Screenshot (188).png
+--------------------
+[BINARY FILE: Screenshot (188).png | SIZE: 179954 bytes]
+--------------------
+
+FILE: Screenshot (189).png
+--------------------
+[BINARY FILE: Screenshot (189).png | SIZE: 158751 bytes]
+--------------------
+
+FILE: Screenshot (190).png
+--------------------
+[BINARY FILE: Screenshot (190).png | SIZE: 176975 bytes]
+--------------------
+
+FILE: Screenshot (216).png
+--------------------
+[BINARY FILE: Screenshot (216).png | SIZE: 179237 bytes]
+--------------------
+
+FILE: Screenshot (217).png
+--------------------
+[BINARY FILE: Screenshot (217).png | SIZE: 161770 bytes]
+--------------------
+
+FILE: Screenshot (218).png
+--------------------
+[BINARY FILE: Screenshot (218).png | SIZE: 169717 bytes]
+--------------------
+
+FILE: Screenshot (219).png
+--------------------
+[BINARY FILE: Screenshot (219).png | SIZE: 170768 bytes]
+--------------------
+
+FILE: Screenshot (220).png
+--------------------
+[BINARY FILE: Screenshot (220).png | SIZE: 171409 bytes]
+--------------------
+
+FILE: Screenshot (221).png
+--------------------
+[BINARY FILE: Screenshot (221).png | SIZE: 170675 bytes]
+--------------------
+
+FILE: Screenshot (222).png
+--------------------
+[BINARY FILE: Screenshot (222).png | SIZE: 175733 bytes]
+--------------------
+
+FILE: Screenshot (223).png
+--------------------
+[BINARY FILE: Screenshot (223).png | SIZE: 171718 bytes]
+--------------------
+
+FILE: set 1\N queen.py
+--------------------
+N = 4
+def solve_queen(board,col):
+	if col==N:
+		print_board(board)
+		return True
+	for i in range(N):
+		if is_safe(board,i,col):
+			board[i][col]=1
+			if solve_queen(board,col + 1):
+				return True
+			board[i][col]=0
+	return False
+def is_safe(board,row,col):
+	for x in range(col):
+		if board[row][x]==1:
+			return False
+	for x, y in zip(range(row,-1,-1),range(col,-1,-1)):
+		if board[x][y] == 1:
+			return False
+	for x,y in zip(range(row,N,1),range(col,-1,-1)):
+		if board[x][y] == 1:
+			return False
+	return True
+def print_board(board):
+	for row in board:
+		for col in row:
+			print(col,end=" ")
+		print()
+board = [[0 for i in range(N)] for i in range(N)]
+if not solve_queen(board,0):
+	print("NO SOLUTION")
+--------------------
+
+FILE: set 1\puzzle.py
+--------------------
+def solve_puzzle(puzzle):
+    goal=[1, 2, 3, 4, 5, 6, 7, 8, 0]
+    
+    def print_puzzle(p):
+        for i in range(0, 9, 3):
+            print(p[i:i+3])
+            
+    print("Initial puzzle state:")
+    print_puzzle(puzzle)
+    
+    while puzzle != goal:
+        position=puzzle.index(0)
+        
+        if position%3 < 2:
+            puzzle[position], puzzle[position+1]=puzzle[position+1], puzzle[position]
+            
+        elif position < 6:
+            puzzle[position], puzzle[position+3]=puzzle[position+3], puzzle[position]
+            
+        print("Current puzzle state:")
+        print_puzzle(puzzle)
+    print("Solved puzzle state:")
+    print_puzzle(puzzle)
+    
+puzzle=[1, 2, 3, 4, 0, 5, 7, 8, 6]
+solve_puzzle(puzzle)
+
+--------------------
+
+FILE: set 1\Student, Teacher and Sub-Code.pl
+--------------------
+studies(oliva,csc135).
+studies(jack,csc131).
+studies(arthur,csc134).
+teaches(kirke,csc135).
+teaches(collins,csc131).
+teaches(juniper,csc134).
+professor(X,Y):-
+    teaches(X,C),
+    studies(Y,C).
+%professor(collins,Y).
+%Y = jack
+
+--------------------
+
+FILE: set 1\tower of hanoi.pl
+--------------------
+move(1, X, Y, _) :-
+    write('Move top disk from '),
+    write(X),
+    write(' to '),
+    write(Y),
+    nl.
+
+move(N, X, Y, Z) :-
+    N > 1,
+    M is N-1,
+    move(M, X, Z, Y),
+    move(1, X, Y, _),
+    move(M, Z, Y, X).
+ %     move(3,a,b,c).
+--------------------
+
+FILE: set 2\bird.pl
+--------------------
+bird(eagle).
+canfly(X):-
+    bird(X).
+# ?- canfly(X).
+# X = eagle.
+
+# ?- canfly(eagle).
+# true.
+--------------------
+
+FILE: set 2\cript airthematic.py
+--------------------
+def is_solution_valid(mapping, words, result):
+    word_values = [int(''.join(str(mapping[c]) for c in word)) for word in words]
+    result_value = int(''.join(str(mapping[c]) for c in result))
+    return sum(word_values) == result_value
+def solve_cryptarithmetic(words, result):
+    all_letters = set(''.join(words + [result]))
+    if len(all_letters) > 10:
+        return None 
+    unique_letters = sorted(all_letters)
+    permutations = range(10)
+    from itertools import permutations as permute
+    for perm in permute(permutations, len(unique_letters)):
+        mapping = {letter: digit for letter, digit in zip(unique_letters, perm)}
+        if mapping[result[0]] == 0:  # Leading zeros not allowed
+            continue
+        if is_solution_valid(mapping, words, result):
+            return mapping
+    return None  
+print("First + First = THREE")
+words = ['TWO', 'TWO']
+result = 'FOUR'
+solution = solve_cryptarithmetic(words, result)
+if solution:
+    print("Solution found:")
+    for letter, digit in solution.items():
+        print(f"{letter} = {digit}")
+else:
+    print("No solution found for the given cryptarithmetic problem.")
+--------------------
+
+FILE: set 2\family.pl
+--------------------
+male(tom).
+male(ram).
+male(jack).
+female(sri).
+female(clin).
+female(geeta).
+parent(sri,tom).
+parent(tom,clin).
+parent(geeta,jack).
+
+mother(X,Y):-
+    parent(X,Y),
+    female(X).
+
+--------------------
+
+FILE: set 2\water jug.py
+--------------------
+def water_jug_problem(capacity_a, capacity_b, target):
+    for a in range(capacity_a + 1):
+        for b in range(capacity_b + 1):
+            if a + b == target:
+                return a, b
+            if a + b > target and a <= capacity_b and b <= capacity_a:
+                return a, b
+    return None
+capacity_a = 4
+capacity_b = 3
+target = 2
+result = water_jug_problem(capacity_a, capacity_b, target)
+if result:
+    print(f"Solution found: Jug A = {result[0]}, Jug B = {result[1]}")
+else:
+    print("Solution not possible.")
+--------------------
+
+FILE: set 3\forward chaining.pl
+--------------------
+american(robert).
+
+hostile(country_a).
+
+owns(country_a, missiles).
+sold(robert, missiles, country_a).
+
+criminal(Person) :-
+    american(Person),
+    sold(Person, Weapon, Country),
+    owns(Country, Weapon),
+    hostile(Country),
+    write(Person), write(' is a criminal because they sold '), write(Weapon), write(' to a hostile country ('), write(Country), write(').'), nl.
+
+% Starting point to prove that Robert is a criminal
+prove_criminal :-
+    criminal(robert).
+
+--------------------
+
+FILE: set 3\missionaries.py
+--------------------
+from collections import deque
+
+def is_valid_state(state):
+    missionaries, cannibals, boat_side = state
+    if 0 <= missionaries <= 3 and 0 <= cannibals <= 3:
+        return missionaries == 0 or missionaries >= cannibals
+    return False
+
+def is_goal_state(state):
+    return state == (0, 0, 0)
+
+def generate_next_states(state):
+    boat_side = state[2]
+    next_states = []
+    for move_m in range(3):
+        for move_c in range(3):
+            if move_m + move_c <= 2 and move_m + move_c >= 1:
+                new_state = (
+                    state[0] - (1 if boat_side == 1 else -1) * move_m,
+                    state[1] - (1 if boat_side == 1 else -1) * move_c,
+                    1 - boat_side
+                )
+                if is_valid_state(new_state):
+                    next_states.append(new_state)
+    return next_states
+
+def bfs():
+    start_state = (3, 3, 1)
+    visited = set()
+    queue = deque([(start_state, [])])
+    while queue:
+        current_state, path = queue.popleft()
+        visited.add(current_state)
+        if is_goal_state(current_state):
+            return path + [current_state]
+        for next_state in generate_next_states(current_state):
+            if next_state not in visited:
+                queue.append((next_state, path + [current_state]))
+    return None
+
+def print_solution_path(path):
+    print("Solution Path:")
+    for state in path:
+        missionaries, cannibals, boat_side = state
+        print(f"Missionaries: {missionaries}, Cannibals: {cannibals}, Boat Side: {'Left' if boat_side == 0 else 'Right'}")
+
+def solve_missionaries_cannibals():
+    solution_path = bfs()
+    if solution_path:
+        print_solution_path(solution_path)
+    else:
+        print("No solution found.")
+
+if __name__ == "__main__":
+    solve_missionaries_cannibals()
+
+--------------------
+
+FILE: set 3\monkey.pl
+--------------------
+initial_state([
+    at(monkey, 1),
+    at(chair, 2),
+    at(stick, 3),
+    bananas_at(4),
+    monkey_on_floor
+]).
+
+% Goal: The bananas should be knocked down.
+goal_state([bananas_down]).
+
+% Actions the monkey can perform:
+
+% Move the monkey to a new position
+action([at(monkey, P1) | Rest], move(P1, P2), [at(monkey, P2) | Rest]) :-
+    write('Monkey moves from position '), write(P1), write(' to position '), write(P2), nl.
+
+% Monkey picks up the stick if it is at the same position as the monkey
+action([at(monkey, P), at(stick, P) | Rest], pick_up(stick), [monkey_with_stick | Rest]) :-
+    write('Monkey picks up the stick at position '), write(P), nl.
+
+% Monkey moves the chair to a new position
+action([at(monkey, P), at(chair, P) | Rest], push_chair(P, P2), [at(chair, P2), at(monkey, P2) | Rest]) :-
+    write('Monkey pushes the chair from position '), write(P), write(' to position '), write(P2), nl.
+
+
+action([at(monkey, P), at(chair, P), monkey_on_floor | Rest], climb(chair), [on(monkey, chair) | Rest]) :-
+    write('Monkey climbs on the chair at position '), write(P), nl.
+
+% Monkey waves the stick if it is on the chair and holding the stick, knocking down the bananas
+action([on(monkey, chair), monkey_with_stick, bananas_at(P), at(chair, P) | Rest], wave_stick, [bananas_down | Rest]) :-
+    write('Monkey waves the stick and knocks down the bananas'), nl.
+
+% Plan: Find the sequence of actions that leads to knocking down the bananas
+plan(State, Goal, Plan) :- 
+    plan(State, Goal, [], Plan).
+
+plan(State, Goal, _, []) :- 
+    subset(Goal, State).
+
+plan(State, Goal, Visited, [Action | Rest]) :-
+    action(State, Action, NewState),
+    \+ member(NewState, Visited), 
+    plan(NewState, Goal, [NewState | Visited], Rest).
+
+% Utility function to check if a subset of elements is in a list
+subset([], _).
+subset([X | Xs], Ys) :- member(X, Ys), subset(Xs, Ys).
+
+% Starting the search
+solve :-
+    initial_state(Initial),
+    goal_state(Goal),
+    plan(Initial, Goal, Plan),
+    write('Solution: '), nl,
+    write_plan(Plan).
+
+% Utility to print the plan
+write_plan([]).
+write_plan([Action | Rest]) :-
+    write(Action), nl,
+    write_plan(Rest).
+
+--------------------
+
+FILE: set 3\tsp.py
+--------------------
+import itertools
+def distance(city1, city2):
+    return abs(city1[0] - city2[0]) + abs(city1[1] - city2[1])
+def total_distance(path, cities):
+    total = 0
+    for i in range(len(path) - 1):
+        total += distance(cities[path[i]], cities[path[i + 1]])
+    total += distance(cities[path[-1]], cities[path[0]])  # Return to starting city
+    return total
+def brute_force_tsp(cities):
+    num_cities = len(cities)
+    min_distance = float('inf')
+    best_path = []
+    for path in itertools.permutations(range(num_cities)):
+        d = total_distance(path, cities)
+        if d < min_distance:
+            min_distance = d
+            best_path = path
+    return best_path, min_distance
+cities = [(0, 0), (1, 3), (4, 2), (3, 6)]
+best_path, min_distance = brute_force_tsp(cities)
+print("Best Path:", best_path)
+print("Min Distance:", min_distance)
+--------------------
+
+FILE: set 4\bfs.py
+--------------------
+from collections import deque
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            print(node)
+            visited.add(node)
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A'],
+    'C': ['B', 'C']
+}
+bfs(graph, 'B')
+--------------------
+
+FILE: set 4\fname, lname,gender.pl
+--------------------
+% Facts: person(FName, SName, Sex, Age, Occupation)
+person(frances, wilson, female, 28, architect).
+person(fred, jones, male, 62, doctor).
+person(paul, smith, male, 45, plumber).
+person(martin, williams, male, 23, chemist).
+person(mary, jones, female, 24, programmer).
+person(martin, johnson, male, 47, solicitor).
+
+% Rule: A person is a man if their sex is male
+man(FirstName, Surname) :-
+    person(FirstName, Surname, male, _, _),
+    write(FirstName), write(' '), write(Surname), write(' is a man'), nl.
+    
+% Example queries for finding men
+% ?- man(A, B).
+
+--------------------
+
+FILE: set 4\name,DOB.pl
+--------------------
+born(mohan,20/12/1222).
+dob(X,Y):-
+    born(X,Y).
+name(X,Y):-
+    born(X,Y).
+# ?- born(mohan,Y).
+# Y = 20/12/1222.
+
+# ?- born(X,20/12/1222).
+# X = mohan.
+--------------------
+
+FILE: set 4\vaccum.py
+--------------------
+class Vacuum:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.cleaned = []
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+    def clean(self):
+        if (self.x, self.y) not in self.cleaned:
+            self.cleaned.append((self.x, self.y))
+            print(f"Cleaned spot ({self.x}, {self.y})")
+
+vacuum = Vacuum(0, 0)
+
+vacuum.move(1, 1)
+vacuum.clean()
+vacuum.move(1, 0)
+vacuum.clean()
+vacuum.move(0, -1)
+vacuum.clean()
+
+--------------------
+
+FILE: set 5\dog.pl
+--------------------
+% Facts: Dog names
+dog(fido).
+dog(rover).
+dog(jane).
+dog(tom).
+dog(fred).
+dog(henry).
+
+% Facts: Cat names
+cat(mary).
+cat(harry).
+cat(bill).
+cat(steve).
+
+% Size of the animals
+small(henry).
+medium(harry).
+medium(fred).
+large(fido).
+large(mary).
+large(tom).
+large(fred).
+large(steve).
+large(jim).
+large(mike).
+
+% Rules:
+
+% A small dog
+small_dog(Name) :-
+    dog(Name),
+    small(Name),
+    write(Name), write(' is a small dog.'), nl.
+
+% A medium dog
+medium_dog(Name) :-
+    dog(Name),
+    medium(Name),
+    write(Name), write(' is a medium dog.'), nl.
+
+% A large dog
+large_dog(Name) :-
+    dog(Name),
+    large(Name),
+    write(Name), write(' is a large dog.'), nl.
+
+% A small cat
+small_cat(Name) :-
+    cat(Name),
+    small(Name),
+    write(Name), write(' is a small cat.'), nl.
+
+% A large cat
+large_cat(Name) :-
+    cat(Name),
+    large(Name),
+    write(Name), write(' is a large cat.'), nl.
+
+% Example queries:
+% - Find all large dogs: ?- large_dog(X).
+% - Find all medium dogs: ?- medium_dog(X).
+% - Find all small dogs: ?- small_dog(X).
+% - Find all large cats: ?- large_cat(X).
+
+--------------------
+
+FILE: set 5\orbit.pl
+--------------------
+% Facts: orbits(Body, OrbitAround)
+orbits(mercury, sun).
+orbits(venus, sun).
+orbits(earth, sun).
+orbits(mars, sun).
+orbits(moon, earth).
+orbits(phobos, mars).
+orbits(deimos, mars).
+
+% Rule to find all celestial bodies that orbit around a given body
+orbits_around(Body, OrbitAround) :-
+    orbits(Body, OrbitAround),
+    write(Body), write(' orbits around '), write(OrbitAround), nl.
+
+% Rule to find all celestial bodies that orbit around a specific body
+orbits_of(Body, OrbitAround) :-
+    orbits(Body, OrbitAround),
+    write(Body), write(' orbits around '), write(OrbitAround), nl.
+
+% Rule to find the moons of a planet
+moons_of(Planet, Moon) :-
+    orbits(Moon, Planet),
+    write(Moon), write(' is a moon of '), write(Planet), nl.
+
+% Rule to find planets that orbit around the sun
+planets :-
+    orbits(Planet, sun),
+    write(Planet), write(' is a planet orbiting the Sun'), nl.
+
+% Rule to find moons that orbit around a planet
+moons :-
+    orbits(Moon, Planet),
+    \+ orbits(Planet, sun),
+    write(Moon), write(' is a moon of '), write(Planet), nl.
+
+% Example queries:
+% - Find all celestial bodies orbiting the sun: ?- orbits_around(Body, sun).
+% - Find moons of a specific planet: ?- moons_of(earth, Moon).
+% - List all planets: ?- planets.
+% - List all moons: ?- moons.
+
+--------------------
+
+FILE: set 5\uniformed cost search.py
+--------------------
+import heapq
+
+# Function to perform Uniform Cost Search (UCS)
+def uniform_cost_search(graph, start, goal):
+    # Priority queue to store (cost, node) pairs
+    priority_queue = [(0, start)]
+    # Dictionary to store the minimum cost to reach each node
+    cost_so_far = {start: 0}
+    # Dictionary to track the path
+    parent = {start: None}
+
+    while priority_queue:
+        # Get the node with the lowest cost
+        current_cost, current_node = heapq.heappop(priority_queue)
+
+        # If the goal is reached, construct the path
+        if current_node == goal:
+            path = []
+            while current_node is not None:
+                path.append(current_node)
+                current_node = parent[current_node]
+            return path[::-1], current_cost  # Return path and total cost
+
+        # Explore neighbors of the current node
+        for neighbor, edge_cost in graph[current_node]:
+            new_cost = current_cost + edge_cost
+
+            # If a cheaper path to neighbor is found, update the cost and queue
+            if neighbor not in cost_so_far or new_cost < cost_so_far[neighbor]:
+                cost_so_far[neighbor] = new_cost
+                parent[neighbor] = current_node
+                heapq.heappush(priority_queue, (new_cost, neighbor))
+
+    return None, float('inf')  # Return None if goal is unreachable
+
+# Example usage
+if __name__ == "__main__":
+    # Tree with weighted edges as an adjacency list
+    graph = {
+        'S': [('A', 1), ('B', 5)],
+        'A': [('C', 3), ('D', 7)],
+        'B': [('D', 2), ('G', 8)],
+        'C': [('G', 4)],
+        'D': [('G', 1)],
+        'G': []
+    }
+
+    start_node = 'S'
+    goal_node = 'G'
+
+    # Perform UCS to find the path and cost from S to G
+    path, total_cost = uniform_cost_search(graph, start_node, goal_node)
+
+    # Output the results
+    if path:
+        print(f"Path: {' -> '.join(path)}")
+        print(f"Total Cost: {total_cost}")
+    else:
+        print("Goal node not reachable from the start node.")
+
+--------------------
+
+FILE: set 5\vaccum.py
+--------------------
+class Vacuum:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.cleaned = []
+    def move(self, dx, dy):
+        self.x += dx
+        self.y += dy
+    def clean(self):
+        if (self.x, self.y) not in self.cleaned:
+            self.cleaned.append((self.x, self.y))
+            print(f"Cleaned spot ({self.x}, {self.y})")
+
+vacuum = Vacuum(0, 0)
+
+vacuum.move(1, 1)
+vacuum.clean()
+vacuum.move(1, 0)
+vacuum.clean()
+vacuum.move(0, -1)
+vacuum.clean()
+
+--------------------
+
+FILE: set 6\forwardchaining rainy cold.pl
+--------------------
+rainy(chennai).
+rainy(coimbatore).
+rainy(ooty).
+cold(ooty).
+wet(X):-rainy(X).
+cold_and_wet(X):-cold(X),rainy(X).
+--------------------
+
+FILE: set 6\fruit.pl
+--------------------
+fruit_color(apple,red).
+fruit_color(banana,yellow).
+fruit_color(grapes,purple).
+fruit_color(strawberry,red).
+get_fruit(Fruit,Color):-
+    fruit_color(Fruit,Color).
+--------------------
+
+FILE: set 6\N queen.py
+--------------------
+N = 4
+
+def solve_queen(board,col):
+	if col==N:
+		print_board(board)
+		return True
+	for i in range(N):
+		if is_safe(board,i,col):
+			board[i][col]=1
+			if solve_queen(board,col + 1):
+				return True
+			board[i][col]=0
+	return False
+def is_safe(board,row,col):
+	for x in range(col):
+		if board[row][x]==1:
+			return False
+	for x, y in zip(range(row,-1,-1),range(col,-1,-1)):
+		if board[x][y] == 1:
+			return False
+	for x,y in zip(range(row,N,1),range(col,-1,-1)):
+		if board[x][y] == 1:
+			return False
+	return True
+def print_board(board):
+	for row in board:
+		for col in row:
+			print(col,end=" ")
+		print()
+board = [[0 for i in range(N)] for i in range(N)]
+if not solve_queen(board,0):
+	print("NO SOLUTION")
+--------------------
+
+FILE: set 6\puzzle.py
+--------------------
+import heapq
+import copy
+class PuzzleNode:
+    def __init__(self, state, parent=None, move=None, cost=0):
+        self.state = state
+        self.parent = parent
+        self.move = move
+        self.cost = cost
+        self.heuristic = self.calculate_heuristic()
+
+    def __lt__(self, other):
+        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
+
+    def calculate_heuristic(self):
+        # Manhattan distance heuristic
+        goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+        h = 0
+        for i in range(3):
+            for j in range(3):
+                if self.state[i][j] != 0:
+                    goal_i, goal_j = divmod(self.state[i][j] - 1, 3)
+                    h += abs(i - goal_i) + abs(j - goal_j)
+        return h
+
+    def get_children(self):
+        children = []
+        zero_i, zero_j = None, None
+        for i in range(3):
+            for j in range(3):
+                if self.state[i][j] == 0:
+                    zero_i, zero_j = i, j
+                    break
+            if zero_i is not None:
+                break
+
+        for move_i, move_j in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            new_i, new_j = zero_i + move_i, zero_j + move_j
+            if 0 <= new_i < 3 and 0 <= new_j < 3:
+                new_state = copy.deepcopy(self.state)
+                new_state[zero_i][zero_j], new_state[new_i][new_j] = new_state[new_i][new_j], new_state[zero_i][zero_j]
+                children.append(PuzzleNode(new_state, self, (new_i, new_j), self.cost + 1))
+
+        return children
+
+    def is_goal(self):
+        return self.state == [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+
+    def get_path(self):
+        path = []
+        current = self
+        while current is not None:
+            path.append((current.move, current.state, current.cost))
+            current = current.parent
+        path.reverse()
+        return path
+
+def solve_puzzle(initial_state):
+    start_node = PuzzleNode(initial_state)
+    open_set = [start_node]
+    heapq.heapify(open_set)
+    closed_set = set()
+
+    while open_set:
+        current_node = heapq.heappop(open_set)
+        if current_node.is_goal():
+            return current_node.get_path()
+        closed_set.add(tuple(map(tuple, current_node.state)))
+
+        for child in current_node.get_children():
+            if tuple(map(tuple, child.state)) not in closed_set:
+                heapq.heappush(open_set, child)
+
+    return None
+
+# Example usage
+initial_state = [[1, 2, 3], [4, 0, 6], [7, 5, 8]]
+solution = solve_puzzle(initial_state)
+if solution:
+    for move, state, cost in solution:
+        print(f"Move {move}, Cost {cost}:")
+        for row in state:
+            print(row)
+        print()
+else:
+    print("No solution found.")
+
+--------------------
+
+FILE: set 7\dfs.py
+--------------------
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    print(start)
+    visited.add(start)
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A'],
+    'C': ['B', 'C']
+}
+
+dfs(graph, 'B')
+--------------------
+
+FILE: set 7\family.pl
+--------------------
+male(tom).
+male(ram).
+male(jack).
+female(sri).
+female(clin).
+female(geeta).
+parent(sri,tom).
+parent(tom,clin).
+parent(geeta,jack).
+
+mother(X,Y):-
+    parent(X,Y),
+    female(X).
+
+--------------------
+
+FILE: set 7\first name , last name.pl
+--------------------
+first_name(tonyblair, tony).
+first_name(georgebush, georgedubya).
+second_name(tonyblair, blair).
+second_name(georgebush, bush).
+
+fullname(M,F,S):-
+    first_name(M,F),
+    second_name(M,S).
+
+--------------------
+
+FILE: set 7\minmac.py
+--------------------
+import math
+
+
+# Function to print the Tic-Tac-Toe board
+def print_board(board):
+    for row in board:
+        print(row)
+    print()
+
+
+# Check if the board is in a terminal state and return the utility value
+def evaluate(board):
+    # Check rows, columns, and diagonals for a winner
+    for row in board:
+        if row[0] == row[1] == row[2] != '_':
+            return 1 if row[0] == 'X' else -1
+
+    for col in range(3):
+        if board[0][col] == board[1][col] == board[2][col] != '_':
+            return 1 if board[0][col] == 'X' else -1
+
+    if board[0][0] == board[1][1] == board[2][2] != '_':
+        return 1 if board[0][0] == 'X' else -1
+
+    if board[0][2] == board[1][1] == board[2][0] != '_':
+        return 1 if board[0][2] == 'X' else -1
+
+    # Return 0 if it's a tie (no winner and no empty spaces left)
+    if all(cell != '_' for row in board for cell in row):
+        return 0
+
+    return None  # Game is still ongoing
+
+
+# Check if there are any moves left
+def is_moves_left(board):
+    for row in board:
+        if '_' in row:
+            return True
+    return False
+
+
+# Minimax function to return the best possible move
+def minimax(board, is_maximizing):
+    score = evaluate(board)
+
+    # If the game has ended, return the utility value
+    if score is not None:
+        return score
+
+    if is_maximizing:  # O's turn (MAX player)
+        best_score = -math.inf
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == '_':  # Check for an empty cell
+                    board[i][j] = 'O'  # Make a move
+                    best_score = max(best_score, minimax(board, False))  # Recursive minimax call
+                    board[i][j] = '_'  # Undo the move
+        return best_score
+    else:  # X's turn (MIN player)
+        best_score = math.inf
+        for i in range(3):
+            for j in range(3):
+                if board[i][j] == '_':  # Check for an empty cell
+                    board[i][j] = 'X'  # Make a move
+                    best_score = min(best_score, minimax(board, True))  # Recursive minimax call
+                    board[i][j] = '_'  # Undo the move
+        return best_score
+
+
+# Function to find the best move for O (MAX player)
+def find_best_move(board):
+    best_move = None
+    best_value = -math.inf
+
+    # Check all possible moves
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == '_':  # If the cell is empty
+                board[i][j] = 'O'  # Try O's move
+                move_value = minimax(board, False)  # Call minimax for X's turn (MIN player)
+                board[i][j] = '_'  # Undo the move
+
+                # Update best move if a better move is found
+                if move_value > best_value:
+                    best_value = move_value
+                    best_move = (i, j)
+
+    return best_move, best_value
+
+
+# Example Tic-Tac-Toe board state
+board = [
+    ['X', 'O', 'X'],
+    ['X', '_', 'O'],
+    ['_', '_', '_']
+]
+
+# Print the current board
+print("Current board state:")
+print_board(board)
+
+# Find the best move for O (MAX player)
+best_move, best_value = find_best_move(board)
+
+# Print the result
+if best_move:
+    print(f"Best move for O is at position {best_move} with a minimax value of {best_value}.")
+else:
+    print("No valid moves left.")
+
+# Show the terminal nodes utility value
+print("Terminal Nodes and their utility values:")
+for i in range(3):
+    for j in range(3):
+        if board[i][j] == '_':
+            board[i][j] = 'O'
+            score = minimax(board, False)
+            board[i][j] = '_'
+            print(f"Move O to position ({i}, {j}) results in a utility value of {score}.")
+
+--------------------
+
+FILE: set 8\alpha beta pruning.py
+--------------------
+MAX, MIN = 1000, -1000
+def minimax(depth, nodeIndex, maximizingPlayer,
+            values, alpha, beta):
+    if depth == 3:
+        return values[nodeIndex]
+    if maximizingPlayer:
+        best = MIN
+        for i in range(0, 2):
+            val = minimax(depth + 1, nodeIndex * 2 + i,
+                          False, values, alpha, beta)
+            best = max(best, val)
+            alpha = max(alpha, best)
+            if beta <= alpha:
+                break
+        return best
+    else:
+        best = MAX
+        for i in range(0, 2):
+            val = minimax(depth + 1, nodeIndex * 2 + i,
+                            True, values, alpha, beta)
+            best = min(best, val)
+            beta = min(beta, best)
+            if beta <= alpha:
+                break
+        return best
+if __name__ == "__main__":
+    values = [3, 5, 6, 9, 1, 2, 0, -1]
+    print("The optimal value is:", minimax(0, 0, True, values, MIN, MAX))
+--------------------
+
+FILE: set 8\web page.html
+--------------------
+
+--------------------
+
+FILE: set 9\map coloring.py
+--------------------
+def is_valid(graph, node, color, coloring):
+    for neighbor in graph[node]:
+        if neighbor in coloring and coloring[neighbor] == color:
+            return False
+    return True
+
+def map_coloring(graph, colors, node, coloring):
+    if node not in graph:
+        return True
+    
+    for color in colors:
+        if is_valid(graph, node, color, coloring):
+            coloring[node] = color
+            next_node = next(iter(graph.keys() - set(coloring.keys())), None)
+            if next_node is None or map_coloring(graph, colors, next_node, coloring):
+                return True
+            coloring.pop(node, None)
+    
+    return False
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['B', 'C']
+}
+
+colors = ['Red', 'Green', 'Blue']
+
+coloring = {}
+starting_node = next(iter(graph.keys()))
+
+if map_coloring(graph, colors, starting_node, coloring):
+    print("Map coloring solution:")
+    for region, color in coloring.items():
+        print(f"Region {region} is colored {color}")
+else:
+    print("No valid map coloring solution found.")
+--------------------
+
+################################################################################
+
+NAME: CSA41-InternetOfThings
+URL: https://github.com/saveetha-labs/CSA41-InternetOfThings
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA43-InternetProgramming
+URL: https://github.com/saveetha-labs/CSA43-InternetProgramming
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: CSA51
+URL: https://github.com/saveetha-labs/CSA51
+RESOURCE SUMMARY: Contains 40 files (22 .cpp, 18 .c)
+----------------------------------------
+
+FILE: caesar cipher program 1.cpp
+--------------------
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+void caesarCipher(char*text,int k) 
+{
+    int i;
+    char ch;
+    for(i=0;text[i]!='\0';++i) 
+	{
+        ch=text[i];
+        if(ch>='A'&&ch<='Z') 
+		{
+            ch=ch+k;
+            if(ch>'Z') 
+			{
+                ch=ch-'Z'+'A'-1;
+            }
+            text[i]=ch;
+        }
+        else if(ch>='a'&&ch<='z') 
+		{
+            ch=ch+k;
+            if(ch>'z') 
+			{
+                ch=ch-'z'+'a'-1;
+            }
+            text[i]=ch;
+        }
+    }
+}
+int main() 
+{
+    char text[100];
+    int k;
+    printf("Enter a string:");
+    fgets(text,sizeof(text),stdin);
+    text[strcspn(text,"\n")]='\0';
+    printf("Enter shift value:");
+    scanf("%d",&k);
+    if(k<1||k>25) 
+	{
+        printf("Invalid shift value\n");
+        return 1;
+    }
+    caesarCipher(text,k);
+    printf("Encrypted string:%s\n",text);
+    return 0;
+}
+
+--------------------
+
+FILE: exp 10.c
+--------------------
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+char getBigramKey(char keySquare[][5], char c1, char c2) {
+    int row1 = (int)toupper(c1) - 'A';
+    int col1 = (int)toupper(c2) - 'A';
+    return keySquare[row1][col1];
+}
+
+void encryptPlayfair(char message[], char keySquare[][5]) {
+    int i = 0;
+    while (message[i] != '\0') {
+        // Handle repeated letters (insert 'X')
+        if (isalpha(message[i]) && isalpha(message[i + 1]) && message[i] == message[i + 1]) {
+            message[i + 1] = 'X';
+        }
+
+        // Check for valid pairs and handle punctuation/spaces
+        if (!isalpha(message[i]) || !isalpha(message[i + 1])) {
+            i++;
+            continue;
+        }
+
+        char key1 = getBigramKey(keySquare, message[i], message[i + 1]);
+        char key2 = getBigramKey(keySquare, message[i + 1], message[i + 1]); // Use same char for repeated letters
+
+        // Handle same row/column cases (shift positions)
+        if (key1 == key2) {
+            if (key1 == 'Z') {
+                key1 = 'A';
+            } else {
+                key1++;
+            }
+            if (key2 == 'Z') {
+                key2 = 'A';
+            } else {
+                key2++;
+            }
+        }
+
+        // Replace message characters with bigram keys
+        message[i] = key1;
+        message[i + 1] = key2;
+
+        i += 2;
+    }
+}
+
+int main() {
+    char message[] = "Must see you over Cadogan West. Coming at once.";
+    char keySquare[5][5] = {
+        {'M', 'F', 'H', 'I', 'J'},
+        {'K', 'U', 'N', 'O', 'P'},
+        {'Q', 'Z', 'V', 'W', 'X'},
+        {'Y', 'E', 'L', 'A', 'R'},
+        {'G', 'D', 'S', 'T', 'B'}
+    };
+
+    encryptPlayfair(message, keySquare);
+
+    printf("Encrypted message: %s\n", message);
+
+    return 0;
+}
+
+
+--------------------
+
+FILE: exp 11.c
+--------------------
+#include <stdio.h>
+#include <math.h>
+unsigned long long factorial(int n) {
+	int i;
+    if (n == 0) return 1;
+    unsigned long long result = 1;
+    for (i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+int main() {
+    unsigned long long total_permutations = factorial(25);
+    unsigned long long row_col_permutations = factorial(5) * factorial(5);
+    unsigned long long unique_keys = total_permutations / row_col_permutations;
+    double total_permutations_log2 = log2((double)total_permutations);
+    double unique_keys_log2 = log2((double)unique_keys);
+
+    printf("Total number of possible keys: 2^%.2f\n", total_permutations_log2);
+    printf("Number of effectively unique keys: 2^%.2f\n", unique_keys_log2);
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 12.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int modInverse(int a, int m) {
+	int x;
+    a = a % m;
+    for (x = 1; x < m; x++) {
+        if ((a * x) % m == 1)
+            return x;
+    }
+    return -1;
+}
+void matrixMultiply(int a[2][2], int b[2], int result[2]) {
+    result[0] = (a[0][0] * b[0] + a[0][1] * b[1]) % 26;
+    result[1] = (a[1][0] * b[0] + a[1][1] * b[1]) % 26;
+}
+void encrypt(char plaintext[], int key[2][2]) {
+    int i;
+	int length = strlen(plaintext);
+    for (i = 0; i < length; i += 2) {
+        int pair[2];
+        pair[0] = toupper(plaintext[i]) - 'A';
+        pair[1] = toupper(plaintext[i+1]) - 'A';
+        
+        int result[2];
+        matrixMultiply(key, pair, result);
+        
+        plaintext[i] = result[0] + 'A';
+        plaintext[i+1] = result[1] + 'A';
+    }
+}
+void decrypt(char ciphertext[], int key[2][2]) {
+    int det = (key[0][0] * key[1][1] - key[0][1] * key[1][0]) % 26;
+    if (det < 0) det += 26;
+    int i,j;
+    int detInverse = modInverse(det, 26);
+    
+    int inverseKey[2][2];
+    inverseKey[0][0] = (key[1][1] * detInverse) % 26;
+    inverseKey[0][1] = (-key[0][1] * detInverse) % 26;
+    inverseKey[1][0] = (-key[1][0] * detInverse) % 26;
+    inverseKey[1][1] = (key[0][0] * detInverse) % 26;
+    
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            if (inverseKey[i][j] < 0) inverseKey[i][j] += 26;
+        }
+    }
+    
+    encrypt(ciphertext, inverseKey);  
+}
+
+int main() {
+    char plaintext[] = "MEETMEATTHEUSUALPLACEATTENRATHERTHANEIGHTOCLOCK";
+    int key[2][2] = {{9, 4}, {5, 7}};
+    
+    printf("Plaintext: %s\n", plaintext);
+    
+    encrypt(plaintext, key);
+    printf("Encrypted: %s\n", plaintext);
+    
+    decrypt(plaintext, key);
+    printf("Decrypted: %s\n", plaintext);
+    
+    return 0;
+}
+
+--------------------
+
+FILE: exp 13.c
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+int modInverse(int a, int m) {
+    a = a % m;
+    int x;
+    for (x = 1; x < m; x++) {
+        if ((a * x) % m == 1) {
+            return x;
+        }
+    }
+    return -1;
+}
+int determinantModulo26(int matrix[2][2]) {
+    int det = (matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]) % 26;
+    return (det + 26) % 26; 
+}
+void inverseMatrixModulo26(int matrix[2][2], int inverse[2][2]) {
+    int det = determinantModulo26(matrix);
+    int det_inv = modInverse(det, 26);
+    if (det_inv == -1) {
+        printf("Matrix is not invertible\n");
+        exit(1);
+    }
+    inverse[0][0] = matrix[1][1] * det_inv % 26;
+    inverse[0][1] = (-matrix[0][1] + 26) * det_inv % 26;
+    inverse[1][0] = (-matrix[1][0] + 26) * det_inv % 26;
+    inverse[1][1] = matrix[0][0] * det_inv % 26;
+}
+void multiplyMatricesModulo26(int a[2][2], int b[2][2], int result[2][2]) {
+	int i,j,k;
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 2; j++) {
+            result[i][j] = 0;
+            for (k = 0; k < 2; k++) {
+                result[i][j] += a[i][k] * b[k][j];
+            }
+            result[i][j] %= 26;
+        }
+    }
+}
+void multiplyMatrixVectorModulo26(int matrix[2][2], int vector[2], int result[2]) {
+	int i,j;
+    for (i = 0; i < 2; i++) {
+        result[i] = 0;
+        for (j = 0; j < 2; j++) {
+            result[i] += matrix[i][j] * vector[j];
+        }
+        result[i] %= 26;
+    }
+}
+
+int main() {
+    int plaintext[2][2] = {{0, 1}, {2, 3}};
+    int ciphertext[2][2] = {{15, 4}, {11, 22}};
+    int plaintext_inv[2][2];
+    inverseMatrixModulo26(plaintext, plaintext_inv);
+    int key[2][2];
+    multiplyMatricesModulo26(ciphertext, plaintext_inv, key);
+    printf("Recovered key matrix:\n");
+    printf("[[%d, %d],\n [%d, %d]]\n", key[0][0], key[0][1], key[1][0], key[1][1]);
+    char example_plaintext[] = "hi"; 
+    int example_plaintext_vector[2] = {7, 8};
+    int example_ciphertext_vector[2];
+    multiplyMatrixVectorModulo26(key, example_plaintext_vector, example_ciphertext_vector);
+    printf("Encrypted result for 'hi': %c%c\n", 
+           example_ciphertext_vector[0] + 'a', 
+           example_ciphertext_vector[1] + 'a');
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 14.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+void encrypt(const char *plaintext, const int *key, char *ciphertext) {
+    int length = strlen(plaintext),i;
+    for (i = 0; i < length; i++) {
+        int p = plaintext[i] - 'a';
+        int k = key[i];
+        ciphertext[i] = ((p + k) % 26) + 'A'; 
+    }
+    ciphertext[length] = '\0';
+}
+void decrypt(const char *ciphertext, const int *key, char *plaintext) {
+    int length = strlen(ciphertext),i;
+    for (i = 0; i < length; i++) {
+        int c = ciphertext[i] - 'A';
+        int k = key[i];
+        plaintext[i] = ((c - k + 26) % 26) + 'a'; 
+    }
+    plaintext[length] = '\0';
+}
+
+int main() {
+    char plaintext[] = "sendmoremoney";
+    int key[] = {9, 0, 1, 7, 23, 15, 21, 14, 11, 11, 2, 8, 9};
+    int length = strlen(plaintext);
+    char ciphertext[length + 1];
+    encrypt(plaintext, key, ciphertext);
+    printf("Ciphertext: %s\n", ciphertext);
+    char desired_plaintext[] = "cashnotneeded";
+    char ciphertext_to_decrypt[] = "BEOKJDMSXZPMH";
+    int key_for_decryption[length],i;
+    for (i = 0; i < length; i++) {
+        int c = ciphertext_to_decrypt[i] - 'A';
+        int p = desired_plaintext[i] - 'a';
+        key_for_decryption[i] = (c - p + 26) % 26;
+    }
+    printf("Decryption key: ");
+    for (i = 0; i < length; i++) {
+        printf("%c", key_for_decryption[i] + 'A');
+    }
+    printf("\n");
+    char decrypted_plaintext[length + 1];
+    decrypt(ciphertext_to_decrypt, key_for_decryption, decrypted_plaintext);
+    printf("Decrypted plaintext: %s\n", decrypted_plaintext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 15.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+double englishFreq[26] = {
+    8.167, 1.492, 2.782, 4.253, 12.702, 2.228, 2.015, 6.094, 6.966, 
+    0.153, 0.772, 4.025, 2.406, 6.749, 7.507, 1.929, 0.095, 5.987, 
+    6.327, 9.056, 2.758, 0.978, 2.360, 0.150, 1.974, 0.074
+};
+
+void calculateFrequency(char *ciphertext, double freq[26]) {
+    int length = strlen(ciphertext);
+    int count[26] = {0};
+    int i;
+    for (i = 0; i < length; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            count[ciphertext[i] - 'A']++;
+        }
+    }
+
+    for (i = 0; i < 26; i++) {
+        freq[i] = ((double)count[i] / length) * 100.0;
+    }
+}
+
+void decrypt(char *ciphertext, char *plaintext, int key) {
+    int length = strlen(ciphertext),i;
+    for (i = 0; i < length; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            plaintext[i] = ((ciphertext[i] - 'A' - key + 26) % 26) + 'A';
+        } else {
+            plaintext[i] = ciphertext[i];  
+        }
+    }
+    plaintext[length] = '\0';
+}
+
+double chiSquared(char *plaintext) {
+    double observed[26] = {0};
+    calculateFrequency(plaintext, observed);
+    int i;
+    double chiSquaredStat = 0.0;
+    for (i = 0; i < 26; i++) {
+        double expected = englishFreq[i];
+        chiSquaredStat += ((observed[i] - expected) * (observed[i] - expected)) / expected;
+    }
+
+    return chiSquaredStat;
+}
+
+void letterFrequencyAttack(char *ciphertext, int topN) {
+    int length = strlen(ciphertext);
+    char possiblePlaintexts[26][length + 1];
+    double chiSquaredValues[26];
+    int key,i,j;
+    for (key = 0; key < 26; key++) {
+        decrypt(ciphertext, possiblePlaintexts[key], key);
+        chiSquaredValues[key] = chiSquared(possiblePlaintexts[key]);
+    }
+ 
+    for (i = 0; i < 25; i++) {
+        for (j = i + 1; j < 26; j++) {
+            if (chiSquaredValues[i] > chiSquaredValues[j]) {
+                double tempValue = chiSquaredValues[i];
+                chiSquaredValues[i] = chiSquaredValues[j];
+                chiSquaredValues[j] = tempValue;
+
+                char tempText[length + 1];
+                strcpy(tempText, possiblePlaintexts[i]);
+                strcpy(possiblePlaintexts[i], possiblePlaintexts[j]);
+                strcpy(possiblePlaintexts[j], tempText);
+            }
+        }
+    }
+
+    printf("Top %d possible plaintexts:\n", topN);
+    for (i = 0; i < topN; i++) {
+        printf("%d. %s (Chi-squared: %.2f)\n", i + 1, possiblePlaintexts[i], chiSquaredValues[i]);
+    }
+}
+
+int main() {
+    char ciphertext[1024];
+    int topN;
+
+    printf("Enter the ciphertext: ");
+    fgets(ciphertext, sizeof(ciphertext), stdin);
+    ciphertext[strcspn(ciphertext, "\n")] = '\0'; 
+
+    printf("Enter the number of top possible plaintexts to display: ");
+    scanf("%d", &topN);
+
+    letterFrequencyAttack(ciphertext, topN);
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 16.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#define ALPHABET_SIZE 26
+
+double english_freq[ALPHABET_SIZE] = {
+    8.167, 1.492, 2.782, 4.253, 12.702, 2.228, 2.015, 6.094, 6.966, 0.153,
+    0.772, 4.025, 2.406, 6.749, 7.507, 1.929, 0.095, 5.987, 6.327, 9.056,
+    2.758, 0.978, 2.361, 0.150, 1.974, 0.074
+};
+
+void calculate_frequencies(const char *text, int *frequencies) {
+    int length = strlen(text);
+    for (int i = 0; i < length; i++) {
+        if (isalpha(text[i])) {
+            frequencies[tolower(text[i]) - 'a']++;
+        }
+    }
+}
+
+void generate_mapping(int *frequencies, char *mapping) {
+    int sorted_indices[ALPHABET_SIZE];
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        sorted_indices[i] = i;
+    }
+
+    for (int i = 0; i < ALPHABET_SIZE - 1; i++) {
+        for (int j = i + 1; j < ALPHABET_SIZE; j++) {
+            if (frequencies[sorted_indices[i]] < frequencies[sorted_indices[j]]) {
+                int temp = sorted_indices[i];
+                sorted_indices[i] = sorted_indices[j];
+                sorted_indices[j] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        mapping[sorted_indices[i]] = 'a' + i;
+    }
+}
+
+void decrypt(const char *ciphertext, char *plaintext, const char *mapping) {
+    int length = strlen(ciphertext);
+    for (int i = 0; i < length; i++) {
+        if (isalpha(ciphertext[i])) {
+            char offset = islower(ciphertext[i]) ? 'a' : 'A';
+            plaintext[i] = mapping[tolower(ciphertext[i]) - 'a'] - 'a' + offset;
+        } else {
+            plaintext[i] = ciphertext[i];
+        }
+    }
+    plaintext[length] = '\0';
+}
+
+double compute_score(const char *plaintext) {
+    int length = strlen(plaintext);
+    int count[ALPHABET_SIZE] = {0};
+    int total = 0;
+
+    for (int i = 0; i < length; i++) {
+        if (isalpha(plaintext[i])) {
+            count[tolower(plaintext[i]) - 'a']++;
+            total++;
+        }
+    }
+
+    double score = 0.0;
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        double frequency = (double)count[i] / total * 100;
+        score += (frequency - english_freq[i]) * (frequency - english_freq[i]);
+    }
+
+    return score;
+}
+ 
+void frequency_attack(const char *ciphertext, int num_results) {
+    int length = strlen(ciphertext);
+    char plaintext[length + 1];
+    double scores[ALPHABET_SIZE];
+    char *plaintexts[ALPHABET_SIZE];
+    int frequencies[ALPHABET_SIZE] = {0};
+    char mapping[ALPHABET_SIZE];
+
+    calculate_frequencies(ciphertext, frequencies);
+    generate_mapping(frequencies, mapping);
+
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        plaintexts[i] = (char*)malloc(length + 1);
+        if (plaintexts[i] == NULL) {
+            fprintf(stderr, "Memory allocation failed\n");
+            exit(1);
+        }
+        decrypt(ciphertext, plaintexts[i], mapping);
+        scores[i] = compute_score(plaintexts[i]);
+
+        char temp = mapping[0];
+        for (int j = 0; j < ALPHABET_SIZE - 1; j++) {
+            mapping[j] = mapping[j + 1];
+        }
+        mapping[ALPHABET_SIZE - 1] = temp;
+    }
+
+    for (int i = 0; i < ALPHABET_SIZE - 1; i++) {
+        for (int j = i + 1; j < ALPHABET_SIZE; j++) {
+            if (scores[i] > scores[j]) {
+                double temp_score = scores[i];
+                scores[i] = scores[j];
+                scores[j] = temp_score;
+
+                char *temp_text = plaintexts[i];
+                plaintexts[i] = plaintexts[j];
+                plaintexts[j] = temp_text;
+            }
+        }
+    }
+
+    printf("Top %d possible plaintexts:\n", num_results);
+    for (int i = 0; i < num_results && i < ALPHABET_SIZE; i++) {
+        printf("%d: %s\n", i + 1, plaintexts[i]);
+        free(plaintexts[i]);
+    }
+}
+
+int main() {
+    char ciphertext[1024];
+    int num_results;
+
+    printf("Enter the ciphertext: ");
+    fgets(ciphertext, sizeof(ciphertext), stdin);
+    ciphertext[strcspn(ciphertext, "\n")] = '\0';  
+
+    printf("Enter the number of top possible plaintexts to display: ");
+    scanf("%d", &num_results);
+
+    frequency_attack(ciphertext, num_results);
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 17.c
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+int initial_permutation[64] = { 58, 50, 42, 34, 26, 18, 10, 2,
+                                60, 52, 44, 36, 28, 20, 12, 4,
+                                62, 54, 46, 38, 30, 22, 14, 6,
+                                64, 56, 48, 40, 32, 24, 16, 8,
+                                57, 49, 41, 33, 25, 17, 9, 1,
+                                59, 51, 43, 35, 27, 19, 11, 3,
+                                61, 53, 45, 37, 29, 21, 13, 5,
+                                63, 55, 47, 39, 31, 23, 15, 7 };
+
+int final_permutation[64] = { 40, 8, 48, 16, 56, 24, 64, 32,
+                              39, 7, 47, 15, 55, 23, 63, 31,
+                              38, 6, 46, 14, 54, 22, 62, 30,
+                              37, 5, 45, 13, 53, 21, 61, 29,
+                              36, 4, 44, 12, 52, 20, 60, 28,
+                              35, 3, 43, 11, 51, 19, 59, 27,
+                              34, 2, 42, 10, 50, 18, 58, 26,
+                              33, 1, 41, 9, 49, 17, 57, 25 };
+int sbox[8][4][16] = { /* S-boxes should be defined here */ };
+
+int pbox[32] = { 16, 7, 20, 21,
+                 29, 12, 28, 17,
+                 1, 15, 23, 26,
+                 5, 18, 31, 10,
+                 2, 8, 24, 14,
+                 32, 27, 3, 9,
+                 19, 13, 30, 6,
+                 22, 11, 4, 25 };
+uint64_t permute(uint64_t block, int* permutation, int size) {
+    uint64_t permuted = 0;
+    for (int i = 0; i < size; i++) {
+        int bit = (block >> (64 - permutation[i])) & 1;
+        permuted |= (bit << (63 - i));
+    }
+    return permuted;
+}
+
+void key_schedule(uint64_t key, uint64_t subkeys[16]) {
+
+}
+uint32_t expansion_permutation(uint32_t half_block) {
+
+    return half_block; 
+}
+uint32_t s_boxes(uint32_t xor_result) {
+    return xor_result; 
+}
+uint32_t p_box(uint32_t substituted) {
+    return substituted; 
+} 
+uint32_t feistel(uint32_t right, uint64_t subkey) {
+    uint32_t expanded = expansion_permutation(right);
+    uint32_t xor_result = expanded ^ (subkey & 0xFFFFFFFF);  
+    uint32_t substituted = s_boxes(xor_result);
+    return p_box(substituted);
+}
+void des_decrypt(uint64_t cipher_text, uint64_t *plain_text, uint64_t *subkeys) {
+    uint64_t ip = permute(cipher_text, initial_permutation, 64); 
+    uint32_t left = ip >> 32;
+    uint32_t right = ip & 0xFFFFFFFF;
+
+    for (int round = 15; round >= 0; round--) {
+        uint32_t new_right = left ^ feistel(right, subkeys[round]);
+        left = right;
+        right = new_right;
+    }
+
+    uint64_t combined = ((uint64_t)right << 32) | left;
+    *plain_text = permute(combined, final_permutation, 64); 
+}
+
+int main() {
+    uint64_t cipher_text = 0x1234567890ABCDEF;
+    uint64_t plain_text;
+    
+    uint64_t subkeys[16] = {0x0101010101010101, 0x0202020202020202, /* other subkeys */};
+
+    des_decrypt(cipher_text, &plain_text, subkeys);
+    
+    printf("Decrypted plaintext: %016llX\n", plain_text);
+    
+    return 0;
+}
+
+--------------------
+
+FILE: exp 18.c
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+int keyPermutationTable[] = {
+    57, 49, 41, 33, 25, 17, 9, 1,
+    58, 50, 42, 34, 26, 18, 10, 2,
+    59, 51, 43, 35, 27, 19, 11, 3,
+    60, 52, 44, 36, 63, 55, 47, 39,
+    31, 23, 15, 7, 62, 54, 46, 38,
+    30, 22, 14, 6, 61, 53, 45, 37,
+    29, 21, 13, 5, 28, 20, 12, 4
+};
+int shiftSchedule[] = {
+    1, 1, 2, 2, 2, 2, 2, 2,
+    1, 2, 2, 2, 2, 2, 2, 1
+};
+void generateSubkeys(uint64_t initialKey, uint64_t subkeys[16]) {
+    uint64_t permutedKey = 0;
+    for (int i = 0; i < 56; ++i) {
+        permutedKey |= ((initialKey >> (64 - keyPermutationTable[i])) & 0x01) << (55 - i);
+    }
+    uint32_t leftHalf = (uint32_t)(permutedKey >> 28) & 0x0FFFFFFF;
+    uint32_t rightHalf = (uint32_t)(permutedKey & 0x0FFFFFFF);
+    for (int round = 0; round < 16; ++round) {
+
+        leftHalf = ((leftHalf << shiftSchedule[round]) | (leftHalf >> (28 - shiftSchedule[round]))) & 0x0FFFFFFF;
+        rightHalf = ((rightHalf << shiftSchedule[round]) | (rightHalf >> (28 - shiftSchedule[round]))) & 0x0FFFFFFF;
+        uint64_t combinedHalf = ((uint64_t)leftHalf << 28) | rightHalf;
+        subkeys[round] = 0;
+        for (int i = 0; i < 48; ++i) {
+            subkeys[round] |= ((combinedHalf >> (56 - keyPermutationTable[i])) & 0x01) << (47 - i);
+        }
+    }
+}
+
+int main() {
+
+    uint64_t initialKey = 0x133457799BBCDFF1;
+    uint64_t subkeys[16];
+    generateSubkeys(initialKey, subkeys);
+
+    for (int i = 0; i < 16; ++i) {
+        printf("Subkey %2d: %012llx\n", i + 1, subkeys[i]);
+    }
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 19.c
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
+uint8_t key[8] = {0x13, 0x34, 0x57, 0x79, 0x9B, 0xBC, 0xDF, 0xF1};
+
+void initialPermutation(uint8_t *block);
+void finalPermutation(uint8_t *block);
+void expansion(uint8_t *block, uint8_t *expanded_block);
+void substitution(uint8_t *expanded_block, uint8_t *substituted_block);
+void permutation(uint8_t *substituted_block, uint8_t *permuted_block);
+void xorBlocks(uint8_t *block1, uint8_t *block2, int size);
+void generateSubkeys(uint8_t *key, uint8_t *subkeys[]);
+void desEncrypt(uint8_t *block, uint8_t *subkeys[]);
+
+void initialPermutation(uint8_t *block) {
+
+}
+
+void finalPermutation(uint8_t *block) {
+ 
+}
+
+void expansion(uint8_t *block, uint8_t *expanded_block) {
+
+}
+
+void substitution(uint8_t *expanded_block, uint8_t *substituted_block) {
+}
+
+void permutation(uint8_t *substituted_block, uint8_t *permuted_block) {
+
+}
+void xorBlocks(uint8_t *block1, uint8_t *block2, int size) {
+}
+void generateSubkeys(uint8_t *key, uint8_t *subkeys[]) {
+}
+
+void desEncrypt(uint8_t *block, uint8_t *subkeys[]) {
+}
+void cbcEncrypt(uint8_t *plaintext, int plaintext_length, uint8_t *key, uint8_t *iv, uint8_t *ciphertext) {
+    uint8_t *subkeys[16]; 
+    uint8_t block[8];    
+    uint8_t temp[8];     
+    generateSubkeys(key, subkeys);
+    memcpy(block, iv, 8);
+    for (int i = 0; i < plaintext_length; i += 8) {
+        xorBlocks(block, plaintext + i, 8);
+        desEncrypt(block, subkeys);
+        memcpy(ciphertext + i, block, 8);
+    }
+}
+
+int main() {
+    uint8_t plaintext[256] = "This is a secret message."; 
+    int plaintext_length = strlen((char *)plaintext);  
+    uint8_t iv[8] = {0xAB, 0xCD, 0xEF, 0x12, 0x34, 0x56, 0x78, 0x90}; 
+    uint8_t ciphertext[256]; 
+
+    cbcEncrypt(plaintext, plaintext_length, key, iv, ciphertext);
+
+    printf("Ciphertext:\n");
+    for (int i = 0; i < plaintext_length; ++i) {
+        printf("%02X ", ciphertext[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+--------------------
+
+FILE: exp 20.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+void cbcEncryptWithErrorPropagation(const char *plaintext, char *ciphertext, size_t blockCount) {
+    char iv[16] = {0}; 
+    for (size_t i = 0; i < blockCount; ++i) {
+        for (int j = 0; j < 16; ++j) {
+            ciphertext[i * 16 + j] = plaintext[i * 16 + j] ^ iv[j];
+        }
+
+        memcpy(iv, ciphertext + i * 16, 16);
+    }
+}
+
+int main() {
+    const char plaintext[] = "This is a sample plaintext block with an error in the first block.";
+    const size_t blockCount = strlen(plaintext) / 16 + 1; 
+    char ciphertext[256]; 
+    cbcEncryptWithErrorPropagation(plaintext, ciphertext, blockCount);
+ 
+    printf("Ciphertext:\n");
+    for (size_t i = 0; i < blockCount; ++i) {
+        for (int j = 0; j < 16; ++j) {
+            printf("%02X", (unsigned char)ciphertext[i * 16 + j]);
+        }
+        printf(" ");
+    }
+    printf("\n");
+    return 0;
+}
+
+--------------------
+
+FILE: exp 3.c
+--------------------
+#include <stdio.h>  
+#include <stdlib.h>  
+#include <string.h>  
+#define SIZE 30
+void toLowerCase(char plain[], int ps)
+{
+    int i;
+    for (i = 0; i < ps; i++) {
+        if (plain[i] > 64 && plain[i] < 91)
+            plain[i] += 32;
+    }
+}
+int removeSpaces(char* plain, int ps)
+{
+    int i, count = 0;
+    for (i = 0; i < ps; i++)
+        if (plain[i] != ' ')
+            plain[count++] = plain[i];
+    plain[count] = '\0';
+    return count;
+}
+void generateKeyTable(char key[], int ks, char keyT[5][5])
+{
+    int i, j, k, flag = 0, *dicty;
+    dicty = (int*)calloc(26, sizeof(int));
+    for (i = 0; i < ks; i++) {
+        if (key[i] != 'j')
+            dicty[key[i] - 97] = 2;
+    }
+
+    dicty['j' - 97] = 1;
+
+    i = 0;
+    j = 0;
+
+    for (k = 0; k < ks; k++) {
+        if (dicty[key[k] - 97] == 2) {
+            dicty[key[k] - 97] -= 1;
+            keyT[i][j] = key[k];
+            j++;
+            if (j == 5) {
+                i++;
+                j = 0;
+            }
+        }
+    }
+
+    for (k = 0; k < 26; k++) {
+        if (dicty[k] == 0) {
+            keyT[i][j] = (char)(k + 97);
+            j++;
+            if (j == 5) {
+                i++;
+                j = 0;
+            }
+        }
+    }
+}
+void search(char keyT[5][5], char a, char b, int arr[])
+{
+    int i, j;
+
+    if (a == 'j')
+        a = 'i';
+    else if (b == 'j')
+        b = 'i';
+
+    for (i = 0; i < 5; i++) {
+
+        for (j = 0; j < 5; j++) {
+
+            if (keyT[i][j] == a) {
+                arr[0] = i;
+                arr[1] = j;
+            }
+            else if (keyT[i][j] == b) {
+                arr[2] = i;
+                arr[3] = j;
+            }
+        }
+    }
+}
+int mod5(int a) { return (a % 5); }
+int prepare(char str[], int ptrs)
+{
+    if (ptrs % 2 != 0) {
+        str[ptrs++] = 'z';
+        str[ptrs] = '\0';
+    }
+    return ptrs;
+}
+void encrypt(char str[], char keyT[5][5], int ps)
+{
+    int i, a[4];
+
+    for (i = 0; i < ps; i += 2) {
+
+        search(keyT, str[i], str[i + 1], a);
+
+        if (a[0] == a[2]) {
+            str[i] = keyT[a[0]][mod5(a[1] + 1)];
+            str[i + 1] = keyT[a[0]][mod5(a[3] + 1)];
+        }
+        else if (a[1] == a[3]) {
+            str[i] = keyT[mod5(a[0] + 1)][a[1]];
+            str[i + 1] = keyT[mod5(a[2] + 1)][a[1]];
+        }
+        else {
+            str[i] = keyT[a[0]][a[3]];
+            str[i + 1] = keyT[a[2]][a[1]];
+        }
+    }
+}
+void encryptByPlayfairCipher(char str[], char key[])
+{
+    char ps, ks, keyT[5][5];
+
+
+    ks = strlen(key);
+    ks = removeSpaces(key, ks);
+    toLowerCase(key, ks);
+
+
+    ps = strlen(str);
+    toLowerCase(str, ps);
+    ps = removeSpaces(str, ps);
+
+    ps = prepare(str, ps);
+
+    generateKeyTable(key, ks, keyT);
+
+    encrypt(str, keyT, ps);
+}
+int main()
+{
+    char str[SIZE], key[SIZE];
+    strcpy(key, "Algorithm");
+    printf("Key text: %s\n", key);
+    strcpy(str, "Programming");
+    printf("Plain text: %s\n", str);
+    encryptByPlayfairCipher(str, key);
+    printf("Cipher text: %s\n", str);
+    return 0;
+}
+
+--------------------
+
+FILE: exp 4.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void vigenereEncrypt(char *plaintext, char *key) {
+    int textLength = strlen(plaintext);
+    int keyLength = strlen(key);
+    for (int i = 0; i < textLength; i++) {
+        if (isalpha(plaintext[i])) {
+            char base = isupper(plaintext[i]) ? 'A' : 'a';
+            int keyIndex = i % keyLength;
+            int shift = tolower(key[keyIndex]) - 'a';
+            plaintext[i] = (plaintext[i] - base + shift) % 26 + base;
+        }
+    }
+}
+int main() {
+    char plaintext[1000];
+    char key[100];
+    printf("Enter the plaintext: ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    printf("Enter the key: ");
+    scanf("%s", key);
+    vigenereEncrypt(plaintext, key);
+    printf("Encrypted text: %s\n", plaintext);
+    return 0;
+}
+
+--------------------
+
+FILE: exp 5.c
+--------------------
+#include <stdio.h>
+#include <ctype.h>
+
+char encryptAffine(char message, int a, int b) {
+    if (!isalpha(message)) {
+        return message; 
+    }
+
+    int newAscii = (toupper(message) - 'A') * a + b; 
+    newAscii = (newAscii % 26 + 26) % 26; 
+    return (char)(newAscii + 'A'); 
+}
+
+char decryptAffine(char message, int a, int b) {
+    int inverse_a = modular_inverse(a, 26); 
+    if (inverse_a == -1) {
+        return message; 
+    }
+
+    int newAscii = (message - 'A' - b) * inverse_a % 26; 
+    newAscii = (newAscii % 26 + 26) % 26; 
+    return (char)(newAscii + 'A'); 
+}
+
+
+int modular_inverse(int a, int m) {
+    
+    
+    return -1; 
+}
+
+int main() {
+	int i;
+    char message[] = "This is a secret message.";
+    int a = 3;  
+    int b = 5;
+
+    printf("Original message: %s\n", message);
+
+    printf("Encrypted message: ");
+    for (i = 0; message[i] != '\0'; i++) {
+        printf("%c", encryptAffine(message[i], a, b));
+    }
+    printf("\n");
+
+    printf("Decrypted message: ");
+    for ( i = 0; message[i] != '\0'; i++) {
+        printf("%c", decryptAffine(message[i], a, b));
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+--------------------
+
+FILE: exp 6.c
+--------------------
+#include <stdio.h>
+// Function to find modular inverse of a under modulo m
+int modInverse(int a, int m) {
+    a = a % m;
+    int x;
+    for (x = 1; x < m; x++) {
+        if ((a * x) % m == 1) {
+            return x;
+        }
+    }
+    return -1;
+}
+// Function to decrypt the ciphertext
+void decryptAffineCipher(char ciphertext[], int a, int b) {
+    int a_inv = modInverse(a, 26);
+    if (a_inv == -1) {
+        printf("No modular inverse exists for a=%d\n", a);
+        return;
+    }
+int i;
+    for ( i = 0; ciphertext[i] != '\0'; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            int y = ciphertext[i] - 'A';
+            int x = (a_inv * (y - b + 26)) % 26;
+            printf("%c", x + 'A');
+ } 
+else {
+            printf("%c", ciphertext[i]);
+        }
+    }
+    printf("\n");
+}
+int main() {
+    char ciphertext[] = "BPU...";
+    int x1 = 4, y1 = 1; // E -> B
+    int x2 = 19, y2 = 20; // T -> U
+    int a, b;
+    for (a = 1; a < 26; a++) {
+        if (modInverse(a, 26) == -1) {
+            continue;
+  }
+        b = (y1 - a * x1) % 26;
+        if (b < 0) {
+            b += 26;
+        }
+        int y_check = (a * x2 + b) % 26;
+        if (y_check == y2) {
+            printf("Possible keys: a = %d, b = %d\n", a, b);
+            printf("Decrypted message: ");
+            decryptAffineCipher(ciphertext, a, b);
+            break;
+        }
+    }
+}
+
+--------------------
+
+FILE: exp 7.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define SIZE 5
+void create_table(char keyword[], char table[SIZE][SIZE]) {
+    int i, j, k = 0;
+    char alphabet[26] = "abcdefghiklmnopqrstuvwxyz";
+    int flag[26] = {0};
+    for (i = 0; i < strlen(keyword); i++) {
+        char c = tolower(keyword[i]);
+        if (c == 'j') c = 'i';
+        if (!flag[c - 'a']) {
+            table[k / SIZE][k % SIZE] = c;
+            flag[c - 'a'] = 1;
+            k++;
+        }
+    }
+    for (i = 0; i < 26; i++) {
+        if (!flag[i]) {
+            table[k / SIZE][k % SIZE] = 'a' + i;
+            k++;
+        }
+    }
+}
+void playfair_cipher(char table[SIZE][SIZE], char plaintext[], char ciphertext[]) {
+    int i, j, k = 0;
+    int row1, col1, row2, col2;
+    for (i = 0; i < strlen(plaintext); i += 2) {
+        char c1 = tolower(plaintext[i]);
+        char c2 = tolower(plaintext[i + 1]);
+        if (c1 == 'j') c1 = 'i';
+        if (c2 == 'j') c2 = 'i';
+        for (j = 0; j < SIZE; j++) {
+            for (k = 0; k < SIZE; k++) {
+                if (table[j][k] == c1) {
+                    row1 = j;
+                    col1 = k;
+                }
+                if (table[j][k] == c2) {
+                    row2 = j;
+                    col2 = k;
+                }
+            }
+        }
+        if (row1 == row2) {
+            ciphertext[i] = table[row1][(col1 + 1) % SIZE];
+            ciphertext[i + 1] = table[row2][(col2 + 1) % SIZE];
+        } else if (col1 == col2) {
+            ciphertext[i] = table[(row1 + 1) % SIZE][col1];
+            ciphertext[i + 1] = table[(row2 + 1) % SIZE][col2];
+        } else {
+            ciphertext[i] = table[row1][col2];
+            ciphertext[i + 1] = table[row2][col1];
+        }
+    }
+    ciphertext[strlen(plaintext)] = '\0';
+}
+int main() 
+{
+    char keyword[20], plaintext[100], ciphertext[100];
+    char table[SIZE][SIZE];
+    printf("Enter keyword: ");
+    scanf("%s", keyword);
+    printf("Enter plaintext: ");
+    scanf("%s", plaintext);
+    create_table(keyword, table);
+    playfair_cipher(table, plaintext, ciphertext);
+    printf("Ciphertext: %s\n", ciphertext);
+    return 0;
+}
+
+--------------------
+
+FILE: exp 8.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+int main() 
+{
+	int i,j;
+    char plain[] = "abcdefghijklmnopqrstuvwxyz";
+    char cipher[] = "CIPHERABDFGJKLMNOQSTUVWXYZ";
+    char text[] = "hello";
+    for(i = 0; i < strlen(text); i++)
+        for (j = 0; j < 26; j++)
+            if (text[i] == plain[j]) 
+           {
+                text[i] = cipher[j];
+                break;
+            }
+    printf("Ciphered text: %s\n", text);
+    return 0;
+}
+
+--------------------
+
+FILE: exp 9.c
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+char getBigramKey(char keySquare[][5], char c1, char c2);
+void decryptPlayfair(char message[], char keySquare[][5]);
+int main() {
+    char message[] = "KXJEY UREBE ZWEHE WRYTU HEYFS KREHE GOYFI WTTTU OLKSY CAJPO BOTEI ZONTX BYBNT GONEY CUZWR GDSON SXBOU YWRHE BAAHY USEDQ";
+    char keySquare[5][5];
+    decryptPlayfair(message, keySquare);
+    printf("Decrypted message: %s\n", message);
+    return 0;
+}
+char getBigramKey(char keySquare[][5], char c1, char c2) {
+    int row1 = (int)c1 - 'A';
+    int col1 = (int)c2 - 'A';
+    return keySquare[row1][col1];
+}
+void decryptPlayfair(char message[], char keySquare[][5]) {
+    int i = 0;
+    while (message[i] != '\0') {
+        if (!isalpha(message[i]) || !isalpha(message[i + 1])) {
+            i++;
+            continue;
+        }
+        char key1 = getBigramKey(keySquare, message[i], message[i + 1]);
+        char key2 = getBigramKey(keySquare, message[i + 1], message[i]);
+        i += 2;
+    }
+}
+
+
+--------------------
+
+FILE: MONOALPHABETIC CIPHER PROGRAM 2.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void monoalphabeticSubstitution(char *plaintext, char *ciphertext, const char *mapping) {
+    int i;
+
+    for (i = 0; plaintext[i] != '\0'; ++i) {
+        if (isalpha(plaintext[i])) {
+            ciphertext[i] = islower(plaintext[i]) ? tolower(mapping[plaintext[i] - 'a']) : toupper(mapping[plaintext[i] - 'A']);
+        } else {
+            ciphertext[i] = plaintext[i];
+        }
+    }
+    ciphertext[i] = '\0';
+}
+
+int main() {
+    char plaintext[100], ciphertext[100];
+    const char *mapping = "DEFGHIJKLMNOPQRSTUVWXYZABC"; // Example mapping
+
+    printf("Enter the plaintext: ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    plaintext[strcspn(plaintext, "\n")] = '\0';
+
+    monoalphabeticSubstitution(plaintext, ciphertext, mapping);
+
+    printf("Ciphertext: %s\n", ciphertext);
+
+    return 0;
+}
+
+
+--------------------
+
+FILE: Q 23.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+#define BLOCK_SIZE 8
+
+void sdes_encrypt(unsigned char *plaintext, unsigned char *key, unsigned char *ciphertext) {
+    // Placeholder for S-DES encryption function
+    // Implement S-DES encryption here
+}
+
+void xor_blocks(unsigned char *block1, unsigned char *block2, unsigned char *result) {
+    for (int i = 0; i < BLOCK_SIZE; ++i) {
+        result[i] = block1[i] ^ block2[i];
+    }
+}
+
+void counter_mode_encrypt(unsigned char *plaintext, int length, unsigned char *key, unsigned char *counter, unsigned char *ciphertext) {
+    unsigned char encrypted_counter[BLOCK_SIZE];
+    unsigned char block[BLOCK_SIZE];
+
+    for (int i = 0; i < length; i += BLOCK_SIZE) {
+        sdes_encrypt(counter, key, encrypted_counter);
+        xor_blocks(plaintext + i, encrypted_counter, block);
+        memcpy(ciphertext + i, block, BLOCK_SIZE);
+        
+        // Increment counter
+        for (int j = BLOCK_SIZE - 1; j >= 0; --j) {
+            if (++counter[j] != 0) break;
+        }
+    }
+}
+
+void counter_mode_decrypt(unsigned char *ciphertext, int length, unsigned char *key, unsigned char *counter, unsigned char *plaintext) {
+    // Decryption is same as encryption in counter mode
+    counter_mode_encrypt(ciphertext, length, key, counter, plaintext);
+}
+
+int main() {
+    unsigned char key[10] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // Binary key 01111 11101
+    unsigned char counter[BLOCK_SIZE] = {0, 0, 0, 0, 0, 0, 0, 0}; // Binary counter 0000 0000
+    unsigned char plaintext[BLOCK_SIZE * 3] = {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1}; // Binary plaintext 0000 0001 0000 0010 0000 0100
+    unsigned char ciphertext[BLOCK_SIZE * 3];
+    unsigned char decryptedtext[BLOCK_SIZE * 3];
+
+    printf("Counter Mode Encryption and Decryption using S-DES\n");
+
+    // Encrypt
+    counter_mode_encrypt(plaintext, sizeof(plaintext), key, counter, ciphertext);
+    printf("Ciphertext: ");
+    for (int i = 0; i < sizeof(ciphertext); ++i) {
+        printf("%d", ciphertext[i]);
+    }
+    printf("\n");
+
+    // Reset counter
+    memset(counter, 0, BLOCK_SIZE);
+
+    // Decrypt
+    counter_mode_decrypt(ciphertext, sizeof(ciphertext), key, counter, decryptedtext);
+    printf("Decrypted Text: ");
+    for (int i = 0; i < sizeof(decryptedtext); ++i) {
+        printf("%d", decryptedtext[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q 24.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to compute the GCD
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+// Extended Euclidean Algorithm to find the multiplicative inverse
+int extended_euclidean(int a, int b, int *x, int *y) {
+    if (a == 0) {
+        *x = 0;
+        *y = 1;
+        return b;
+    }
+
+    int x1, y1;
+    int gcd = extended_euclidean(b % a, a, &x1, &y1);
+
+    *x = y1 - (b / a) * x1;
+    *y = x1;
+
+    return gcd;
+}
+
+int mod_inverse(int a, int m) {
+    int x, y;
+    int g = extended_euclidean(a, m, &x, &y);
+    if (g != 1) {
+        printf("Inverse doesn't exist\n");
+        return -1;
+    } else {
+        int res = (x % m + m) % m;
+        return res;
+    }
+}
+
+int main() {
+    int e = 31;
+    int n = 3599;
+    int p, q;
+
+    // Finding p and q
+    for (p = 2; p < n; ++p) {
+        if (n % p == 0) {
+            q = n / p;
+            if (n == p * q) break;
+        }
+    }
+
+    int phi = (p - 1) * (q - 1);
+
+    int d = mod_inverse(e, phi);
+
+    if (d != -1) {
+        printf("Private key: %d\n", d);
+    }
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q21.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+#include <openssl/aes.h>
+#include <openssl/rand.h>
+
+void handleErrors() {
+    fprintf(stderr, "An error occurred\n");
+    exit(1);
+}
+
+void printData(const char *title, const void *data, int len) {
+    printf("%s: ", title);
+    const unsigned char *p = (const unsigned char*)data;
+    for (int i = 0; i < len; ++i) {
+        printf("%02x ", *p++);
+    }
+    printf("\n");
+}
+
+void padData(unsigned char *data, int *len, int blockSize) {
+    int padding = blockSize - (*len % blockSize);
+    memset(data + *len, padding, padding);
+    *len += padding;
+}
+
+int main() {
+    // Key and IV setup
+    unsigned char key[AES_BLOCK_SIZE];
+    unsigned char iv[AES_BLOCK_SIZE];
+
+    if (!RAND_bytes(key, sizeof(key)) || !RAND_bytes(iv, sizeof(iv))) {
+        handleErrors();
+    }
+
+    // Example plaintext
+    unsigned char plaintext[] = "This is a test message to demonstrate ECB, CBC, and CFB modes.";
+    int plaintext_len = strlen((char *)plaintext);
+
+    // Pad the plaintext to ensure it's a multiple of the block size
+    int blockSize = AES_BLOCK_SIZE;
+    int padded_len = plaintext_len;
+    padData(plaintext, &padded_len, blockSize);
+
+    // Buffers for ciphertext and decrypted text
+    unsigned char ciphertext[128];
+    unsigned char decryptedtext[128];
+
+    // ECB Mode
+    AES_KEY enc_key, dec_key;
+    AES_set_encrypt_key(key, 128, &enc_key);
+    AES_set_decrypt_key(key, 128, &dec_key);
+
+    printf("ECB Mode:\n");
+    for (int i = 0; i < padded_len; i += blockSize) {
+        AES_ecb_encrypt(plaintext + i, ciphertext + i, &enc_key, AES_ENCRYPT);
+    }
+    printData("Ciphertext", ciphertext, padded_len);
+
+    for (int i = 0; i < padded_len; i += blockSize) {
+        AES_ecb_encrypt(ciphertext + i, decryptedtext + i, &dec_key, AES_DECRYPT);
+    }
+    printData("Decrypted Text", decryptedtext, padded_len);
+
+    // CBC Mode
+    memset(ciphertext, 0, sizeof(ciphertext));
+    memset(decryptedtext, 0, sizeof(decryptedtext));
+    AES_cbc_encrypt(plaintext, ciphertext, padded_len, &enc_key, iv, AES_ENCRYPT);
+    printData("Ciphertext", ciphertext, padded_len);
+
+    // Reset IV for decryption
+    AES_cbc_encrypt(ciphertext, decryptedtext, padded_len, &dec_key, iv, AES_DECRYPT);
+    printData("Decrypted Text", decryptedtext, padded_len);
+
+    // CFB Mode
+    memset(ciphertext, 0, sizeof(ciphertext));
+    memset(decryptedtext, 0, sizeof(decryptedtext));
+    AES_cfb128_encrypt(plaintext, ciphertext, padded_len, &enc_key, iv, AES_ENCRYPT);
+    printData("Ciphertext", ciphertext, padded_len);
+
+    // Reset IV for decryption
+    AES_cfb128_encrypt(ciphertext, decryptedtext, padded_len, &dec_key, iv, AES_DECRYPT);
+    printData("Decrypted Text", decryptedtext, padded_len);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q22.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+#define BLOCK_SIZE 8
+
+void xor_blocks(unsigned char *block1, unsigned char *block2, unsigned char *result) {
+    for (int i = 0; i < BLOCK_SIZE; ++i) {
+        result[i] = block1[i] ^ block2[i];
+    }
+}
+
+void sdes_encrypt(unsigned char *plaintext, unsigned char *key, unsigned char *ciphertext) {
+    // Placeholder for S-DES encryption function
+    // Implement S-DES encryption here
+}
+
+void sdes_decrypt(unsigned char *ciphertext, unsigned char *key, unsigned char *plaintext) {
+    // Placeholder for S-DES decryption function
+    // Implement S-DES decryption here
+}
+
+void cbc_encrypt(unsigned char *plaintext, int length, unsigned char *key, unsigned char *iv, unsigned char *ciphertext) {
+    unsigned char block[BLOCK_SIZE];
+    unsigned char previous_block[BLOCK_SIZE];
+    memcpy(previous_block, iv, BLOCK_SIZE);
+
+    for (int i = 0; i < length; i += BLOCK_SIZE) {
+        xor_blocks(plaintext + i, previous_block, block);
+        sdes_encrypt(block, key, ciphertext + i);
+        memcpy(previous_block, ciphertext + i, BLOCK_SIZE);
+    }
+}
+
+void cbc_decrypt(unsigned char *ciphertext, int length, unsigned char *key, unsigned char *iv, unsigned char *plaintext) {
+    unsigned char block[BLOCK_SIZE];
+    unsigned char previous_block[BLOCK_SIZE];
+    unsigned char decrypted_block[BLOCK_SIZE];
+    memcpy(previous_block, iv, BLOCK_SIZE);
+
+    for (int i = 0; i < length; i += BLOCK_SIZE) {
+        sdes_decrypt(ciphertext + i, key, decrypted_block);
+        xor_blocks(decrypted_block, previous_block, plaintext + i);
+        memcpy(previous_block, ciphertext + i, BLOCK_SIZE);
+    }
+}
+
+int main() {
+    unsigned char key[10] = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1}; // Binary key 01111 11101
+    unsigned char iv[BLOCK_SIZE] = {1, 0, 1, 0, 1, 0, 1, 0}; // Binary IV 1010 1010
+    unsigned char plaintext[BLOCK_SIZE] = {0, 0, 0, 1, 0, 0, 1, 1}; // Binary plaintext 0000 0001 0010 0011
+    unsigned char ciphertext[BLOCK_SIZE];
+    unsigned char decryptedtext[BLOCK_SIZE];
+
+    printf("CBC Mode Encryption and Decryption using S-DES\n");
+
+    // Encrypt
+    cbc_encrypt(plaintext, BLOCK_SIZE, key, iv, ciphertext);
+    printf("Ciphertext: ");
+    for (int i = 0; i < BLOCK_SIZE; ++i) {
+        printf("%d", ciphertext[i]);
+    }
+    printf("\n");
+
+    // Decrypt
+    cbc_decrypt(ciphertext, BLOCK_SIZE, key, iv, decryptedtext);
+    printf("Decrypted Text: ");
+    for (int i = 0; i < BLOCK_SIZE; ++i) {
+        printf("%d", decryptedtext[i]);
+    }
+   
+
+--------------------
+
+FILE: Q25.cpp
+--------------------
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+int main() {
+    int n = 3599;
+    int common_factor = 61; // Known common factor
+
+    int p = gcd(common_factor, n);
+    int q = n / p;
+
+    printf("Factors of n: p = %d, q = %d\n", p, q);
+    return 0;
+}
+
+--------------------
+
+FILE: Q26.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int gcd(int a, int b) {
+    if (b == 0)
+        return a;
+    return gcd(b, a % b);
+}
+
+int main() {
+    srand(time(0));
+    int p, q, n, e, d;
+
+    // Generate new p and q
+    p = rand() % 100 + 50; // Random primes for simplicity
+    q = rand() % 100 + 50;
+    n = p * q;
+
+    int phi = (p - 1) * (q - 1);
+    e = 31; // Choose a new e
+    d = modInverse(e, phi);
+
+    printf("New public key: e = %d, n = %d\n", e, n);
+    printf("New private key: d = %d\n", d);
+    return 0;
+}
+
+--------------------
+
+FILE: Q27.cpp
+--------------------
+#include <stdio.h>
+
+int main() {
+    // Example to illustrate the insecurity
+    char message[] = "HELLO";
+    int encrypted_message[5];
+
+    int e = 31, n = 3599;
+    for (int i = 0; i < 5; ++i) {
+        encrypted_message[i] = ((message[i] - 'A') * (message[i] - 'A')) % n;
+    }
+
+    // Print encrypted message
+    for (int i = 0; i < 5; ++i) {
+        printf("%d ", encrypted_message[i]);
+    }
+    printf("\n");
+    return 0;
+}
+
+--------------------
+
+FILE: Q28.cpp
+--------------------
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int a = 5, q = 23;
+    int xA = 6, xB = 15;
+
+    int A = pow(a, xA) % q;
+    int B = pow(a, xB) % q;
+
+    int keyA = pow(B, xA) % q;
+    int keyB = pow(A, xB) % q;
+
+    printf("Shared key (Alice): %d\n", keyA);
+    printf("Shared key (Bob): %d\n", keyB);
+    return 0;
+}
+
+--------------------
+
+FILE: Q29.cpp
+--------------------
+#include <stdio.h>
+
+int main() {
+    int lanes[25] = {0}; // Initial state
+    lanes[0] = 1; // At least one non-zero bit in the first block
+
+    // Show how long it will take
+    int rounds = 0;
+    while (1) {
+        int all_non_zero = 1;
+        for (int i = 0; i < 25; ++i) {
+            if (lanes[i] == 0) {
+                all_non_zero = 0;
+                lanes[i] = 1; // Simulate change
+                rounds++;
+                break;
+            }
+        }
+        if (all_non_zero) break;
+    }
+
+    printf("Rounds to non-zero state: %d\n", rounds);
+    return 0;
+}
+
+--------------------
+
+FILE: Q30.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+void xorBlocks(char *block1, char *block2, char *out, int blockSize) {
+    for (int i = 0; i < blockSize; ++i) {
+        out[i] = block1[i] ^ block2[i];
+    }
+}
+
+int main() {
+    char K[] = "secretkey";
+    char X[] = "message";
+    char T[8];
+    char X2[8];
+    int blockSize = 8;
+
+    // Compute CBC MAC
+    xorBlocks(K, X, T, blockSize);
+
+    // Compute CBC MAC for two-block message
+    xorBlocks(X, T, X2, blockSize);
+    xorBlocks(K, X2, T, blockSize);
+
+    // Print results
+    printf("MAC for one-block message: %s\n", T);
+    printf("MAC for two-block message: %s\n", T);
+    return 0;
+}
+
+--------------------
+
+FILE: Q31.cpp
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+#define BLOCK_SIZE 16 // 128 bits for this example
+
+void print_hex(const char *label, uint8_t *data, int len) {
+    printf("%s: ", label);
+    for (int i = 0; i < len; i++) {
+        printf("%02x", data[i]);
+    }
+    printf("\n");
+}
+
+void left_shift(uint8_t *input, uint8_t *output, int len) {
+    int carry = 0;
+    for (int i = len - 1; i >= 0; i--) {
+        int next_carry = (input[i] & 0x80) ? 1 : 0;
+        output[i] = (input[i] << 1) | carry;
+        carry = next_carry;
+    }
+}
+
+void xor_with_constant(uint8_t *data, int len, uint8_t constant) {
+    data[len - 1] ^= constant;
+}
+
+void generate_subkeys(uint8_t *key, uint8_t *k1, uint8_t *k2, int block_size) {
+    uint8_t L[BLOCK_SIZE] = {0}; // Assuming AES(block_size = 128)
+    uint8_t Rb;
+
+    // Rb value for block size
+    if (block_size == 8) {
+        Rb = 0x1B; // for 64 bits
+    } else {
+        Rb = 0x87; // for 128 bits
+    }
+
+    // AES encryption of zero block (this is a placeholder, replace with actual AES function)
+    // AES_encrypt_zero_block(key, L);
+
+    // Simulating AES with zero block for this example
+    memset(L, 0xAB, block_size); // Placeholder for AES encryption result
+
+    // Generate K1
+    left_shift(L, k1, block_size);
+    if (L[0] & 0x80) {
+        xor_with_constant(k1, block_size, Rb);
+    }
+
+    // Generate K2
+    left_shift(k1, k2, block_size);
+    if (k1[0] & 0x80) {
+        xor_with_constant(k2, block_size, Rb);
+    }
+}
+
+int main() {
+    uint8_t key[BLOCK_SIZE] = {0}; // Example key
+    uint8_t k1[BLOCK_SIZE];
+    uint8_t k2[BLOCK_SIZE];
+
+    generate_subkeys(key, k1, k2, BLOCK_SIZE);
+
+    print_hex("K1", k1, BLOCK_SIZE);
+    print_hex("K2", k2, BLOCK_SIZE);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q32.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+// Placeholder for a secure random number generator
+uint32_t generate_random() {
+    return rand();
+}
+
+// Placeholder for modular exponentiation
+uint32_t mod_exp(uint32_t base, uint32_t exp, uint32_t mod) {
+    uint32_t result = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1) {
+            result = (result * base) % mod;
+        }
+        exp = exp >> 1;
+        base = (base * base) % mod;
+    }
+    return result;
+}
+
+// Placeholder for DSA parameters
+#define P 23 // Example prime number
+#define Q 11 // Example prime divisor of P-1
+#define G 4  // Example generator
+
+// Placeholder for hash function
+uint32_t hash_message(const char *message) {
+    uint32_t hash = 0;
+    for (int i = 0; i < strlen(message); i++) {
+        hash = (hash * 31) + message[i];
+    }
+    return hash % Q;
+}
+
+void dsa_sign(const char *message, uint32_t x, uint32_t *r, uint32_t *s) {
+    uint32_t k, k_inv, hash;
+    do {
+        k = generate_random() % Q;
+        k_inv = mod_exp(k, Q - 2, Q); // k^(-1) mod Q
+        *r = mod_exp(G, k, P) % Q;
+        hash = hash_message(message);
+        *s = (k_inv * (hash + x * (*r))) % Q;
+    } while (*r == 0 || *s == 0);
+}
+
+int main() {
+    const char *message = "Hello, DSA!";
+    uint32_t x = 7; // Example private key
+    uint32_t r, s;
+
+    dsa_sign(message, x, &r, &s);
+
+    printf("Message: %s\n", message);
+    printf("Signature (r, s): (%u, %u)\n", r, s);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q33.cpp
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+// Placeholder for DES encryption and decryption functions
+void DES_encrypt(uint8_t *plaintext, uint8_t *key, uint8_t *ciphertext) {
+    // Implement the DES encryption algorithm here
+}
+
+void DES_decrypt(uint8_t *ciphertext, uint8_t *key, uint8_t *plaintext) {
+    // Implement the DES decryption algorithm here
+}
+
+void print_hex(const char *label, uint8_t *data, int len) {
+    printf("%s: ", label);
+    for (int i = 0; i < len; i++) {
+        printf("%02x", data[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    uint8_t key[8] = {0x13, 0x34, 0x57, 0x79, 0x9B, 0xBC, 0xDF, 0xF1}; // 56-bit key
+    uint8_t plaintext[8] = "ABCDEFGH"; // 64-bit block
+    uint8_t ciphertext[8];
+    uint8_t decryptedtext[8];
+
+    DES_encrypt(plaintext, key, ciphertext);
+    print_hex("Ciphertext", ciphertext, 8);
+
+    DES_decrypt(ciphertext, key, decryptedtext);
+    print_hex("Decrypted text", decryptedtext, 8);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q34.cpp
+--------------------
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+#define BLOCK_SIZE 8 // 64 bits for this example
+
+void pad(uint8_t *input, uint8_t *padded, int len) {
+    int pad_len = BLOCK_SIZE - (len % BLOCK_SIZE);
+    memcpy(padded, input, len);
+    padded[len] = 0x80; // Padding starts with 1 bit followed by zeros
+    for (int i = len + 1; i < len + pad_len; i++) {
+        padded[i] = 0x00;
+    }
+}
+
+void print_hex(const char *label, uint8_t *data, int len) {
+    printf("%s: ", label);
+    for (int i = 0; i < len; i++) {
+        printf("%02x", data[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    uint8_t plaintext[16] = "Hello, world!";
+    uint8_t padded[24]; // Larger than plaintext to accommodate padding
+
+    int plaintext_len = strlen((char *)plaintext);
+    pad(plaintext, padded, plaintext_len);
+    print_hex("Padded plaintext", padded, 24);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q35.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+void encrypt_vigenere(char *plaintext, int *key, char *ciphertext) {
+    int len = strlen(plaintext);
+    for (int i = 0; i < len; i++) {
+        ciphertext[i] = ((plaintext[i] - 'A' + key[i]) % 26) + 'A';
+    }
+    ciphertext[len] = '\0';
+}
+
+void generate_random_key(int *key, int len) {
+    for (int i = 0; i < len; i++) {
+        key[i] = rand() % 26;
+    }
+}
+
+int main() {
+    char plaintext[] = "HELLOWORLD";
+    int key[10];
+    char ciphertext[11];
+
+    srand(time(NULL));
+    generate_random_key(key, 10);
+
+    encrypt_vigenere(plaintext, key, ciphertext);
+
+    printf("Plaintext: %s\n", plaintext);
+    printf("Ciphertext: %s\n", ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q36.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+void affine_encrypt(char *plaintext, int a, int b, char *ciphertext) {
+    int len = strlen(plaintext);
+    for (int i = 0; i < len; i++) {
+        ciphertext[i] = ((a * (plaintext[i] - 'A') + b) % 26) + 'A';
+    }
+    ciphertext[len] = '\0';
+}
+
+int main() {
+    char plaintext[] = "HELLO";
+    char ciphertext[6];
+    int a = 5, b = 8;
+
+    if (gcd(a, 26) != 1) {
+        printf("Error: 'a' must be coprime with 26\n");
+        return 1;
+    }
+
+    affine_encrypt(plaintext, a, b, ciphertext);
+    printf("Ciphertext: %s\n", ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q37.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+void frequency_analysis(char *ciphertext) {
+    int freq[26] = {0};
+    int len = strlen(ciphertext);
+
+    for (int i = 0; i < len; i++) {
+        freq[ciphertext[i] - 'A']++;
+    }
+
+    for (int i = 0; i < 26; i++) {
+        printf("%c: %d\n", 'A' + i, freq[i]);
+    }
+}ssint main() {
+    char ciphertext[] = "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD";
+
+    frequency_analysis(ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q38.cpp
+--------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define N 3 // Assuming a 3x3 key matrix
+
+void hill_encrypt(char *plaintext, int key[N][N], char *ciphertext) {
+    int len = strlen(plaintext);
+    for (int i = 0; i < len; i += N) {
+        for (int j = 0; j < N; j++) {
+            ciphertext[i + j] = 0;
+            for (int k = 0; k < N; k++) {
+                ciphertext[i + j] += key[j][k] * (plaintext[i + k] - 'A');
+            }
+            ciphertext[i + j] = (ciphertext[i + j] % 26) + 'A';
+        }
+    }
+    ciphertext[len] = '\0';
+}
+
+int main() {
+    char plaintext[] = "ACT";
+    char ciphertext[4];
+    int key[N][N] = {
+        {6, 24, 1},
+        {13, 16, 10},
+        {20, 17, 15}
+    };
+
+    hill_encrypt(plaintext, key, ciphertext);
+    printf("Ciphertext: %s\n", ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q39.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+void frequency_analysis(char *ciphertext, int *freq) {
+    int len = strlen(ciphertext);
+    for (int i = 0; i < len; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            freq[ciphertext[i] - 'A']++;
+        }
+    }
+}
+
+void decrypt_additive_cipher(char *ciphertext, int key, char *plaintext) {
+    int len = strlen(ciphertext);
+    for (int i = 0; i < len; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            plaintext[i] = ((ciphertext[i] - 'A' - key + 26) % 26) + 'A';
+        } else {
+            plaintext[i] = ciphertext[i];
+        }
+    }
+    plaintext[len] = '\0';
+}
+
+void perform_attack(char *ciphertext) {
+    int freq[26] = {0};
+    char plaintext[256];
+    int most_frequent_letter = 'E' - 'A'; // Assume 'E' is the most frequent letter in English
+
+    frequency_analysis(ciphertext, freq);
+
+    for (int i = 0; i < 26; i++) {
+        int key = (i - most_frequent_letter + 26) % 26;
+        decrypt_additive_cipher(ciphertext, key, plaintext);
+        printf("Key: %2d, Plaintext: %s\n", key, plaintext);
+    }
+}
+
+int main() {
+    char ciphertext[] = "LIPPS ASVPH";
+
+    perform_attack(ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+FILE: Q40.cpp
+--------------------
+#include <stdio.h>
+#include <string.h>
+
+void frequency_analysis(char *ciphertext, int *freq) {
+    int len = strlen(ciphertext);
+    for (int i = 0; i < len; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            freq[ciphertext[i] - 'A']++;
+        }
+    }
+}
+
+void substitute(char *ciphertext, char *key, char *plaintext) {
+    int len = strlen(ciphertext);
+    for (int i = 0; i < len; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            plaintext[i] = key[ciphertext[i] - 'A'];
+        } else {
+            plaintext[i] = ciphertext[i];
+        }
+    }
+    plaintext[len] = '\0';
+}
+
+void sort_frequencies(int *freq, char *letters) {
+    for (int i = 0; i < 26; i++) {
+        letters[i] = 'A' + i;
+    }
+
+    for (int i = 0; i < 25; i++) {
+        for (int j = i + 1; j < 26; j++) {
+            if (freq[i] < freq[j]) {
+                int temp_freq = freq[i];
+                freq[i] = freq[j];
+                freq[j] = temp_freq;
+
+                char temp_letter = letters[i];
+                letters[i] = letters[j];
+                letters[j] = temp_letter;
+            }
+        }
+    }
+}
+
+void perform_attack(char *ciphertext) {
+    int freq[26] = {0};
+    char letters[26];
+    char plaintext[256];
+    char keys[10][26] = {
+        "ETAOINSHRDLCUMWFGYPBVKJXQZ",
+        "ETAOINSHRDLCUMWFGYPBVJZKXQ",
+        "ETAOINSHRDLCUMWFGYPBZVKXJQ",
+        "ETAOINSHRDLCUMWFGYPBVKJQXZ",
+        "ETAOINSHRDLCUMWFGYPBZVJXKQ",
+        "ETAOINSHRDLCUMWFGYPBVJXKQZ",
+        "ETAOINSHRDLCUMWFGYPBVZKJXQ",
+        "ETAOINSHRDLCUMWFGYPBVJKXQZ",
+        "ETAOINSHRDLCUMWFGYPBVKJXZQ",
+        "ETAOINSHRDLCUMWFGYPBVJKQXZ"
+    };
+
+    frequency_analysis(ciphertext, freq);
+    sort_frequencies(freq, letters);
+
+    for (int i = 0; i < 10; i++) {
+        char key[26];
+        for (int j = 0; j < 26; j++) {
+            key[letters[j] - 'A'] = keys[i][j];
+        }
+        substitute(ciphertext, key, plaintext);
+        printf("Possible plaintext %2d: %s\n", i + 1, plaintext);
+    }
+}
+
+int main() {
+    char ciphertext[] = "QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD";
+
+    perform_attack(ciphertext);
+
+    return 0;
+}
+
+--------------------
+
+################################################################################
+
+NAME: CSA57-FundamentalsOfComputing
+URL: https://github.com/saveetha-labs/CSA57-FundamentalsOfComputing
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: DSA01-ObjectOrientedProgrammingWithC-
+URL: https://github.com/saveetha-labs/DSA01-ObjectOrientedProgrammingWithC-
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: ECA10-MicroprocessorsAndMicrocontrollers
+URL: https://github.com/saveetha-labs/ECA10-MicroprocessorsAndMicrocontrollers
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: ECA14
+URL: https://github.com/saveetha-labs/ECA14
+RESOURCE SUMMARY: Contains 20 files (7 .ino, 13 .pdsprj)
+----------------------------------------
+
+FILE: arduino\1led-blink.ino
+--------------------
+int LEDpin = 13;
+int delayT = 1000;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(LEDpin, OUTPUT);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+digitalWrite(LEDpin, HIGH);
+delay(delayT);
+digitalWrite(LEDpin, LOW);
+delay(delayT);
+}
+
+--------------------
+
+FILE: arduino\2fadein.ino
+--------------------
+
+int led = 9;         // the PWM pin the LED is attached to
+int brightness = 0;  // how bright the LED is
+int fadeAmount = 5;  // how many points to fade the LED by
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  pinMode(led, OUTPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // set the brightness of pin 9:
+  analogWrite(led, brightness);
+
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+}
+
+--------------------
+
+FILE: arduino\3interface-water-level.ino
+--------------------
+#define ledPin 6
+#define sensorPin A0
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+}
+void loop() {
+  int sensorValue = analogRead(sensorPin);
+  if (sensorValue > 570)  {
+    int outputValue = map(sensorValue, 570, 800, 0, 255);
+    Serial.println(outputValue);
+    analogWrite(ledPin, outputValue); // generate PWM signal
+  }
+}
+
+--------------------
+
+FILE: arduino\4interface-US-echo-trigger.ino
+--------------------
+// Include NewPing Library
+#include "NewPing.h"
+
+// Hook up HC-SR04 with Trig to Arduino Pin 9, Echo to Arduino pin 10
+#define TRIGGER_PIN 9
+#define ECHO_PIN 10
+
+// Maximum distance we want to ping for (in centimeters).
+#define MAX_DISTANCE 400	
+
+// NewPing setup of pins and maximum distance.
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
+void setup() {
+	Serial.begin(9600);
+}
+
+void loop() {
+	Serial.print("Distance = ");
+	Serial.print(sonar.ping_cm());
+	Serial.println(" cm");
+	delay(500);
+}
+--------------------
+
+FILE: arduino\5interface-US-led-buzzer.ino
+--------------------
+       int LED = 12;  
+       int BUZZER = 13;  
+       int LPG_sensor = 3;// MQ-6 SENSOR  
+       int LPG_detected;  
+       void setup()  
+       {  
+         Serial.begin(9600);  
+         pinMode(LED, OUTPUT);  
+         pinMode(BUZZER, OUTPUT);  
+         pinMode(LPG_sensor, INPUT);  
+       }  
+       void loop()  
+       {  
+          LPG_detected = digitalRead(LPG_sensor);  
+          Serial.println(LPG_detected);  
+         if (LPG_detected == 1)  
+         {  
+           Serial.println("LPG detected...");  
+           digitalWrite(LED, HIGH);  
+           digitalWrite(BUZZER, HIGH);  
+         }  
+         else  
+         {  
+           Serial.println("No LPG detected.");  
+           digitalWrite(LED, LOW);  
+           digitalWrite(BUZZER, LOW);  
+         }  
+       }  
+--------------------
+
+FILE: arduino\6Buzzer.ino
+--------------------
+const int buzzer = 9; //buzzer to arduino pin 9
+
+
+void setup(){
+   
+  pinMode(buzzer, OUTPUT); // Set buzzer - pin 9 as an output
+
+}
+
+void   loop(){
+ 
+  tone(buzzer, 1000); // Send 1KHz sound signal...
+  delay(1000);         // ...for 1 sec
+  noTone(buzzer);     // Stop sound...
+  delay(1000);         // ...for 1sec
+  
+}
+--------------------
+
+FILE: arduino\7LedChaser.ino
+--------------------
+int ledpin;
+int pot = A0;
+
+void setup() {
+for(ledpin=2;ledpin<=8;ledpin++){
+  pinMode(ledpin,OUTPUT);
+ }
+}
+void loop() {
+  for(ledpin=2;ledpin<=8;ledpin++){
+  int value = analogRead(pot);
+  digitalWrite(ledpin,HIGH);
+  delay(value);
+  }
+    for(ledpin=2;ledpin<=8;ledpin++){
+      int value = analogRead(pot);
+  digitalWrite(ledpin,LOW);
+  delay(value);
+  }
+}
+--------------------
+
+FILE: proteus\Q1) blink.pdsprj
+--------------------
+[BINARY FILE: Q1) blink.pdsprj | SIZE: 19505 bytes]
+--------------------
+
+FILE: proteus\Q10)interfacerelay_led.pdsprj
+--------------------
+[BINARY FILE: Q10)interfacerelay_led.pdsprj | SIZE: 18336 bytes]
+--------------------
+
+FILE: proteus\Q11)interfacerelay_bulb.pdsprj
+--------------------
+[BINARY FILE: Q11)interfacerelay_bulb.pdsprj | SIZE: 17942 bytes]
+--------------------
+
+FILE: proteus\Q12)7_SEGMENT[1].pdsprj
+--------------------
+[BINARY FILE: Q12)7_SEGMENT[1].pdsprj | SIZE: 19837 bytes]
+--------------------
+
+FILE: proteus\Q13)traffic.signal.pdsprj
+--------------------
+[BINARY FILE: Q13)traffic.signal.pdsprj | SIZE: 20802 bytes]
+--------------------
+
+FILE: proteus\Q2)ledtoggle.pdsprj
+--------------------
+[BINARY FILE: Q2)ledtoggle.pdsprj | SIZE: 20241 bytes]
+--------------------
+
+FILE: proteus\Q3)LED_CHASER[1].pdsprj
+--------------------
+[BINARY FILE: Q3)LED_CHASER[1].pdsprj | SIZE: 20305 bytes]
+--------------------
+
+FILE: proteus\Q4)fade_in_fade_out_correct[1].pdsprj
+--------------------
+[BINARY FILE: Q4)fade_in_fade_out_correct[1].pdsprj | SIZE: 20636 bytes]
+--------------------
+
+FILE: proteus\Q5) SQUARE WAVE.pdsprj
+--------------------
+[BINARY FILE: Q5) SQUARE WAVE.pdsprj | SIZE: 18464 bytes]
+--------------------
+
+FILE: proteus\Q6)triangularwave.pdsprj
+--------------------
+[BINARY FILE: Q6)triangularwave.pdsprj | SIZE: 17681 bytes]
+--------------------
+
+FILE: proteus\Q7) ANTICLOCKWISEsteppermotor[1] - Copy.pdsprj
+--------------------
+[BINARY FILE: Q7) ANTICLOCKWISEsteppermotor[1] - Copy.pdsprj | SIZE: 20278 bytes]
+--------------------
+
+FILE: proteus\Q8)ClOCKWISEsteppermotor.pdsprj
+--------------------
+[BINARY FILE: Q8)ClOCKWISEsteppermotor.pdsprj | SIZE: 20300 bytes]
+--------------------
+
+FILE: proteus\Q9)Digitalclock.pdsprj
+--------------------
+[BINARY FILE: Q9)Digitalclock.pdsprj | SIZE: 19357 bytes]
+--------------------
+
+################################################################################
+
+NAME: ECA47-PrinciplesOfDigitalSystemDesign
+URL: https://github.com/saveetha-labs/ECA47-PrinciplesOfDigitalSystemDesign
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: EEA01-BEEE
+URL: https://github.com/saveetha-labs/EEA01-BEEE
+RESOURCE SUMMARY: Contains 3 files (2 .pdf, 1 .jpg)
+----------------------------------------
+
+FILE: BEEE MASTER RECORD.pdf
+--------------------
+[BINARY FILE: BEEE MASTER RECORD.pdf | SIZE: 16745644 bytes]
+--------------------
+
+FILE: BEEE-CSE-MCQ-Final.pdf
+--------------------
+[BINARY FILE: BEEE-CSE-MCQ-Final.pdf | SIZE: 2705496 bytes]
+--------------------
+
+FILE: WhatsApp Image 2025-03-19 at 14.14.21_1b37571d.jpg
+--------------------
+[BINARY FILE: WhatsApp Image 2025-03-19 at 14.14.21_1b37571d.jpg | SIZE: 392711 bytes]
+--------------------
+
+################################################################################
+
+NAME: ITA14-EthicalHacking
+URL: https://github.com/saveetha-labs/ITA14-EthicalHacking
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA01-EngineeringMathematicsI
+URL: https://github.com/saveetha-labs/UBA01-EngineeringMathematicsI
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA04-DiscreteMathematics
+URL: https://github.com/saveetha-labs/UBA04-DiscreteMathematics
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA05-EngineeringMathematicsIi
+URL: https://github.com/saveetha-labs/UBA05-EngineeringMathematicsIi
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA09-ProbabilityAndStatistics
+URL: https://github.com/saveetha-labs/UBA09-ProbabilityAndStatistics
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA10-NumericalMethods
+URL: https://github.com/saveetha-labs/UBA10-NumericalMethods
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA28-ProfessionalEthicsAndLegalPractices
+URL: https://github.com/saveetha-labs/UBA28-ProfessionalEthicsAndLegalPractices
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA29-TechnicalEnglish
+URL: https://github.com/saveetha-labs/UBA29-TechnicalEnglish
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA33-PrinciplesOfManagement
+URL: https://github.com/saveetha-labs/UBA33-PrinciplesOfManagement
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA48-EngineeringPhysics
+URL: https://github.com/saveetha-labs/UBA48-EngineeringPhysics
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
+
+################################################################################
+
+NAME: UBA49-EngineeringChemistry
+URL: https://github.com/saveetha-labs/UBA49-EngineeringChemistry
+----------------------------------------
+
+[SKELETON REPO: No unique project data found beyond boilerplate index/readme]
