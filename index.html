@@ -479,8 +479,7 @@
             grid.innerHTML = "";
             const filtered = repos.filter(r => {
                 const isMain = r.name === 'saveetha-labs' || r.name === 'saveetha-labs.github.io';
-                const isEmpty = !r.description && r.stargazers_count === 0;
-                return !r.fork && !isMain && !isEmpty;
+                return !r.fork && !isMain;
             });
 
             countEl.textContent = filtered.length;
