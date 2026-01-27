@@ -1,71 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 — Page Not Found | Saveetha Labs</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lost in Deep Space — 404 Error | Saveetha Labs</title>
+    <link rel="icon" type="image/png" href="https://saveetha-labs.github.io/favicon-32x32.png" />
+    <meta name="description"
+        content="The page you are looking for has been lost in deep space. Return to Saveetha Labs.">
+    <meta name="robots" content="noindex" />
 
-  <meta name="robots" content="noindex" />
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --card: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f9fafb;
+            --text-muted: #9ca3af;
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'Space Grotesk', sans-serif;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background: #020617;
-      color: #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    .box {
-      max-width: 520px;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      margin-bottom: 10px;
-    }
+        /* High-Performance Canvas Background */
+        canvas#space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-    p {
-      color: #9ca3af;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
+        /* 404 Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 40px;
+            max-width: 600px;
+            text-align: center;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
-    a {
-      display: inline-block;
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: #38bdf8;
-      color: #020617;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
 
-    a:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-  </style>
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Glitch 404 Text */
+        .glitch-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .glitch {
+            font-family: var(--font-mono);
+            font-size: clamp(6rem, 15vw, 10rem);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            color: var(--text);
+            position: relative;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: "404";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+            animation: glitch-anim2 1s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(31px, 9999px, 94px, 0);
+                transform: skew(0.85deg);
+            }
+
+            5% {
+                clip: rect(70px, 9999px, 71px, 0);
+                transform: skew(0.5deg);
+            }
+
+            /* ... more steps ... */
+            100% {
+                clip: rect(67px, 9999px, 62px, 0);
+                transform: skew(0.1deg);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(10px, 9999px, 85px, 0);
+                transform: skew(0.6deg);
+            }
+
+            50% {
+                clip: rect(80px, 9999px, 10px, 0);
+                transform: skew(0.2deg);
+            }
+
+            100% {
+                clip: rect(10px, 9999px, 85px, 0);
+                transform: skew(0.6deg);
+            }
+        }
+
+        /* Info Text */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Futuristics Action Button */
+        .btn-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px -10px var(--accent);
+            color: #fff;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            background: #0ea5e9;
+            height: 100%;
+            width: 0;
+            left: 0;
+            top: 0;
+            transition: 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover::after {
+            width: 100%;
+        }
+
+        /* Responsive Mobile UI */
+        @media (max-width: 640px) {
+            .container {
+                margin: 20px;
+                padding: 30px 20px;
+                border-radius: 24px;
+            }
+
+            .glitch {
+                font-size: 5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h1>404</h1>
-    <p>
-      Oops! The page you’re looking for doesn’t exist.<br />
-      It may have been moved, renamed, or never existed.
-    </p>
+    <canvas id="space-canvas"></canvas>
 
-    <a href="/">← Back to Saveetha Labs</a>
-  </div>
+    <div class="container">
+        <div class="glitch-wrapper">
+            <div class="glitch" data-text="404">404</div>
+        </div>
+        <h2>System Anomaly Detected</h2>
+        <p>The coordinates you've requested do not exist in the known repository database. You might have ventured too
+            far into the void.</p>
 
+        <div class="btn-wrapper">
+            <a href="/" class="btn">Initiate Return Sequence</a>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Space Particle System
+         */
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, lastNow;
+        let particles = [];
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random();
+                this.vel = Math.random() * 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 150; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function loop(now) {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(loop);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        requestAnimationFrame(loop);
+
+        // Interactive mouse effect for box
+        const container = document.querySelector('.container');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
+            container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            container.style.transition = 'all 0.5s ease';
+            container.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+        document.addEventListener('mouseenter', () => {
+            container.style.transition = 'none';
+        });
+    </script>
 </body>
+
 </html>
