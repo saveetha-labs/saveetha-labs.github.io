@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Saveetha Labs Documentation | Open Source Educational Resources</title>
+    <meta name="description"
+        content="Comprehensive documentation for Saveetha Labs - an open-source educational resource hub for engineering students." />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(17, 24, 39, 0.6);
+            --text: #f9fafb;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            background-attachment: fixed;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.05rem;
+        }
+
+        .btn-primary {
+            background: var(--text);
+            color: var(--bg);
+            border: 1px solid var(--text);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px var(--text);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px var(--accent);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            z-index: 100;
+            margin-bottom: 40px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 80px;
+            scroll-margin-top: 100px;
+        }
+
+        section h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        section h3 {
+            font-size: 1.5rem;
+            margin: 32px 0 16px;
+            color: var(--accent);
+        }
+
+        section h4 {
+            font-size: 1.25rem;
+            margin: 24px 0 12px;
+            color: var(--text);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 0 0 1px var(--accent-soft), 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card);
+        }
+
+        th {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        table a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        table a:hover {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        /* Code blocks */
+        code {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin: 8px 0;
+            color: var(--muted);
+        }
+
+        li strong {
+            color: var(--text);
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .step:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .warning-box {
+            background: rgba(251, 191, 36, 0.05);
+            border-left: 4px solid #fbbf24;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .success-box {
+            background: rgba(34, 197, 94, 0.05);
+            border-left: 4px solid #22c55e;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.02));
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Back to top button */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 40px -10px var(--accent);
+            transition: 0.3s;
+            z-index: 99;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px -10px var(--accent);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: var(--accent-soft);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 0 40px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-toggle {
+                display: block;
+                align-self: flex-end;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .feature-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+
+            #backToTop {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+
+            section h2 {
+                font-size: 1.75rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>📚 Saveetha Labs Documentation</h1>
+            <p>Comprehensive educational resource hub for engineering students across various disciplines</p>
+            <div class="header-actions">
+                <a class="btn btn-primary" href="https://github.com/saveetha-labs" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                    </svg>
+                    GitHub Organization
+                </a>
+                <a class="btn btn-secondary" href="https://saveetha-labs.github.io/" target="_blank">
+                    🌐 Main Website
+                </a>
+                <a class="btn btn-secondary" href="#courses">
+                    📖 Browse Courses
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <strong style="color: var(--accent);">Saveetha Labs Docs</strong>
+                <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#overview">Overview</a>
+                    <a href="#courses">Courses</a>
+                    <a href="#usage">How to Use</a>
+                    <a href="#contributing">Contributing</a>
+                    <a href="#community">Community</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>🌟 Welcome to Saveetha Labs</h2>
+            <div class="card">
+                <p><strong>Saveetha Labs</strong> is more than just a collection of repositories—it's a thriving
+                    educational ecosystem built for academic excellence. We provide course-wise study materials, lab
+                    resources, and academic support for students across various engineering disciplines.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h4>Purpose-Driven</h4>
+                    <p>Democratizes access to quality learning materials for all students regardless of background</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h4>Mission-Focused</h4>
+                    <p>Bridge the gap between theoretical learning and practical application through hands-on resources
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📂</span>
+                    <h4>Well-Organized</h4>
+                    <p>Systematic structure with each repository representing a specific course or subject area</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h4>Collaborative</h4>
+                    <p>Open-source platform encouraging contributions, discussions, and peer-to-peer knowledge exchange
+                    </p>
+                </div>
+            </div>
+
+            <h3>What We Offer</h3>
+            <div class="info-box">
+                <p><strong>Every repository includes:</strong></p>
+                <ul>
+                    <li>Comprehensive study materials and lecture notes</li>
+                    <li>Practical code examples and implementations</li>
+                    <li>Hands-on lab exercises and experiments</li>
+                    <li>Assignment templates and solutions</li>
+                    <li>Exam preparation resources and question banks</li>
+                    <li>Reference materials and external learning links</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Repository Structure -->
+        <section id="structure">
+            <h2>📁 Repository Structure</h2>
+            <p>Our repositories follow a systematic organization designed for clarity and ease of use:</p>
+
+            <h3>Course Code System</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <strong>CSA</strong>
+                    <p>Computer Science & Engineering</p>
+                </div>
+                <div class="feature-card">
+                    <strong>ECA</strong>
+                    <p>Electronics & Communication Engineering</p>
+                </div>
+                <div class="feature-card">
+                    <strong>EEA</strong>
+                    <p>Electrical & Electronics Engineering</p>
+                </div>
+                <div class="feature-card">
+                    <strong>DSA</strong>
+                    <p>Data Science Applications</p>
+                </div>
+                <div class="feature-card">
+                    <strong>ITA</strong>
+                    <p>Information Technology Applications</p>
+                </div>
+                <div class="feature-card">
+                    <strong>UBA</strong>
+                    <p>Universal Basic & Applied Sciences</p>
+                </div>
+            </div>
+
+            <h3>Standard Folder Structure</h3>
+            <pre><code>├── README.md
+├── Notes/
+├── Code/
+├── Lab-Exercises/
+├── Assignments/
+├── Question-Papers/
+├── References/
+└── Resources/</code></pre>
+        </section>
+
+        <!-- Available Courses -->
+        <section id="courses">
+            <h2>📖 Available Courses</h2>
+
+            <h3>Computer Science & Engineering (CSA)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Subject Name</th>
+                            <th>Repository</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CSA57</td>
+                            <td>Fundamentals of Computing</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA57-FundamentalsOfComputing"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA13</td>
+                            <td>Theory of Computation</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA13-Theory-of-Computation"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA17</td>
+                            <td>Artificial Intelligence</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA17" target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA51</td>
+                            <td>Cryptography and Network Security</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA51" target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA10</td>
+                            <td>Software Engineering</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA10-SoftwareEngineering"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA11</td>
+                            <td>Object Oriented Analysis and Design</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA11-ObjectOrientedAnalysisAndDesign"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA12</td>
+                            <td>Computer Architecture</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA12-ComputerArchitecture"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA14</td>
+                            <td>Compiler Design</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA14-CompilerDesign" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA15</td>
+                            <td>Cloud Computing and Big Data Analytics</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA15-CloudComputingAndBigDataAnalytics"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA16</td>
+                            <td>Data Warehousing and Data Mining</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA16-DataWarehousingAndDataMining"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA41</td>
+                            <td>Internet of Things</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA41-InternetOfThings" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSA43</td>
+                            <td>Internet Programming</td>
+                            <td><a href="https://github.com/saveetha-labs/CSA43-InternetProgramming"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Electronics & Communication Engineering (ECA)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Subject Name</th>
+                            <th>Repository</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ECA14</td>
+                            <td>Embedded Systems</td>
+                            <td><a href="https://github.com/saveetha-labs/ECA14" target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>ECA10</td>
+                            <td>Microprocessors and Microcontrollers</td>
+                            <td><a href="https://github.com/saveetha-labs/ECA10-MicroprocessorsAndMicrocontrollers"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>ECA47</td>
+                            <td>Principles of Digital System Design</td>
+                            <td><a href="https://github.com/saveetha-labs/ECA47-PrinciplesOfDigitalSystemDesign"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Other Disciplines</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Course Code</th>
+                            <th>Subject Name</th>
+                            <th>Repository</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EEA</td>
+                            <td>EEA01</td>
+                            <td>Basic Electrical & Electronics Engineering</td>
+                            <td><a href="https://github.com/saveetha-labs/EEA01-BEEE" target="_blank">View Repo</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DSA</td>
+                            <td>DSA01</td>
+                            <td>Object Oriented Programming with C++</td>
+                            <td><a href="https://github.com/saveetha-labs/DSA01-ObjectOrientedProgrammingWithC-"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>ITA</td>
+                            <td>ITA14</td>
+                            <td>Ethical Hacking</td>
+                            <td><a href="https://github.com/saveetha-labs/ITA14-EthicalHacking" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Basic Sciences & Core Engineering (UBA)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Subject Name</th>
+                            <th>Repository</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>UBA01</td>
+                            <td>Engineering Mathematics I</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA01-EngineeringMathematicsI"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA04</td>
+                            <td>Discrete Mathematics</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA04-DiscreteMathematics"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA05</td>
+                            <td>Engineering Mathematics II</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA05-EngineeringMathematicsIi"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA09</td>
+                            <td>Probability and Statistics</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA09-ProbabilityAndStatistics"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA10</td>
+                            <td>Numerical Methods</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA10-NumericalMethods" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA28</td>
+                            <td>Professional Ethics and Legal Practices</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA28-ProfessionalEthicsAndLegalPractices"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA29</td>
+                            <td>Technical English</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA29-TechnicalEnglish" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA33</td>
+                            <td>Principles of Management</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA33-PrinciplesOfManagement"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA48</td>
+                            <td>Engineering Physics</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA48-EngineeringPhysics" target="_blank">View
+                                    Repo</a></td>
+                        </tr>
+                        <tr>
+                            <td>UBA49</td>
+                            <td>Engineering Chemistry</td>
+                            <td><a href="https://github.com/saveetha-labs/UBA49-EngineeringChemistry"
+                                    target="_blank">View Repo</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- How to Use -->
+        <section id="usage">
+            <h2>🚀 How to Use Saveetha Labs</h2>
+
+            <h3>Getting Started</h3>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Browse</h4>
+                    <p>Visit <a href="https://github.com/saveetha-labs" target="_blank">github.com/saveetha-labs</a> to
+                        see all repositories</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Find Course</h4>
+                    <p>Use course code or subject name to locate your specific course</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Access Materials</h4>
+                    <p>Click repository to access all course materials and resources</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h4>Clone or Download</h4>
+                    <p>Use Git to clone or download files for offline access</p>
+                </div>
+            </div>
+
+            <h3>Cloning a Repository</h3>
+            <pre><code># Replace [REPOSITORY-NAME] with actual repo name
+git clone https://github.com/saveetha-labs/[REPOSITORY-NAME].git
+
+# Example
+git clone https://github.com/saveetha-labs/CSA13-Theory-of-Computation.git
+
+# Navigate to directory
+cd [REPOSITORY-NAME]</code></pre>
+
+            <div class="success-box">
+                <p><strong>Pro Tips:</strong></p>
+                <ul>
+                    <li>⭐ Star repositories to bookmark and track updates</li>
+                    <li>👁️ Watch repositories to receive notifications for new materials</li>
+                    <li>🔄 Check regularly for newly added materials and improvements</li>
+                    <li>🔗 Follow our organization to stay informed about new courses</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contributing -->
+        <section id="contributing">
+            <h2>🤝 Contributing to Saveetha Labs</h2>
+            <p>We welcome contributions from students, faculty, alumni, and education enthusiasts!</p>
+
+            <h3>Contribution Process</h3>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>Fork Repository</h4>
+                    <p>Click "Fork" button to create your personal copy</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>Clone Your Fork</h4>
+                    <p>Clone the repository to your local machine</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>Create Branch</h4>
+                    <p>Create a new branch for your contribution</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h4>Add Resources</h4>
+                    <p>Organize files properly in appropriate folders</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <h4>Commit Changes</h4>
+                    <p>Commit with descriptive message</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">6</span>
+                    <h4>Push & PR</h4>
+                    <p>Push changes and create pull request</p>
+                </div>
+            </div>
+
+            <h3>Example Workflow</h3>
+            <pre><code># Clone your fork
+git clone https://github.com/YOUR-USERNAME/REPO-NAME.git
+cd REPO-NAME
+
+# Create a branch
+git checkout -b feature/add-unit3-notes
+
+# Make your changes, then stage and commit
+git add .
+git commit -m "Add: Unit 3 notes on database normalization"
+
+# Push to your fork
+git push origin feature/add-unit3-notes
+
+# Then create Pull Request on GitHub</code></pre>
+
+            <div class="warning-box">
+                <p><strong>⚠️ Contribution Guidelines:</strong></p>
+                <ul>
+                    <li>Ensure content accuracy and quality</li>
+                    <li>Follow existing folder structure</li>
+                    <li>Add clear documentation and comments</li>
+                    <li>Respect intellectual property rights</li>
+                    <li>Be responsive during review process</li>
+                </ul>
+            </div>
+
+            <h3>What to Contribute</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📝</span>
+                    <h4>Course Notes</h4>
+                    <p>Comprehensive study notes and summaries</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💻</span>
+                    <h4>Code Projects</h4>
+                    <p>Sample programs and implementations</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🧪</span>
+                    <h4>Lab Solutions</h4>
+                    <p>Working solutions with explanations</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📄</span>
+                    <h4>Question Papers</h4>
+                    <p>Previous year papers and practice sets</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community & Support -->
+        <section id="community">
+            <h2>🌐 Community & Support</h2>
+
+            <h3>Connect With Us</h3>
+            <div class="card">
+                <ul>
+                    <li><strong>Website:</strong> <a href="https://saveetha-labs.github.io/"
+                            target="_blank">saveetha-labs.github.io</a></li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/saveetha-labs"
+                            target="_blank">github.com/saveetha-labs</a></li>
+                    <li><strong>Documentation:</strong> <a href="https://saveetha-labs.github.io/docs"
+                            target="_blank">saveetha-labs.github.io/docs</a></li>
+                </ul>
+            </div>
+
+            <h3>Getting Help</h3>
+            <div class="info-box">
+                <ul>
+                    <li>Open an issue in the specific repository for course-related questions</li>
+                    <li>Check existing issues and discussions before creating new ones</li>
+                    <li>Participate in repository discussions for broader questions</li>
+                    <li>Connect with other contributors for guidance and support</li>
+                    <li>Review README files in each repository for specific instructions</li>
+                </ul>
+            </div>
+
+            <h3>Community Guidelines</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h4>Respect</h4>
+                    <p>Maintain a respectful and supportive environment</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💡</span>
+                    <h4>Help Others</h4>
+                    <p>Answer questions and share knowledge</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h4>Be Constructive</h4>
+                    <p>Provide helpful, constructive feedback</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">✨</span>
+                    <h4>Stay Positive</h4>
+                    <p>Foster a positive learning atmosphere</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- License -->
+        <section id="license">
+            <h2>📜 License Information</h2>
+            <div class="card">
+                <h3>MIT License</h3>
+                <p>All repositories are licensed under the <strong>MIT License</strong>, providing maximum freedom for
+                    educational use.</p>
+
+                <h4>✅ Permissions:</h4>
+                <ul>
+                    <li>Commercial use in projects and applications</li>
+                    <li>Modification and adaptation to your needs</li>
+                    <li>Distribution and sharing with others</li>
+                    <li>Private use for personal and educational purposes</li>
+                </ul>
+
+                <h4>📝 Conditions:</h4>
+                <ul>
+                    <li>Include original license and copyright notice when sharing</li>
+                </ul>
+
+                <h4>❌ Limitations:</h4>
+                <ul>
+                    <li>No liability for issues arising from use</li>
+                    <li>No warranty regarding accuracy or completeness</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <p><strong>You can freely:</strong></p>
+                <ul>
+                    <li>Use materials for personal study and education</li>
+                    <li>Modify and adapt resources for your learning needs</li>
+                    <li>Share with classmates and study groups</li>
+                    <li>Build upon existing resources to create new content</li>
+                </ul>
+                <p><em>Always provide appropriate credit to original contributors!</em></p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+
+            <div class="card">
+                <h4>How do I access resources?</h4>
+                <p>Browse repositories at <a href="https://github.com/saveetha-labs"
+                        target="_blank">github.com/saveetha-labs</a> or visit our main website at <a
+                        href="https://saveetha-labs.github.io/" target="_blank">saveetha-labs.github.io</a>.</p>
+            </div>
+
+            <div class="card">
+                <h4>Are materials completely free?</h4>
+                <p>Yes! All resources are completely free and open-source under the MIT License.</p>
+            </div>
+
+            <div class="card">
+                <h4>Can I contribute my own materials?</h4>
+                <p>Absolutely! We welcome and encourage contributions from students, faculty, and anyone passionate about
+                    education.</p>
+            </div>
+
+            <div class="card">
+                <h4>How do I report errors?</h4>
+                <p>Open an issue in the specific repository where you found the problem, or contact maintainers through
+                    GitHub discussions.</p>
+            </div>
+
+            <div class="card">
+                <h4>Can I use these materials for my own projects?</h4>
+                <p>Yes, under the MIT License terms with proper attribution to original contributors.</p>
+            </div>
+
+            <div class="card">
+                <h4>How frequently are materials updated?</h4>
+                <p>Repositories are regularly updated by our community of contributors and maintainers as new content
+                    becomes available.</p>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section id="best-practices">
+            <h2>💡 Best Practices</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📅</span>
+                    <h4>Regular Review</h4>
+                    <p>Access materials consistently throughout semester</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⌨️</span>
+                    <h4>Active Practice</h4>
+                    <p>Work through examples hands-on</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h4>Independent Work</h4>
+                    <p>Attempt exercises before reviewing solutions</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h4>Contribute Back</h4>
+                    <p>Share your notes and solutions</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🐛</span>
+                    <h4>Report Issues</h4>
+                    <p>Help improve quality by reporting errors</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h4>Engage Community</h4>
+                    <p>Participate in discussions and collaborations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section id="stats">
+            <h2>📊 Platform Statistics</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📚</span>
+                    <h4>30+ Repositories</h4>
+                    <p>Comprehensive course coverage</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎓</span>
+                    <h4>Multiple Disciplines</h4>
+                    <p>CS, Electronics, Electrical, Applied Sciences</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h4>Regular Updates</h4>
+                    <p>Continuously improved by contributors</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌍</span>
+                    <h4>Global Reach</h4>
+                    <p>Used by students worldwide</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support the Project -->
+        <section id="support">
+            <h2>🌟 Support the Project</h2>
+            <div class="card">
+                <p>Help Saveetha Labs grow and improve:</p>
+                <ul>
+                    <li>⭐ <strong>Star repositories</strong> that you find helpful</li>
+                    <li>🔄 <strong>Share with others</strong> - recommend to classmates and friends</li>
+                    <li>🤝 <strong>Contribute materials</strong> - add your notes, code, and resources</li>
+                    <li>📢 <strong>Spread the word</strong> - share on social media and forums</li>
+                    <li>💡 <strong>Suggest features</strong> - propose improvements through GitHub issues</li>
+                    <li>🐛 <strong>Report issues</strong> - help maintain quality by reporting problems</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p><strong>Made with ❤️ by the Saveetha Labs Community</strong></p>
+                <p style="color: var(--muted); margin: 16px 0;">Empowering students with accessible, quality educational
+                    resources</p>
+
+                <div class="footer-links">
+                    <a href="https://saveetha-labs.github.io/" target="_blank">Main Website</a>
+                    <a href="https://github.com/saveetha-labs?tab=repositories" target="_blank">All Repositories</a>
+                    <a href="https://saveetha-labs.github.io/docs" target="_blank">Documentation</a>
+                    <a href="#contributing">Contributing</a>
+                    <a href="#license">License</a>
+                </div>
+
+                <div style="margin-top: 40px; padding: 20px; border: 1px dashed var(--border); border-radius: 12px; font-size: 0.85rem; color: var(--muted);">
+                    <strong>🛡️ Data Privacy & Usage Disclaimer</strong><br>
+                    This platform is built for college learning and academic reference purposes only. All code and
+                    resources are student-contributed. We do not store personal student data. Use responsibly to enhance
+                    your understanding of engineering concepts.
+                </div>
+
+                <p style="margin-top: 32px; color: var(--muted); font-size: 0.9rem;">
+                    Last Updated: January 2026 | Version: 1.0.0<br>
+                    Maintained By: Saveetha Labs Community
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Back to top button
+        window.onscroll = function () {
+            const btn = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = 'flex';
+            } else {
+                btn.style.display = 'none';
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
