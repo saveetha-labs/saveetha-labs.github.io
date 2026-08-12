@@ -4,30 +4,39 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="manifest" href="manifest.json" />
     <title>Lost in Deep Space — 404 Error | Saveetha Labs</title>
     <link rel="icon" type="image/png" href="https://saveetha-labs.github.io/favicon-32x32.png" />
     <meta name="description"
         content="The page you are looking for has been lost in deep space. Return to Saveetha Labs.">
     <meta name="robots" content="noindex" />
 
-    <!-- Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script>
+        try {
+            if (localStorage.getItem('sl-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        } catch (e) { }
+    </script>
 
     <style>
         :root {
             --bg: #030712;
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.3);
             --card: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
+            --card-solid: #111827;
             --text: #f9fafb;
-            --text-muted: #9ca3af;
-            --font-main: 'Outfit', sans-serif;
-            --font-mono: 'Space Grotesk', sans-serif;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-2: #818cf8;
+            --accent-soft: rgba(56, 189, 248, 0.1);
+            --border: rgba(255, 255, 255, 0.1);
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --nav-h: 62px;
+            --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
         }
 
         * {
@@ -36,16 +45,24 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: var(--font-main);
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
         }
 
         /* High-Performance Canvas Background */
@@ -57,13 +74,138 @@
             pointer-events: none;
         }
 
-        /* 404 Container */
+        /* ---------- Navigation (floating curvy pill) ---------- */
+        nav {
+            position: sticky;
+            top: 14px;
+            z-index: 200;
+            width: min(1180px, calc(100% - 32px));
+            margin: 14px auto 0;
+            background: rgba(3, 7, 18, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            box-shadow: 0 10px 40px -18px rgba(0, 0, 0, 0.55);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(3, 7, 18, 0.9);
+            border-color: rgba(56, 189, 248, 0.25);
+        }
+
+        .nav-inner {
+            height: var(--nav-h);
+            padding: 0 10px 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: opacity 0.2s;
+        }
+
+        .brand:hover {
+            opacity: 0.85;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #030712;
+            box-shadow: 0 6px 18px -6px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.93rem;
+            font-weight: 500;
+            padding: 9px 16px;
+            border-radius: 999px;
+            transition: 0.25s;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .nav-cta {
+            background: var(--text) !important;
+            color: var(--bg) !important;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--bg) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px -8px var(--accent);
+        }
+
+        .theme-toggle {
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -8px var(--accent);
+        }
+
+        /* ---------- 404 Container ---------- */
         .container {
             position: relative;
             z-index: 10;
-            padding: 40px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .card {
             max-width: 600px;
             text-align: center;
+            padding: 48px 40px;
             background: var(--card);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -71,29 +213,67 @@
             border-radius: 32px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            perspective: 1200px;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px) scale(0.95);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: var(--accent-soft);
+            color: #bae6fd;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 26px;
+            backdrop-filter: blur(8px);
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f43f5e;
+            box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
             }
         }
 
         /* Glitch 404 Text */
         .glitch-wrapper {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .glitch {
             font-family: var(--font-mono);
-            font-size: clamp(6rem, 15vw, 10rem);
+            font-size: clamp(5.5rem, 14vw, 9rem);
             font-weight: 700;
             letter-spacing: -0.05em;
             color: var(--text);
@@ -136,7 +316,16 @@
                 transform: skew(0.5deg);
             }
 
-            /* ... more steps ... */
+            30% {
+                clip: rect(12px, 9999px, 30px, 0);
+                transform: skew(0.3deg);
+            }
+
+            60% {
+                clip: rect(55px, 9999px, 83px, 0);
+                transform: skew(0.7deg);
+            }
+
             100% {
                 clip: rect(67px, 9999px, 62px, 0);
                 transform: skew(0.1deg);
@@ -160,18 +349,18 @@
             }
         }
 
-        /* Info Text */
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 500;
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
             margin-bottom: 12px;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
+            color: var(--text);
         }
 
-        p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .card p {
+            color: var(--muted);
+            font-size: 1.05rem;
             line-height: 1.6;
             margin-bottom: 32px;
             max-width: 440px;
@@ -179,7 +368,7 @@
             margin-right: auto;
         }
 
-        /* Futuristics Action Button */
+        /* Futuristic Action Button */
         .btn-wrapper {
             position: relative;
             display: inline-block;
@@ -188,31 +377,33 @@
         .btn {
             display: inline-flex;
             align-items: center;
-            padding: 16px 32px;
-            background: var(--accent);
-            color: var(--bg);
-            font-family: var(--font-mono);
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            font-family: inherit;
             font-weight: 700;
             text-decoration: none;
             border-radius: 16px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-size: 1rem;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            border: 1px solid rgba(56, 189, 248, 0.4);
         }
 
         .btn:hover {
             transform: translateY(-4px);
-            box-shadow: 0 10px 40px -10px var(--accent);
-            color: #fff;
+            box-shadow: 0 12px 40px -10px var(--accent);
+            filter: brightness(1.1);
         }
 
         .btn::after {
             content: "";
             position: absolute;
-            background: #0ea5e9;
+            background: rgba(255, 255, 255, 0.16);
             height: 100%;
             width: 0;
             left: 0;
@@ -225,24 +416,88 @@
             width: 100%;
         }
 
-        /* Responsive Mobile UI */
+        /* ---------- Footer hint ---------- */
+        .foot {
+            position: relative;
+            z-index: 10;
+            padding: 0 20px 30px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .foot a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .foot a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- Light theme ---------- */
+        html[data-theme="light"] {
+            --bg: #f5f7fb;
+            --card: rgba(255, 255, 255, 0.85);
+            --card-solid: #ffffff;
+            --text: #0f172a;
+            --muted: #55647a;
+            --accent: #0284c7;
+            --accent-2: #6366f1;
+            --accent-soft: rgba(2, 132, 199, 0.1);
+            --border: rgba(15, 23, 42, 0.12);
+            --accent-glow: rgba(2, 132, 199, 0.35);
+        }
+
+        html[data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        html[data-theme="light"] nav.scrolled {
+            background: rgba(255, 255, 255, 0.94);
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .badge {
+            color: #0369a1;
+        }
+
+        /* ---------- Responsive ---------- */
         @media (max-width: 640px) {
-            .container {
-                margin: 20px;
-                padding: 30px 20px;
+            .card {
+                margin: 0;
+                padding: 34px 22px;
                 border-radius: 24px;
             }
 
             .glitch {
-                font-size: 5rem;
+                font-size: 4.6rem;
             }
 
-            h2 {
-                font-size: 1.25rem;
+            .card h2 {
+                font-size: 1.05rem;
             }
 
-            p {
-                font-size: 1rem;
+            .card p {
+                font-size: 0.98rem;
+            }
+
+            .nav-link {
+                display: none;
+            }
+
+            .nav-cta {
+                display: inline-flex;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -252,26 +507,97 @@
 
     <canvas id="space-canvas"></canvas>
 
-    <div class="container">
-        <div class="glitch-wrapper">
-            <div class="glitch" data-text="404">404</div>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6M10 3v6.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9.5V3" />
+                        <path d="M7.5 15h9" />
+                    </svg>
+                </span>
+                <span>Saveetha Labs</span>
+            </a>
+            <div class="nav-actions">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="docs.html">Docs</a>
+                <a class="nav-link nav-cta" href="https://github.com/saveetha-labs" target="_blank" rel="noopener">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                    </svg>
+                    GitHub
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4.5" />
+                        <path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+                    </svg>
+                    <svg class="icon-moon" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+            </div>
         </div>
-        <h2>System Anomaly Detected</h2>
-        <p>The coordinates you've requested do not exist in the known repository database. You might have ventured too
-            far into the void.</p>
+    </nav>
 
-        <div class="btn-wrapper">
-            <a href="/" class="btn">Initiate Return Sequence</a>
+    <div class="container">
+        <div class="card" id="tiltCard">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Error 404 · Page Not Found
+            </div>
+            <div class="glitch-wrapper">
+                <div class="glitch" data-text="404">404</div>
+            </div>
+            <h2>System Anomaly Detected</h2>
+            <p>The coordinates you've requested do not exist in the known repository database. You might have ventured too far into the void.</p>
+
+            <div class="btn-wrapper">
+                <a href="index.html" class="btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <path d="M9 22V12h6v10" />
+                    </svg>
+                    Initiate Return Sequence
+                </a>
+            </div>
         </div>
     </div>
 
+    <div class="foot">
+        Or explore the <a href="docs.html">documentation</a> · <a href="https://github.com/saveetha-labs" target="_blank" rel="noopener">GitHub organization</a>
+    </div>
+
     <script>
-        /**
-         * Space Particle System
-         */
+        // ---------- Theme toggle ----------
+        const themeToggle = document.getElementById('themeToggle');
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            try { localStorage.setItem('sl-theme', t); } catch (e) { }
+            themeToggle.querySelector('.icon-sun').style.display = t === 'light' ? 'none' : 'block';
+            themeToggle.querySelector('.icon-moon').style.display = t === 'light' ? 'block' : 'none';
+            const mt = document.querySelector('meta[name="theme-color"]');
+            if (mt) mt.setAttribute('content', t === 'light' ? '#f5f7fb' : '#030712');
+        }
+        applyTheme((document.documentElement.getAttribute('data-theme') || 'dark') === 'light' ? 'light' : 'dark');
+        themeToggle.addEventListener('click', () => {
+            applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // ---------- Nav scroll state ----------
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
+        // ---------- Space Particle System ----------
         const canvas = document.getElementById('space-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, lastNow;
+        let width, height;
         let particles = [];
 
         class Particle {
@@ -311,7 +637,7 @@
             }
         }
 
-        function loop(now) {
+        function loop() {
             ctx.clearRect(0, 0, width, height);
             particles.forEach(p => {
                 p.update();
@@ -324,8 +650,8 @@
         resize();
         requestAnimationFrame(loop);
 
-        // Interactive mouse effect for box
-        const container = document.querySelector('.container');
+        // Interactive mouse tilt for the card
+        const container = document.getElementById('tiltCard');
         document.addEventListener('mousemove', (e) => {
             const xAxis = (window.innerWidth / 2 - e.pageX) / 45;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 45;
@@ -340,6 +666,13 @@
         document.addEventListener('mouseenter', () => {
             container.style.transition = 'none';
         });
+
+        // ---------- PWA / offline support ----------
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => { /* optional */ });
+            });
+        }
     </script>
 </body>
 

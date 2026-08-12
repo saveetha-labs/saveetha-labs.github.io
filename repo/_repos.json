@@ -1,0 +1,340 @@
+{
+  "generated_at": "2026-08-12T08:35:10Z",
+  "org": "saveetha-labs",
+  "base": "https://saveetha-labs.github.io",
+  "repos": [
+    {
+      "name": "CSA09-ProgrammingInJava",
+      "description": "CSA09: Programming in Java",
+      "pushed_at": "2026-08-12T08:25:15Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA09-ProgrammingInJava",
+      "page": "https://saveetha-labs.github.io/repo/CSA09-ProgrammingInJava.html"
+    },
+    {
+      "name": "UBA49-EngineeringChemistry",
+      "description": "UBA49: Engineering Chemistry",
+      "pushed_at": "2026-08-12T06:59:06Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA49-EngineeringChemistry",
+      "page": "https://saveetha-labs.github.io/repo/UBA49-EngineeringChemistry.html"
+    },
+    {
+      "name": "UBA48-EngineeringPhysics",
+      "description": "UBA48: Engineering Physics",
+      "pushed_at": "2026-08-12T06:59:04Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA48-EngineeringPhysics",
+      "page": "https://saveetha-labs.github.io/repo/UBA48-EngineeringPhysics.html"
+    },
+    {
+      "name": "UBA33-PrinciplesOfManagement",
+      "description": "UBA33: Principles of Management",
+      "pushed_at": "2026-08-12T06:59:01Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA33-PrinciplesOfManagement",
+      "page": "https://saveetha-labs.github.io/repo/UBA33-PrinciplesOfManagement.html"
+    },
+    {
+      "name": "UBA29-TechnicalEnglish",
+      "description": "UBA29: Technical English",
+      "pushed_at": "2026-08-12T06:58:59Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA29-TechnicalEnglish",
+      "page": "https://saveetha-labs.github.io/repo/UBA29-TechnicalEnglish.html"
+    },
+    {
+      "name": "UBA28-ProfessionalEthicsAndLegalPractices",
+      "description": "UBA28: Professional Ethics and Legal Practices",
+      "pushed_at": "2026-08-12T06:58:56Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA28-ProfessionalEthicsAndLegalPractices",
+      "page": "https://saveetha-labs.github.io/repo/UBA28-ProfessionalEthicsAndLegalPractices.html"
+    },
+    {
+      "name": "UBA10-NumericalMethods",
+      "description": "UBA10: Numerical Methods",
+      "pushed_at": "2026-08-12T06:58:53Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA10-NumericalMethods",
+      "page": "https://saveetha-labs.github.io/repo/UBA10-NumericalMethods.html"
+    },
+    {
+      "name": "UBA09-ProbabilityAndStatistics",
+      "description": "UBA09: Probability and Statistics",
+      "pushed_at": "2026-08-12T06:58:51Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA09-ProbabilityAndStatistics",
+      "page": "https://saveetha-labs.github.io/repo/UBA09-ProbabilityAndStatistics.html"
+    },
+    {
+      "name": "UBA05-EngineeringMathematicsIi",
+      "description": "UBA05: Engineering Mathematics II",
+      "pushed_at": "2026-08-12T06:58:48Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA05-EngineeringMathematicsIi",
+      "page": "https://saveetha-labs.github.io/repo/UBA05-EngineeringMathematicsIi.html"
+    },
+    {
+      "name": "UBA04-DiscreteMathematics",
+      "description": "UBA04: Discrete Mathematics",
+      "pushed_at": "2026-08-12T06:58:46Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA04-DiscreteMathematics",
+      "page": "https://saveetha-labs.github.io/repo/UBA04-DiscreteMathematics.html"
+    },
+    {
+      "name": "UBA01-EngineeringMathematicsI",
+      "description": "UBA01: Engineering Mathematics I",
+      "pushed_at": "2026-08-12T06:58:43Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/UBA01-EngineeringMathematicsI",
+      "page": "https://saveetha-labs.github.io/repo/UBA01-EngineeringMathematicsI.html"
+    },
+    {
+      "name": "ITA14-EthicalHacking",
+      "description": "ITA14: Ethical Hacking",
+      "pushed_at": "2026-08-12T06:58:41Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/ITA14-EthicalHacking",
+      "page": "https://saveetha-labs.github.io/repo/ITA14-EthicalHacking.html"
+    },
+    {
+      "name": "EEA01-BEEE",
+      "description": "",
+      "pushed_at": "2026-08-12T06:58:38Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/EEA01-BEEE",
+      "page": "https://saveetha-labs.github.io/repo/EEA01-BEEE.html"
+    },
+    {
+      "name": "ECA47-PrinciplesOfDigitalSystemDesign",
+      "description": "ECA47: Principles of Digital System Design",
+      "pushed_at": "2026-08-12T06:58:35Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/ECA47-PrinciplesOfDigitalSystemDesign",
+      "page": "https://saveetha-labs.github.io/repo/ECA47-PrinciplesOfDigitalSystemDesign.html"
+    },
+    {
+      "name": "ECA14",
+      "description": "",
+      "pushed_at": "2026-08-12T06:58:32Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/ECA14",
+      "page": "https://saveetha-labs.github.io/repo/ECA14.html"
+    },
+    {
+      "name": "ECA10-MicroprocessorsAndMicrocontrollers",
+      "description": "ECA10: Microprocessors and Microcontrollers",
+      "pushed_at": "2026-08-12T06:58:30Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/ECA10-MicroprocessorsAndMicrocontrollers",
+      "page": "https://saveetha-labs.github.io/repo/ECA10-MicroprocessorsAndMicrocontrollers.html"
+    },
+    {
+      "name": "DSA01-ObjectOrientedProgrammingWithC-",
+      "description": "DSA01: Object Oriented Programming with C++",
+      "pushed_at": "2026-08-12T06:58:27Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/DSA01-ObjectOrientedProgrammingWithC-",
+      "page": "https://saveetha-labs.github.io/repo/DSA01-ObjectOrientedProgrammingWithC-.html"
+    },
+    {
+      "name": "CSA57-FundamentalsOfComputing",
+      "description": "CSA57: Fundamentals of Computing",
+      "pushed_at": "2026-08-12T06:58:24Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA57-FundamentalsOfComputing",
+      "page": "https://saveetha-labs.github.io/repo/CSA57-FundamentalsOfComputing.html"
+    },
+    {
+      "name": "CSA51",
+      "description": "",
+      "pushed_at": "2026-08-12T06:58:22Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA51",
+      "page": "https://saveetha-labs.github.io/repo/CSA51.html"
+    },
+    {
+      "name": "CSA43-InternetProgramming",
+      "description": "CSA43: Internet Programming",
+      "pushed_at": "2026-08-12T06:58:19Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA43-InternetProgramming",
+      "page": "https://saveetha-labs.github.io/repo/CSA43-InternetProgramming.html"
+    },
+    {
+      "name": "CSA41-InternetOfThings",
+      "description": "CSA41: Internet of Things",
+      "pushed_at": "2026-08-12T06:58:17Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA41-InternetOfThings",
+      "page": "https://saveetha-labs.github.io/repo/CSA41-InternetOfThings.html"
+    },
+    {
+      "name": "CSA17",
+      "description": "",
+      "pushed_at": "2026-08-12T06:58:14Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA17",
+      "page": "https://saveetha-labs.github.io/repo/CSA17.html"
+    },
+    {
+      "name": "CSA16-DataWarehousingAndDataMining",
+      "description": "CSA16: Data Warehousing and Data Mining",
+      "pushed_at": "2026-08-12T06:58:11Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA16-DataWarehousingAndDataMining",
+      "page": "https://saveetha-labs.github.io/repo/CSA16-DataWarehousingAndDataMining.html"
+    },
+    {
+      "name": "CSA15-CloudComputingAndBigDataAnalytics",
+      "description": "CSA15: Cloud Computing and Big Data Analytics",
+      "pushed_at": "2026-08-12T06:58:09Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA15-CloudComputingAndBigDataAnalytics",
+      "page": "https://saveetha-labs.github.io/repo/CSA15-CloudComputingAndBigDataAnalytics.html"
+    },
+    {
+      "name": "CSA14-CompilerDesign",
+      "description": "CSA14: Compiler Design",
+      "pushed_at": "2026-08-12T06:58:06Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA14-CompilerDesign",
+      "page": "https://saveetha-labs.github.io/repo/CSA14-CompilerDesign.html"
+    },
+    {
+      "name": "CSA13-Theory-of-Computation",
+      "description": "",
+      "pushed_at": "2026-08-12T06:58:03Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA13-Theory-of-Computation",
+      "page": "https://saveetha-labs.github.io/repo/CSA13-Theory-of-Computation.html"
+    },
+    {
+      "name": "CSA12-ComputerArchitecture",
+      "description": "CSA12: Computer Architecture",
+      "pushed_at": "2026-08-12T06:58:01Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA12-ComputerArchitecture",
+      "page": "https://saveetha-labs.github.io/repo/CSA12-ComputerArchitecture.html"
+    },
+    {
+      "name": "CSA11-ObjectOrientedAnalysisAndDesign",
+      "description": "CSA11: Object Oriented Analysis and Design",
+      "pushed_at": "2026-08-12T06:57:58Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA11-ObjectOrientedAnalysisAndDesign",
+      "page": "https://saveetha-labs.github.io/repo/CSA11-ObjectOrientedAnalysisAndDesign.html"
+    },
+    {
+      "name": "CSA10-SoftwareEngineering",
+      "description": "CSA10: Software Engineering",
+      "pushed_at": "2026-08-12T06:57:55Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA10-SoftwareEngineering",
+      "page": "https://saveetha-labs.github.io/repo/CSA10-SoftwareEngineering.html"
+    },
+    {
+      "name": "CSA08-PythonProgramming",
+      "description": "CSA08: Python Programming",
+      "pushed_at": "2026-08-12T06:57:50Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA08-PythonProgramming",
+      "page": "https://saveetha-labs.github.io/repo/CSA08-PythonProgramming.html"
+    },
+    {
+      "name": "CSA07-ComputerNetworks",
+      "description": "CSA07: Computer Networks",
+      "pushed_at": "2026-08-12T06:57:47Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA07-ComputerNetworks",
+      "page": "https://saveetha-labs.github.io/repo/CSA07-ComputerNetworks.html"
+    },
+    {
+      "name": "CSA06-DesignAndAnalysisOfAlgorithms",
+      "description": "CSA06: Design and Analysis of Algorithms",
+      "pushed_at": "2026-08-12T06:57:45Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA06-DesignAndAnalysisOfAlgorithms",
+      "page": "https://saveetha-labs.github.io/repo/CSA06-DesignAndAnalysisOfAlgorithms.html"
+    },
+    {
+      "name": "CSA05-DatabaseManagementSystems",
+      "description": "CSA05: Database Management Systems",
+      "pushed_at": "2026-08-12T06:57:42Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA05-DatabaseManagementSystems",
+      "page": "https://saveetha-labs.github.io/repo/CSA05-DatabaseManagementSystems.html"
+    },
+    {
+      "name": "CSA04-OperatingSystems",
+      "description": "CSA04: Operating Systems",
+      "pushed_at": "2026-08-12T06:57:39Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA04-OperatingSystems",
+      "page": "https://saveetha-labs.github.io/repo/CSA04-OperatingSystems.html"
+    },
+    {
+      "name": "CSA03-DataStructures",
+      "description": "CSA03: Data Structures",
+      "pushed_at": "2026-08-12T06:57:37Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA03-DataStructures",
+      "page": "https://saveetha-labs.github.io/repo/CSA03-DataStructures.html"
+    },
+    {
+      "name": "CSA02-CProgramming",
+      "description": "CSA02: C Programming",
+      "pushed_at": "2026-08-12T06:57:35Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA02-CProgramming",
+      "page": "https://saveetha-labs.github.io/repo/CSA02-CProgramming.html"
+    },
+    {
+      "name": "BTA01-BiologyAndEnvironmentalScienceForEngineers",
+      "description": "BTA01: Biology and Environmental Science for Engineers",
+      "pushed_at": "2026-08-12T06:57:32Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/BTA01-BiologyAndEnvironmentalScienceForEngineers",
+      "page": "https://saveetha-labs.github.io/repo/BTA01-BiologyAndEnvironmentalScienceForEngineers.html"
+    }
+  ]
+}

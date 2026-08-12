@@ -5,26 +5,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#030712" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <title>Saveetha Labs | Open Source Student Projects & Learning Hub</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://saveetha-labs.github.io/" />
     <meta name="description"
-        content="Saveetha Labs is a student-driven open-source platform for Saveetha University students." />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+        content="Saveetha Labs is a student-driven open-source platform for Saveetha University students — browse 37+ course repositories with labs, notes, programs and resources." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Saveetha Labs" />
+    <meta property="og:title" content="Saveetha Labs — Open Source Student Projects & Learning Hub" />
+    <meta property="og:description" content="Student-built open-source resources for Saveetha University: course repositories, lab programs, notes and free tools." />
+    <meta property="og:url" content="https://saveetha-labs.github.io/" />
+    <meta property="og:image" content="https://saveetha-labs.github.io/icons/og-banner.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saveetha Labs — Open Source Learning Hub" />
+    <meta name="twitter:description" content="Student-built open-source resources for Saveetha University students." />
+    <meta name="twitter:image" content="https://saveetha-labs.github.io/icons/og-banner.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />        <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <script>
+        try {
+            if (localStorage.getItem('sl-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        } catch (e) { }
+    </script>
     <style>
         :root {
             --bg: #030712;
             --card: rgba(17, 24, 39, 0.6);
+            --card-solid: #111827;
             --text: #f9fafb;
             --muted: #94a3b8;
+            --muted-2: #64748b;
             --accent: #38bdf8;
+            --accent-2: #818cf8;
             --accent-soft: rgba(56, 189, 248, 0.1);
             --border: rgba(255, 255, 255, 0.08);
             --accent-glow: rgba(56, 189, 248, 0.4);
             --radius: 20px;
+            --nav-h: 62px;
         }
 
         * {
@@ -33,65 +54,347 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.5;
+            overflow-x: hidden;
             background-attachment: fixed;
             background-image:
                 radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.06) 0%, transparent 40%);
+            -webkit-font-smoothing: antialiased;
         }
 
-        header {
-            max-width: 1280px;
-            margin: auto;
-            padding: 100px 24px 80px;
-            text-align: center;
-            background: transparent;
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            border: 2px solid var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        a {
+            color: var(--accent);
+        }
+
+        /* ---------- Navigation (liquid glass pill) ---------- */
+        nav {
+            position: sticky;
+            top: 14px;
+            z-index: 200;
+            width: min(1180px, calc(100% - 32px));
+            margin: 14px auto 0;
+            background: rgba(15, 22, 38, 0.45);
+            backdrop-filter: blur(26px) saturate(180%);
+            -webkit-backdrop-filter: blur(26px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.04),
+                0 10px 40px -18px rgba(0, 0, 0, 0.55);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 22, 38, 0.6);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+                0 14px 44px -16px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-inner {
+            height: var(--nav-h);
+            padding: 0 10px 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 700;
+            font-size: 1.05rem;
             color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+            transition: opacity 0.2s;
+        }
+
+        .brand:hover {
+            opacity: 0.85;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #030712;
+            box-shadow: 0 6px 18px -6px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        .brand-sub {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.93rem;
+            font-weight: 500;
+            transition: 0.25s;
+            padding: 9px 14px;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .nav-cta {
+            background: var(--text) !important;
+            color: var(--bg) !important;
+            font-weight: 600;
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--bg) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px -8px var(--accent);
+        }
+
+        .menu-toggle,
+        .theme-toggle {
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .menu-toggle:hover,
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -8px var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ---------- Hero (full-width so orb clipping stays offscreen) ---------- */
+        header {
             position: relative;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb-a {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 65%);
+            top: -160px;
+            left: -140px;
+            animation: floatA 14s ease-in-out infinite;
+        }
+
+        .orb-b {
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.3), transparent 65%);
+            top: 18%;
+            right: -110px;
+            animation: floatA 18s ease-in-out infinite reverse;
+        }
+
+        .orb-c {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.22), transparent 65%);
+            top: 35%;
+            left: 58%;
+            animation: floatA 22s ease-in-out infinite;
+        }
+
+        @keyframes floatA {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, -30px) scale(1.08);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 50px 24px 70px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: var(--accent-soft);
+            color: #bae6fd;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 30px;
+            backdrop-filter: blur(8px);
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34d399;
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+            }
         }
 
         header h1 {
             font-family: 'Crimson Pro', serif;
-            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-size: clamp(2.6rem, 8vw, 4.4rem);
             font-weight: 700;
-            background: linear-gradient(to right, #fff, var(--accent));
+            letter-spacing: -0.02em;
+            line-height: 1.08;
+            background: linear-gradient(110deg, #ffffff 20%, #7dd3fc 45%, #a5b4fc 60%, #ffffff 85%);
+            background-size: 220% 100%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            animation: shimmer 7s linear infinite;
+        }
+
+        @keyframes shimmer {
+            from {
+                background-position: 200% 0;
+            }
+
+            to {
+                background-position: -100% 0;
+            }
         }
 
         header p {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--muted);
-            margin-bottom: 40px;
-            max-width: 700px;
+            margin-bottom: 42px;
+            max-width: 680px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .actions {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 60px;
+            margin-bottom: 20px;
         }
 
         .btn {
-            padding: 14px 28px;
-            border-radius: 12px;
+            padding: 14px 26px;
+            border-radius: 14px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1.05rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border: 1px solid transparent;
         }
 
         .btn-github {
@@ -104,7 +407,7 @@
             background: transparent;
             color: var(--text);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px -10px var(--text);
+            box-shadow: 0 12px 34px -12px var(--text);
         }
 
         .btn-browse {
@@ -117,9 +420,93 @@
         .btn-browse:hover {
             border-color: var(--accent);
             transform: translateY(-4px);
-            box-shadow: 0 10px 30px -10px var(--accent);
+            box-shadow: 0 12px 34px -12px var(--accent);
         }
 
+        .btn-bot {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-bot:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 34px -12px var(--accent);
+            filter: brightness(1.1);
+        }
+
+        /* ---------- Stats ---------- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            max-width: 740px;
+            margin: 56px auto 0;
+        }
+
+        .stat-item {
+            position: relative;
+            background: var(--card);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px 16px 20px;
+            overflow: hidden;
+            transition: 0.35s;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.35s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 45px -20px rgba(56, 189, 248, 0.35);
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px;
+        }
+
+        .stat-value {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: var(--text);
+            display: block;
+            letter-spacing: -0.02em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+
+        /* ---------- Main / Sections ---------- */
         main {
             max-width: 1280px;
             margin: auto;
@@ -128,21 +515,168 @@
 
         section {
             margin-bottom: 100px;
+            scroll-margin-top: calc(var(--nav-h) + 44px);
         }
 
+        .section-head {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-head h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto;
+            font-size: 1.02rem;
+        }
+
+        /* ---------- Toolbar (search + filters) ---------- */
+        .toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 640px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .search-box>svg {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #repoSearch {
+            width: 100%;
+            padding: 16px 48px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            outline: none;
+            transition: 0.3s;
+            font-size: 0.98rem;
+            backdrop-filter: blur(10px);
+        }
+
+        #repoSearch::placeholder {
+            color: var(--muted-2);
+        }
+
+        #repoSearch:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft), 0 10px 40px -18px var(--accent-glow);
+        }
+
+        #searchClear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            border: none;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--muted);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+        }
+
+        #searchClear:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .filters {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pill {
+            padding: 9px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: inherit;
+        }
+
+        .pill span {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 2px 7px;
+            border-radius: 999px;
+        }
+
+        .pill:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .pill.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg);
+        }
+
+        .pill.active span {
+            background: rgba(3, 7, 18, 0.18);
+            color: var(--bg);
+        }
+
+        .results-meta {
+            text-align: center;
+            font-size: 0.88rem;
+            color: var(--muted-2);
+            margin-bottom: 26px;
+            min-height: 1.3em;
+        }
+
+        /* ---------- Repo grid ---------- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .repo h3 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 1.25rem;
-            color: var(--text);
-            transition: 0.3s;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
         }
 
         .repo {
@@ -151,13 +685,12 @@
             backdrop-filter: blur(16px);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            gap: 13px;
+            transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow: hidden;
-            cursor: pointer;
         }
 
         .repo::after {
@@ -167,180 +700,74 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.5s;
             pointer-events: none;
         }
 
         .repo:hover {
-            transform: translateY(-12px) scale(1.03);
+            transform: translateY(-8px) scale(1.015);
             border-color: var(--accent);
-            background: rgba(31, 41, 55, 0.8);
+            background: rgba(31, 41, 55, 0.85);
             box-shadow:
                 0 0 0 1px var(--accent-soft),
                 0 30px 60px -20px rgba(0, 0, 0, 0.6),
-                0 0 20px -5px var(--accent-glow);
+                0 0 24px -6px var(--accent-glow);
         }
 
         .repo:hover::after {
             opacity: 1;
         }
 
+        .repo-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .repo-code {
+            font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+            font-weight: 700;
+            font-size: 0.76rem;
+            letter-spacing: 0.07em;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 5px 11px;
+            border-radius: 8px;
+        }
+
+        .repo-updated {
+            font-size: 0.75rem;
+            color: var(--muted-2);
+        }
+
+        .repo h3 {
+            font-size: 1.16rem;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: 0.3s;
+        }
+
         .repo:hover h3 {
             color: var(--accent);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 40px auto 0;
-            padding: 30px;
-            background: var(--card);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            max-width: 800px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 80px 24px;
-            border-top: 1px solid var(--border);
-            background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.02));
-            text-align: center;
-        }
-
-        .footer-line {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            color: var(--muted);
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-        }
-
-        .footer-line::before,
-        .footer-line::after {
-            content: '';
-            height: 1px;
-            flex: 1;
-            max-width: 200px;
-            background: var(--border);
-        }
-
-        .footer-line b {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .footer-sub {
-            color: var(--muted);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
-        }
-
-        .footer-powered {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--muted);
+        .repo-desc {
             font-size: 0.9rem;
-            margin-bottom: 40px;
-        }
-
-        .footer-powered b {
-            color: var(--text);
-        }
-
-        .disclaimer-box {
-            font-size: 0.8rem;
             color: var(--muted);
-            margin-top: 40px;
-            padding: 20px;
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-            max-width: 600px;
-            margin-inline: auto;
-            background: rgba(255, 255, 255, 0.01);
-        }
-
-        .contribution-section {
-            margin: 80px 0;
-            padding: 40px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-        }
-
-        .contribution-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            margin-top: 30px;
-        }
-
-        .step {
-            padding: 20px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: 0.3s;
-        }
-
-        .step:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        .step i {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        footer {
-            margin-top: 100px;
-            padding: 60px 20px;
-            background: var(--card);
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .disclaimer {
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-top: 24px;
-            padding: 16px;
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.8em;
         }
 
         .meta {
@@ -348,67 +775,634 @@
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .repo-sets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .set-chip {
+            font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 3px 9px;
+            border-radius: 999px;
+            transition: 0.25s;
+        }
+
+        .repo:hover .set-chip {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .set-chip.more {
+            color: var(--muted-2);
+        }
+
+        .meta-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            min-width: 0;
+        }
+
+        .lang {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .lang-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .stat-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            color: var(--muted);
+        }
+
+        .size-chip {
+            color: var(--muted-2);
         }
 
         .icons {
             display: flex;
-            gap: 12px;
+            gap: 9px;
+            flex-shrink: 0;
         }
 
         .icon-link {
             color: var(--muted);
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
             border-radius: 10px;
             transition: 0.3s;
+            text-decoration: none;
         }
 
         .icon-link:hover {
             color: var(--accent);
             background: var(--accent-soft);
-            transform: scale(1.1);
+            border-color: var(--accent);
+            transform: translateY(-3px) scale(1.06);
         }
 
-        .search-container {
-            margin-bottom: 40px;
+        /* Skeletons */
+        .repo.skeleton {
+            min-height: 210px;
+            pointer-events: none;
+            background: linear-gradient(110deg, rgba(255, 255, 255, 0.02) 8%, rgba(255, 255, 255, 0.06) 18%, rgba(255, 255, 255, 0.02) 33%);
+            background-size: 200% 100%;
+            animation: shimmerBg 1.3s linear infinite;
         }
 
-        #repoSearch {
-            width: 100%;
-            padding: 18px 24px;
-            border-radius: 18px;
-            border: 1px solid var(--border);
+        @keyframes shimmerBg {
+            from {
+                background-position: 200% 0;
+            }
+
+            to {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 70px 24px;
+            border: 1px dashed var(--border);
+            border-radius: var(--radius);
+        }
+
+        .empty-icon {
+            font-size: 2.6rem;
+            margin-bottom: 14px;
+        }
+
+        .empty-state h3 {
+            color: var(--text);
+            margin-bottom: 6px;
+            font-size: 1.25rem;
+        }
+
+        .empty-state p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* ---------- Contribution (transparent — blends with the page background) ---------- */
+        .contribution-section {
+            margin: 90px 0 110px;
+            scroll-margin-top: calc(var(--nav-h) + 44px);
+        }
+
+        .contribution-inner {
+            background: transparent;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .contribution-inner h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(1.9rem, 4.5vw, 2.5rem);
+            margin-bottom: 12px;
+        }
+
+        .contribution-sub {
+            color: var(--muted);
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .contribution-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin: 40px 0 36px;
+            text-align: left;
+        }
+
+        .step {
+            position: relative;
             background: var(--card);
-            color: white;
-            outline: none;
-            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 26px 24px 22px;
+            transition: 0.35s;
+            overflow: hidden;
         }
 
-        #repoSearch:focus {
+        .step:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px);
+            box-shadow: 0 22px 45px -18px rgba(56, 189, 248, 0.3);
+        }
+
+        .step-num {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-family: ui-monospace, monospace;
+            font-weight: 800;
+            font-size: 2.6rem;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+        }
+
+        .step-icon {
+            font-size: 1.9rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .step h4 {
+            font-size: 1.04rem;
+            margin-bottom: 6px;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .step code {
+            font-family: ui-monospace, monospace;
+            font-size: 0.82em;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 1px 6px;
+            border-radius: 5px;
+        }
+
+        /* ---------- Contact ---------- */
+        .contact-card {
+            max-width: 660px;
+            margin: 0 auto;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 36px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-card:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft), 0 30px 60px -30px var(--accent-glow);
+        }
+
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+            width: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .field {
+            margin-bottom: 16px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 13px 16px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.25s;
+            resize: vertical;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: var(--muted-2);
+        }
+
+        .field input:focus,
+        .field textarea:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 4px var(--accent-soft);
         }
 
-        /* Chatbot UI */
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px -12px var(--accent);
+            filter: brightness(1.08);
+        }
+
+        .btn-submit.loading {
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .btn-submit.loading .btn-label::after {
+            content: '';
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin-left: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: -2px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .form-note {
+            color: var(--muted-2);
+            font-size: 0.82rem;
+        }
+
+        .form-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: msgFade 0.3s ease-out;
+        }
+
+        .form-status[hidden] {
+            display: none;
+        }
+
+        .form-status.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            color: #4ade80;
+        }
+
+        .form-status.error {
+            background: rgba(244, 63, 94, 0.1);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            color: #fb7185;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 48px;
+            padding: 30px 24px 22px;
+            border-top: 1px solid var(--border);
+            background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.03));
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1.7fr;
+            gap: 18px 36px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .footer-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            color: var(--text);
+        }
+
+        .footer-name::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .footer-sub {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 5px 13px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            transition: 0.25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            border-color: var(--border);
+            background: rgba(56, 189, 248, 0.06);
+        }
+
+        .footer-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-powered {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .footer-powered b {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .footer-copy {
+            color: var(--muted);
+        }
+
+        .disclaimer-box {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.6;
+            padding: 12px 16px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .disclaimer-box strong {
+            color: var(--text);
+        }
+
+        .disclaimer-box code {
+            color: var(--accent);
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1px 6px;
+            border-radius: 5px;
+        }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 560px) {
+            footer {
+                margin-top: 32px;
+                padding: 24px 16px 20px;
+            }
+
+            .footer-grid {
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .footer-meta {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        /* ---------- Back to top ---------- */
+        #backToTop {
+            position: fixed;
+            bottom: 112px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--card-solid);
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px -12px rgba(0, 0, 0, 0.7);
+            transition: 0.3s;
+            z-index: 90;
+            backdrop-filter: blur(10px);
+        }
+
+        #backToTop:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px -12px var(--accent);
+        }
+
+        /* ---------- Chatbot UI ---------- */
         #chat-trigger {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 64px;
-            height: 64px;
-            background: var(--accent);
+            width: 62px;
+            height: 62px;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 10px 40px -10px var(--accent);
+            box-shadow: 0 12px 44px -10px var(--accent);
             z-index: 1000;
             transition: 0.3s ease;
+            color: #fff;
+        }
+
+        #chat-trigger::before {
+            content: '';
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 2px solid rgba(56, 189, 248, 0.5);
+            animation: ringPulse 2.2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes ringPulse {
+            0% {
+                transform: scale(0.92);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1.55);
+                opacity: 0;
+            }
+        }
+
+        #chat-trigger:hover {
+            transform: scale(1.08) rotate(-4deg);
+        }
+
+        #chat-trigger .trigger-label {
+            position: absolute;
+            right: 72px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--card-solid);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 7px 13px;
+            border-radius: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        #chat-trigger:hover .trigger-label {
+            opacity: 1;
         }
 
         #chat-window {
@@ -417,24 +1411,93 @@
             right: 30px;
             width: 400px;
             height: 600px;
-            background: rgba(17, 24, 39, 0.95);
+            max-height: calc(100vh - 140px);
+            background: rgba(13, 18, 32, 0.97);
             backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border);
             border-radius: 24px;
             display: none;
             flex-direction: column;
             z-index: 999;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 70px -18px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.06);
+            animation: windowIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes windowIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .chat-header {
-            padding: 20px;
-            background: var(--accent-soft);
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(129, 140, 248, 0.12));
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
+        }
+
+        .chat-id {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 6px 16px -6px var(--accent);
+        }
+
+        .chat-id strong {
+            font-size: 0.98rem;
+            display: block;
+        }
+
+        .chat-online {
+            display: block;
+            font-size: 0.72rem;
+            color: #34d399;
+            margin-top: 2px;
+        }
+
+        #close-chat {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        #close-chat:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            transform: rotate(90deg);
         }
 
         .chat-messages {
@@ -446,12 +1509,21 @@
             gap: 12px;
         }
 
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
         .message {
             max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 14px;
+            padding: 11px 15px;
+            border-radius: 16px;
             font-size: 0.9rem;
-            line-height: 1.4;
+            line-height: 1.45;
             animation: msgFade 0.3s ease-out;
             word-wrap: break-word;
         }
@@ -470,47 +1542,76 @@
 
         .message.bot {
             background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
             align-self: flex-start;
+            border-bottom-left-radius: 6px;
         }
 
         .message.user {
-            background: var(--accent);
-            color: var(--bg);
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
             align-self: flex-end;
             font-weight: 500;
+            border-bottom-right-radius: 6px;
         }
 
-        .chat-input {
-            padding: 16px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            gap: 8px;
+        .message code {
+            font-family: ui-monospace, monospace;
+            font-size: 0.86em;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 1px 6px;
+            border-radius: 5px;
         }
 
-        .chat-input input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px;
-            color: white;
-            outline: none;
+        .message a {
+            color: var(--accent);
         }
 
-        .chat-input button {
+        /* Typing indicator */
+        .message.typing {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 15px 18px;
+        }
+
+        .typing .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
             background: var(--accent);
-            border: none;
-            padding: 10px;
-            border-radius: 10px;
-            cursor: pointer;
+            animation: blinkDot 1.2s infinite;
+        }
+
+        .typing .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blinkDot {
+            0%,
+            80%,
+            100% {
+                opacity: 0.25;
+                transform: translateY(0);
+            }
+
+            40% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
         }
 
         .bot-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 12px;
-            margin-top: 8px;
+            margin-top: 9px;
         }
 
         .bot-card h5 {
@@ -521,207 +1622,1120 @@
         .bot-card .links {
             display: flex;
             gap: 8px;
-            margin-top: 8px;
+            margin-top: 9px;
+        }
+
+        .bot-card .icon-link {
+            width: 30px;
+            height: 30px;
+        }
+
+        .chat-quick {
+            display: flex;
+            gap: 8px;
+            padding: 10px 16px 0;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+
+        .chat-quick button {
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--accent);
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 7px 13px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .chat-quick button:hover {
+            background: rgba(56, 189, 248, 0.2);
+            transform: translateY(-1px);
+            border-color: var(--accent);
+        }
+
+        .chat-input {
+            padding: 14px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 9px;
+            flex-shrink: 0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 11px 14px;
+            color: var(--text);
+            outline: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.25s;
+            min-width: 0;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .chat-input button {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        .chat-input button:hover {
+            filter: brightness(1.15);
+            transform: translateY(-2px);
+        }
+
+        /* ---------- Reveal on scroll (low-specificity so it never overrides hover transforms) ---------- */
+        :where(.reveal) {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        :where(.reveal).visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- Light theme ---------- */
+        html[data-theme="light"] {
+            --bg: #f5f7fb;
+            --card: rgba(255, 255, 255, 0.82);
+            --card-solid: #ffffff;
+            --text: #0f172a;
+            --muted: #55647a;
+            --muted-2: #8a99af;
+            --accent: #0284c7;
+            --accent-2: #6366f1;
+            --accent-soft: rgba(2, 132, 199, 0.1);
+            --border: rgba(15, 23, 42, 0.12);
+            --accent-glow: rgba(2, 132, 199, 0.35);
+        }
+
+        html[data-theme="light"] body {
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
+        }
+
+        html[data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.42);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.35),
+                0 10px 40px -18px rgba(2, 132, 199, 0.22);
+        }
+
+        html[data-theme="light"] nav.scrolled {
+            background: rgba(255, 255, 255, 0.62);
+            border-color: rgba(255, 255, 255, 0.85);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+                0 14px 44px -16px rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .nav-links {
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9), 0 30px 60px -20px rgba(2, 132, 199, 0.25);
+        }
+
+        html[data-theme="light"] header h1 {
+            background: linear-gradient(110deg, #0f172a 20%, #0284c7 45%, #6366f1 60%, #0f172a 85%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 7s linear infinite;
+        }
+
+        html[data-theme="light"] .badge {
+            color: #0369a1;
+        }
+
+        html[data-theme="light"] .badge-dot {
+            background: #059669;
+            box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        html[data-theme="light"] .step-num {
+            color: rgba(15, 23, 42, 0.06);
+        }
+
+        html[data-theme="light"] .set-chip {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .icon-link {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .repo:hover {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow:
+                0 0 0 1px var(--accent-soft),
+                0 24px 50px -24px rgba(2, 132, 199, 0.35),
+                0 0 24px -8px var(--accent-glow);
+        }
+
+        html[data-theme="light"] .repo:hover .set-chip {
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .skeleton {
+            background: linear-gradient(110deg, rgba(15, 23, 42, 0.02) 8%, rgba(15, 23, 42, 0.06) 18%, rgba(15, 23, 42, 0.02) 33%);
+            background-size: 200% 100%;
+            animation: shimmerBg 1.3s linear infinite;
+        }
+
+        html[data-theme="light"] .message.bot {
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        html[data-theme="light"] .chat-input input {
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        html[data-theme="light"] #chat-window {
+            background: rgba(255, 255, 255, 0.97);
+        }
+
+        html[data-theme="light"] #chat-trigger .trigger-label {
+            background: #ffffff;
+        }
+
+        html[data-theme="light"] #searchClear {
+            background: rgba(15, 23, 42, 0.06);
+        }
+
+        html[data-theme="light"] ::-webkit-scrollbar-thumb {
+            background: rgba(15, 23, 42, 0.2);
+        }
+
+        html[data-theme="light"] .pill span {
+            background: rgba(15, 23, 42, 0.07);
+        }
+
+        html[data-theme="light"] .bot-card {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .field input,
+        html[data-theme="light"] .field textarea {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .form-status.success {
+            color: #15803d;
+        }
+
+        html[data-theme="light"] .form-status.error {
+            color: #be123c;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (min-width: 769px) and (max-width: 1000px) {
+            .nav-links a {
+                padding: 9px 10px;
+                font-size: 0.88rem;
+            }
+
+            .brand {
+                font-size: 0.98rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 12px;
+                right: 12px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                background: rgba(15, 22, 38, 0.6);
+                backdrop-filter: blur(28px) saturate(180%);
+                -webkit-backdrop-filter: blur(28px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: 22px;
+                padding: 14px;
+                display: none;
+                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px 14px;
+            }
+
+            .nav-cta {
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .hero-content {
+                padding: 50px 20px 60px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.68rem;
+                letter-spacing: 0.8px;
+            }
+
+            .contribution-inner {
+                padding: 44px 24px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 480px) {
+            .nav-inner {
+                padding: 0 16px;
+            }
+
+            header p {
+                font-size: 1.05rem;
+            }
+
+            .btn {
+                padding: 13px 20px;
+                font-size: 0.95rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-item {
+                padding: 18px 10px 16px;
+            }
+
             #chat-window {
                 width: calc(100vw - 40px);
                 right: 20px;
                 height: 70vh;
+            }
+
+            #chat-trigger {
+                right: 20px;
+                bottom: 20px;
+            }
+
+            #backToTop {
+                right: 20px;
+                bottom: 98px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
             }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Saveetha Labs — Learning Resources</h1>
-        <p>Curated subject-wise repositories for CS students.</p>
-        <div class="actions">
-            <a class="btn btn-github" href="https://github.com/saveetha-labs" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
-                </svg>
-                View GitHub Organization
+    <noscript>
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a class="brand" href="#top">
+                <span class="brand-mark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6M10 3v6.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9.5V3" />
+                        <path d="M7.5 15h9" />
+                    </svg>
+                </span>
+                <span>Saveetha <span class="brand-sub">Labs</span></span>
             </a>
-            <a class="btn btn-browse" href="#projects">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="4.5" />
+                    <path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
                 </svg>
-                Browse Resources <span style="margin-left:5px">›</span>
-            </a>
+                <svg class="icon-moon" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                </svg>
+            </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                    <path d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#projects">Resources</a>
+                <a href="#contribute">Contribute</a>
+                <a href="#contact">Contact</a>
+                <a href="docs.html">Docs</a>
+                <a class="nav-cta" href="https://github.com/saveetha-labs" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            </div>
         </div>
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span id="stat-repos" class="stat-value">0</span>
-                <span class="stat-label">Repositories</span>
+    </nav>
+
+    <!-- Hero -->
+    <header id="top">
+        <div class="hero-orb orb-a"></div>
+        <div class="hero-orb orb-b"></div>
+        <div class="hero-orb orb-c"></div>
+
+        <div class="hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Open Source · Student Built · 100% Free
             </div>
-            <div class="stat-item">
-                <span id="stat-sets" class="stat-value">0</span>
-                <span class="stat-label">Lab Sets</span>
+            <h1>Saveetha Labs — Learning Resources</h1>
+            <p>Curated, student-built repositories with lab programs, notes and resources for every course at Saveetha.</p>
+            <div class="actions">
+                <a class="btn btn-github" href="https://github.com/saveetha-labs" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                    </svg>
+                    View GitHub Organization
+                </a>
+                <a class="btn btn-browse" href="#projects">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Browse Resources
+                </a>
+                <a class="btn btn-bot" id="heroBotBtn" role="button" tabindex="0">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Ask the Bot
+                </a>
             </div>
-            <div class="stat-item">
-                <span id="stat-files" class="stat-value">0</span>
-                <span class="stat-label">Total Files</span>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2 2 7l10 5 10-5-10-5z" />
+                            <path d="m2 17 10 5 10-5" />
+                            <path d="m2 12 10 5 10-5" />
+                        </svg>
+                    </span>
+                    <span id="stat-repos" class="stat-value">0</span>
+                    <span class="stat-label">Repositories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                        </svg>
+                    </span>
+                    <span id="stat-sets" class="stat-value">0</span>
+                    <span class="stat-label">Lab Sets</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <path d="M14 2v6h6" />
+                            <path d="M9 13h6M9 17h6" />
+                        </svg>
+                    </span>
+                    <span id="stat-files" class="stat-value">0</span>
+                    <span class="stat-label">Total Files</span>
+                </div>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="projects">
-            <div class="search-container">
-                <input type="text" id="repoSearch" placeholder="Search course code or name..." />
+        <!-- Projects / Resources -->
+        <section id="projects" class="reveal">
+            <div class="section-head">
+                <span class="eyebrow">Explore</span>
+                <h2>Course Resources</h2>
+                <p>Search by course code or subject — every repository is student-curated, organized by lab sets, and free to use.</p>
             </div>
+
+            <div class="toolbar">
+                <div class="search-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    <input type="text" id="repoSearch" placeholder="Search course code or name…" autocomplete="off" />
+                    <button id="searchClear" aria-label="Clear search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round">
+                            <path d="M18 6 6 18M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="filters" id="filterPills"></div>
+            </div>
+
+            <div class="results-meta" id="resultCount"></div>
             <div id="repoGrid" class="grid"></div>
+
+            <div id="emptyState" class="empty-state" hidden>
+                <div class="empty-icon">🔍</div>
+                <h3>No courses found</h3>
+                <p>Try a different course code or keyword, or clear the filters.</p>
+            </div>
         </section>
 
-        <section class="contribution-section">
-            <h2>🤝 How to Contribute</h2>
-            <p>Help us grow the Saveetha Labs ecosystem by contributing your lab programs and notes.</p>
-            <div class="contribution-steps">
-                <div class="step">
-                    <span>📂 Step 1</span>
-                    <p>Fork any course repository or the organization meta-repo.</p>
+        <!-- Contribute -->
+        <section id="contribute" class="contribution-section reveal">
+            <div class="contribution-inner">
+                <span class="eyebrow">Get involved</span>
+                <h2>🤝 How to Contribute</h2>
+                <p class="contribution-sub">Help us grow the Saveetha Labs ecosystem by contributing your lab programs and notes.</p>
+                <div class="contribution-steps">
+                    <div class="step reveal">
+                        <span class="step-num">1</span>
+                        <span class="step-icon">🍴</span>
+                        <h4>Fork the repo</h4>
+                        <p>Fork any course repository or the organization meta-repo.</p>
+                    </div>
+                    <div class="step reveal">
+                        <span class="step-num">2</span>
+                        <span class="step-icon">📁</span>
+                        <h4>Add your resources</h4>
+                        <p>Organize lab programs into <code>s1</code>, <code>s2</code> folders.</p>
+                    </div>
+                    <div class="step reveal">
+                        <span class="step-num">3</span>
+                        <span class="step-icon">🚀</span>
+                        <h4>Open a Pull Request</h4>
+                        <p>Submit a PR with a clear description of your additions.</p>
+                    </div>
                 </div>
-                <div class="step">
-                    <span>✍️ Step 2</span>
-                    <p>Add your lab programs (organized into <code>s1</code>, <code>s2</code> folders).</p>
-                </div>
-                <div class="step">
-                    <span>🚀 Step 3</span>
-                    <p>Open a Pull Request with a clear description of your additions.</p>
-                </div>
+                <a class="btn btn-github" href="https://github.com/saveetha-labs" target="_blank" rel="noopener">
+                    Start Contributing
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="reveal">
+            <div class="section-head">
+                <span class="eyebrow">Get in touch</span>
+                <h2>Contact Us</h2>
+                <p>Questions, feedback or a resource request? Send us a message — we'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-card">
+                <form id="contactForm" action="https://submit.formpost.ai/l522cv2f" method="POST" novalidate>
+                    <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                    <input type="hidden" name="subject" value="New message from saveetha-labs.github.io contact form" />
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="cf-name">Name</label>
+                            <input type="text" id="cf-name" name="name" placeholder="Your name" required autocomplete="name" />
+                        </div>
+                        <div class="field">
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" name="email" placeholder="you@example.com" required autocomplete="email" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cf-msg">Message</label>
+                        <textarea id="cf-msg" name="message" rows="5" placeholder="How can we help?" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-submit" id="cf-submit">
+                            <span class="btn-label">Send Message</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 2-7 20-4-9-9-4z" />
+                                <path d="M22 2 11 13" />
+                            </svg>
+                        </button>
+                        <p class="form-note">Messages go straight to the maintainers. No spam, ever.</p>
+                    </div>
+                    <div id="contactStatus" class="form-status" aria-live="polite" hidden></div>
+                </form>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-line">Maintained by <b>Saveetha Labs</b></div>
-            <div class="footer-sub">Educational use only</div>
-            <div class="footer-powered">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
-                </svg>
-                Powered by <b>GitHub Pages</b>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-name">Saveetha Labs</div>
+                    <div class="footer-sub">Educational use only · MIT License</div>
+                </div>
+
+                <nav class="footer-links" aria-label="Footer links">
+                    <a href="#projects">Resources</a>
+                    <a href="#contribute">Contribute</a>
+                    <a href="#contact">Contact</a>
+                    <a href="docs.html">Documentation</a>
+                    <a href="https://github.com/saveetha-labs" target="_blank" rel="noopener">GitHub</a>
+                </nav>
+            </div>
+
+            <div class="footer-meta">
+                <div class="footer-powered">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                    </svg>
+                    Powered by <b>GitHub Pages</b>
+                </div>
+                <div class="footer-copy">© 2026 Saveetha Labs · Educational use only · MIT License</div>
             </div>
 
             <div class="disclaimer-box">
-                <strong>🛡️ Data Privacy & Usage Disclaimer</strong><br>
-                This platform is built for college learning and academic reference purposes only.
-                All code and resources are student-contributed. We do not store personal student data.
-                Use responsibly to enhance your understanding of engineering concepts.
+                <strong>Data Privacy & Usage Disclaimer</strong> — This platform is built for college learning and academic
+                reference purposes only. All code and resources are student-contributed. We do not store personal student
+                data. Use responsibly to enhance your understanding of engineering concepts.
             </div>
         </div>
     </footer>
 
-    <div id="chat-trigger">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button id="backToTop" aria-label="Back to top">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+    </button>
+
+    <!-- Chatbot -->
+    <div id="chat-trigger" role="button" aria-label="Open chat">
+        <span class="trigger-label">Ask the bot 💬</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
     </div>
 
     <div id="chat-window">
         <div class="chat-header">
-            <h4>🤖 Saveetha AI Bot</h4>
-            <span id="close-chat" style="cursor:pointer">✕</span>
+            <div class="chat-id">
+                <div class="chat-avatar">🤖</div>
+                <div>
+                    <strong>Saveetha Bot</strong>
+                    <span class="chat-online">● Online — answers from the knowledge base</span>
+                </div>
+            </div>
+            <button id="close-chat" aria-label="Close chat">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+            </button>
         </div>
         <div class="chat-messages" id="chat-msgs">
-            <div class="message bot">Ask me about CSA13, CSA51 or any lab set!</div>
+            <div class="message bot">Hi! 👋 Ask me about <b>CSA13</b>, <b>CSA51</b> or any lab set. Try <code>list</code> to see all available courses!</div>
+        </div>
+        <div class="chat-quick" id="chatQuick">
+            <button data-q="list courses">📋 List courses</button>
+            <button data-q="csa13">📘 CSA13</button>
+            <button data-q="csa51">📗 CSA51</button>
+            <button data-q="show all">✨ Show all</button>
         </div>
         <form class="chat-input" id="chat-form">
             <input type="text" id="chat-input" placeholder="What's in CSA13?" autocomplete="off" />
-            <button type="submit">➤</button>
+            <button type="submit" aria-label="Send">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m22 2-7 20-4-9-9-4z" />
+                    <path d="M22 2 11 13" />
+                </svg>
+            </button>
         </form>
     </div>
 
     <script>
         const grid = document.getElementById("repoGrid");
         const searchInput = document.getElementById("repoSearch");
+        const searchClear = document.getElementById("searchClear");
+        const filterPills = document.getElementById("filterPills");
+        const resultCount = document.getElementById("resultCount");
+        const emptyState = document.getElementById("emptyState");
+        const navbar = document.getElementById("navbar");
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+        const backToTop = document.getElementById("backToTop");
         const chatTrigger = document.getElementById('chat-trigger');
         const chatWindow = document.getElementById('chat-window');
         const chatMsgs = document.getElementById('chat-msgs');
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('chat-input');
+        const heroBotBtn = document.getElementById('heroBotBtn');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // ---------- Theme toggle ----------
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            try { localStorage.setItem('sl-theme', t); } catch (e) { }
+            themeToggle.querySelector('.icon-sun').style.display = t === 'light' ? 'none' : 'block';
+            themeToggle.querySelector('.icon-moon').style.display = t === 'light' ? 'block' : 'none';
+            const mt = document.querySelector('meta[name="theme-color"]');
+            if (mt) mt.setAttribute('content', t === 'light' ? '#f5f7fb' : '#030712');
+        }
+        applyTheme((document.documentElement.getAttribute('data-theme') || 'dark') === 'light' ? 'light' : 'dark');
+        themeToggle.addEventListener('click', () => {
+            applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        // ---------- Reveal on scroll (set up early so content is never stuck hidden) ----------
+        let revealObserver = null;
+        if ('IntersectionObserver' in window) {
+            revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(en => {
+                    if (en.isIntersecting) {
+                        en.target.classList.add('visible');
+                        revealObserver.unobserve(en.target);
+                    }
+                });
+            }, { threshold: 0.08 });
+        }
+
+        function observeReveals() {
+            if (revealObserver) {
+                document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+            } else {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+            }
+        }
+        observeReveals();
 
         const icons = {
-            github: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z"/></svg>`,
-            web: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 9h-2.95a15.3 15.3 0 00-1.23-5.01A8.03 8.03 0 0118.93 11zM12 4.07c.9 1.28 1.64 3.34 1.96 5.93h-3.92C10.36 7.41 11.1 5.35 12 4.07zM5.07 13h2.95c.26 1.87.8 3.58 1.57 4.93A8.03 8.03 0 015.07 13zm2.95-2H5.07a8.03 8.03 0 014.55-5.01A15.3 15.3 0 008.02 11zM12 19.93c-.9-1.28-1.64-3.34-1.96-5.93h3.92c-.32 2.59-1.06 4.65-1.96 5.93zM14.41 17.93c.77-1.35 1.31-3.06 1.57-4.93h2.95a8.03 8.03 0 01-4.52 4.93z"/></svg>`
+            github: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z"/></svg>`,
+            web: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 9h-2.95a15.3 15.3 0 00-1.23-5.01A8.03 8.03 0 0118.93 11zM12 4.07c.9 1.28 1.64 3.34 1.96 5.93h-3.92C10.36 7.41 11.1 5.35 12 4.07zM5.07 13h2.95c.26 1.87.8 3.58 1.57 4.93A8.03 8.03 0 015.07 13zm2.95-2H5.07a8.03 8.03 0 014.55-5.01A15.3 15.3 0 008.02 11zM12 19.93c-.9-1.28-1.64-3.34-1.96-5.93h3.92c-.32 2.59-1.06 4.65-1.96 5.93zM14.41 17.93c.77-1.35 1.31-3.06 1.57-4.93h2.95a8.03 8.03 0 01-4.52 4.93z"/></svg>`,
+            star: `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.3 6.16 21l1.55-6.65L2.5 9.9l6.8-.58L12 3l2.7 6.32 6.8.58-5.21 4.45L17.84 21z"/></svg>`,
+            fork: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.4"/><circle cx="18" cy="5" r="2.4"/><circle cx="12" cy="19" r="2.4"/><path d="M6 7.4v2a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-2M12 12.4V16.4"/></svg>`,
+            file: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>`,
+            size: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`
+        };
+
+        const langColors = {
+            'JavaScript': '#f1e05a', 'Python': '#3572A5', 'Java': '#b07219', 'C': '#555555',
+            'C++': '#f34b7d', 'HTML': '#e34c26', 'CSS': '#563d7c', 'TypeScript': '#3178c6',
+            'Jupyter Notebook': '#DA5B0B', 'TeX': '#3D6117', 'Kotlin': '#A97BFF', 'Shell': '#89e051',
+            'PHP': '#4F5D95', 'Go': '#00ADD8', 'Rust': '#dea584', 'Dart': '#00B4AB'
         };
 
         let allRepos = [];
         let kbData = [];
+        let kbByCode = {};
         let contextSubject = null;
+        let activeFilter = 'all';
 
-        // Fetch Repos
-        fetch('https://api.github.com/users/saveetha-labs/repos?per_page=100')
-            .then(res => res.json())
-            .then(data => {
-                allRepos = data.filter(r => !r.name.includes('.github.io') && r.name !== 'saveetha-labs');
-                renderRepos(allRepos);
+        // ---------- Helpers ----------
+        function esc(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+        function repoCode(name) {
+            const m = name.match(/^([A-Za-z]+)/);
+            return m ? m[1].toUpperCase() : 'MISC';
+        }
+
+        function subjectName(name) {
+            return name
+                .replace(/^[A-Za-z]+\d*[-_]?\s*/i, '')
+                .replace(/[-_]/g, ' ')
+                .replace(/([a-z])([A-Z])/g, '$1 $2')
+                .replace(/\s+/g, ' ')
+                .trim() || name;
+        }
+
+        function timeAgo(iso) {
+            if (!iso) return '';
+            const s = (Date.now() - new Date(iso).getTime()) / 1000;
+            if (s < 60) return 'just now';
+            const m = s / 60;
+            if (m < 60) return Math.floor(m) + 'm ago';
+            const h = m / 60;
+            if (h < 24) return Math.floor(h) + 'h ago';
+            const d = h / 24;
+            if (d < 30) return Math.floor(d) + 'd ago';
+            const mo = d / 30;
+            if (mo < 12) return Math.floor(mo) + 'mo ago';
+            return Math.floor(mo / 12) + 'y ago';
+        }
+
+        // ---------- Nav ----------
+        menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+            backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+        }, { passive: true });
+
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ---------- Repos ----------
+        function showSkeletons(n = 6) {
+            grid.innerHTML = Array(n).fill('<div class="repo skeleton"></div>').join('');
+        }
+
+        function showEmpty(title, msg) {
+            emptyState.querySelector('h3').textContent = title;
+            emptyState.querySelector('p').textContent = msg;
+            emptyState.hidden = false;
+        }
+
+        function buildFilters() {
+            const counts = {};
+            allRepos.forEach(r => {
+                const c = repoCode(r.name);
+                counts[c] = (counts[c] || 0) + 1;
             });
+            const codes = Object.keys(counts).sort();
+            filterPills.innerHTML =
+                `<button class="pill active" data-code="all">All <span>${allRepos.length}</span></button>` +
+                codes.map(c => `<button class="pill" data-code="${c}">${c} <span>${counts[c]}</span></button>`).join('');
 
-        loadKB();
+            filterPills.querySelectorAll('.pill').forEach(p => {
+                p.addEventListener('click', () => {
+                    activeFilter = p.dataset.code;
+                    filterPills.querySelectorAll('.pill').forEach(x => x.classList.toggle('active', x === p));
+                    applyFilter();
+                });
+            });
+        }
+
+        function applyFilter() {
+            const term = searchInput.value.toLowerCase();
+            const list = allRepos.filter(r => {
+                const codeOk = activeFilter === 'all' || repoCode(r.name) === activeFilter;
+                const termOk = r.name.toLowerCase().includes(term) || (r.description || '').toLowerCase().includes(term);
+                return codeOk && termOk;
+            });
+            renderRepos(list);
+        }
 
         function renderRepos(repos) {
-            grid.innerHTML = repos.map(repo => `
-                <div class="repo">
-                    <h3>${repo.name}</h3>
+            grid.innerHTML = repos.map(repoCard).join('');
+            resultCount.textContent = repos.length
+                ? `${repos.length} course${repos.length > 1 ? 's' : ''} found`
+                : '';
+            if (repos.length === 0) {
+                emptyState.querySelector('h3').textContent = 'No courses found';
+                emptyState.querySelector('p').textContent = 'Try a different course code or keyword, or clear the filters.';
+            }
+            emptyState.hidden = repos.length > 0;
+            observeReveals();
+        }
+
+        function repoCard(repo) {
+            const code = esc(repoCode(repo.name));
+            const subject = esc(subjectName(repo.name));
+            const desc = esc(repo.description || 'Student-curated lab programs, notes and resources for this course.');
+            const lang = esc(repo.language || '');
+            const langColor = langColors[lang] || '#8b949e';
+            const stars = repo.stargazers_count || 0;
+            const forks = repo.forks_count || 0;
+            const updated = timeAgo(repo.updated_at);
+            const sizeKb = repo.size || 0;
+            const sizeStr = sizeKb >= 1024 ? (sizeKb / 1024).toFixed(1) + ' MB' : sizeKb + ' KB';
+            const kb = kbByCode[String(code).toUpperCase()] || kbByCode[String(repo.name).toLowerCase()] || null;
+            const fileCount = kb ? kb.files.length : 0;
+            const setChips = kb && kb.sets.length ? kb.sets.slice(0, 4) : [];
+            const moreSets = kb && kb.sets.length > 4 ? kb.sets.length - 4 : 0;
+            return `
+                <div class="repo reveal">
+                    <div class="repo-top">
+                        <span class="repo-code">${code}</span>
+                        ${updated ? `<span class="repo-updated">updated ${updated}</span>` : ''}
+                    </div>
+                    <h3>${subject}</h3>
+                    <p class="repo-desc">${desc}</p>
+                    ${setChips.length ? `<div class="repo-sets">${setChips.map(s => `<span class="set-chip">${esc(s)}</span>`).join('')}${moreSets ? `<span class="set-chip more">+${moreSets}</span>` : ''}</div>` : ''}
                     <div class="meta">
-                        <span>⭐ ${repo.stargazers_count}</span>
+                        <div class="meta-left">
+                            ${lang ? `<span class="lang"><span class="lang-dot" style="background:${langColor}"></span>${lang}</span>` : ''}
+                            ${stars ? `<span class="stat-chip">${icons.star} ${stars}</span>` : ''}
+                            ${forks ? `<span class="stat-chip">${icons.fork} ${forks}</span>` : ''}
+                            ${fileCount ? `<span class="stat-chip">${icons.file} ${fileCount}</span>` : ''}
+                            ${sizeKb ? `<span class="stat-chip size-chip">${icons.size} ${sizeStr}</span>` : ''}
+                        </div>
                         <div class="icons">
-                            <a href="${repo.html_url}" class="icon-link" target="_blank">${icons.github}</a>
-                            <a href="https://saveetha-labs.github.io/${repo.name}/" class="icon-link" target="_blank">${icons.web}</a>
+                            <a href="${esc(repo.html_url)}" class="icon-link" target="_blank" rel="noopener" title="Open on GitHub">${icons.github}</a>
+                            <a href="https://saveetha-labs.github.io/repo/?repo=${encodeURIComponent(repo.name)}" class="icon-link" target="_blank" rel="noopener" title="Live preview">${icons.web}</a>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
         }
 
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            renderRepos(allRepos.filter(r => r.name.toLowerCase().includes(term)));
+        showSkeletons();
+
+        const REPOS_CACHE_KEY = 'sl-repos-cache';
+        let cachedRepos = null;
+
+        function applyRepos(repos) {
+            allRepos = repos;
+            buildFilters();
+            applyFilter();
+        }
+
+        function buildPseudoRepos() {
+            return kbData.map(k => ({
+                name: k.name,
+                html_url: k.url,
+                description: '',
+                stargazers_count: 0,
+                forks_count: 0,
+                language: '',
+                updated_at: null
+            }));
+        }
+
+        function fetchRepos() {
+            fetch('https://api.github.com/users/saveetha-labs/repos?per_page=100&sort=updated')
+                .then(res => {
+                    if (!res.ok) throw new Error('GitHub API error');
+                    return res.json();
+                })
+                .then(data => {
+                    const repos = data.filter(r => !r.name.includes('.github.io') && r.name !== 'saveetha-labs');
+                    try {
+                        localStorage.setItem(REPOS_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: repos }));
+                    } catch (err) { }
+                    applyRepos(repos);
+                })
+                .catch(() => {
+                    // Fallback: cached copy first, then knowledge-base derived cards
+                    const fallback = cachedRepos && cachedRepos.length ? cachedRepos : (kbData.length ? buildPseudoRepos() : []);
+                    if (fallback.length) {
+                        applyRepos(fallback);
+                        showRateNote();
+                    } else {
+                        grid.innerHTML = '';
+                        showEmpty('Couldn\u2019t load repositories', 'There was a problem reaching the GitHub API. Please try again in a moment.');
+                    }
+                });
+        }
+
+        // Render from cache instantly when fresh, then refresh from the API
+        try {
+            const raw = localStorage.getItem(REPOS_CACHE_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (Array.isArray(parsed.data)) {
+                    cachedRepos = parsed.data;
+                    if (Date.now() - (parsed.ts || 0) < 15 * 60 * 1000) {
+                        applyRepos(parsed.data);
+                    }
+                }
+            }
+        } catch (err) { }
+        fetchRepos();
+
+        function showRateNote() {
+            const meta = document.getElementById('resultCount');
+            if (!meta) return;
+            const note = document.createElement('div');
+            note.id = 'rateNote';
+            note.style.cssText = 'display:inline-flex;align-items:center;gap:7px;margin-bottom:14px;padding:8px 14px;border-radius:999px;border:1px solid rgba(245,158,11,0.35);background:rgba(245,158,11,0.08);color:#fbbf24;font-size:0.8rem;font-weight:500';
+            note.textContent = 'GitHub API rate limit reached — showing cached/offline data. Live stats will return once the limit resets.';
+            meta.prepend(note);
+        }
+
+        searchInput.addEventListener('input', () => {
+            searchClear.style.display = searchInput.value ? 'flex' : 'none';
+            applyFilter();
         });
 
-        // Chatbot Knowledge Logic
-        chatTrigger.onclick = () => {
-            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-            if (!kbData.length) loadKB();
-        };
-        document.getElementById('close-chat').onclick = () => chatWindow.style.display = 'none';
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchClear.style.display = 'none';
+            applyFilter();
+            searchInput.focus();
+        });
 
-        async function loadKB() {
-            const res = await fetch('knowledgebase.txt');
-            const text = await res.text();
-            const entries = text.split(/#{10,}/);
-            kbData = entries.map(e => {
-                const name = (e.match(/NAME:\s*([^\n\r]+)/) || [])[1];
-                if (!name) return null;
-                const url = (e.match(/URL:\s*([^\n\r]+)/) || [])[1];
-                const files = [...e.matchAll(/FILE:\s*([^\n\r]+)/g)].map(m => m[1].trim());
-                const sets = [...new Set(files.map(f => f.split(/[\\/]/)[0]))]
-                    .filter(d => /^(s|set)\s*\d+$/i.test(d))
-                    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
-                return { name, url, files, sets };
-            }).filter(Boolean);
-
-            // Update Stats from KB Data
-            document.getElementById('stat-repos').innerText = kbData.length;
-            document.getElementById('stat-sets').innerText = kbData.reduce((acc, curr) => acc + curr.sets.length, 0);
-            document.getElementById('stat-files').innerText = kbData.reduce((acc, curr) => acc + curr.files.length, 0);
+        // ---------- Stats ----------
+        function animateCount(el, target, dur = 1100) {
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / dur, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(target * eased).toLocaleString();
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
         }
 
-        chatForm.onsubmit = (e) => {
+        // ---------- Chatbot ----------
+        function toggleChat(force) {
+            const open = typeof force === 'boolean' ? force : chatWindow.style.display !== 'flex';
+            chatWindow.style.display = open ? 'flex' : 'none';
+            if (open) {
+                if (!kbData.length) loadKB();
+                chatInput.focus();
+            }
+        }
+
+        chatTrigger.addEventListener('click', () => toggleChat());
+        heroBotBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleChat(true);
+        });
+        heroBotBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleChat(true);
+            }
+        });
+        document.getElementById('close-chat').addEventListener('click', () => toggleChat(false));
+
+        document.querySelectorAll('#chatQuick button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                chatInput.value = btn.dataset.q;
+                chatForm.dispatchEvent(new Event('submit'));
+            });
+        });
+
+        async function loadKB() {
+            try {
+                const res = await fetch('knowledgebase.txt');
+                const text = await res.text();
+                const entries = text.split(/#{10,}/);
+                kbData = entries.map(e => {
+                    const name = (e.match(/NAME:\s*([^\n\r]+)/) || [])[1];
+                    if (!name) return null;
+                    const url = (e.match(/URL:\s*([^\n\r]+)/) || [])[1];
+                    const files = [...e.matchAll(/FILE:\s*([^\n\r]+)/g)].map(m => m[1].trim());
+                    const sets = [...new Set(files.map(f => f.split(/[\\/]/)[0]))]
+                        .filter(d => /^(s|set)\s*\d+$/i.test(d))
+                        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+                    return { name, url, files, sets };
+                }).filter(Boolean);
+
+                kbByCode = {};
+                kbData.forEach(k => {
+                    const c = (k.name.split('-')[0] || '').toUpperCase();
+                    if (c && !kbByCode[c]) kbByCode[c] = k;
+                    const kName = String(k.name).toLowerCase();
+                    if (kName && !kbByCode[kName]) kbByCode[kName] = k;
+                });
+
+                animateCount(document.getElementById('stat-repos'), kbData.length);
+                animateCount(document.getElementById('stat-sets'), kbData.reduce((acc, curr) => acc + curr.sets.length, 0));
+                animateCount(document.getElementById('stat-files'), kbData.reduce((acc, curr) => acc + curr.files.length, 0));
+                applyFilter();
+                if (!allRepos.length) applyRepos(buildPseudoRepos());
+            } catch (err) {
+                console.warn('Knowledge base unavailable:', err);
+            }
+        }
+
+        loadKB();
+
+        // Typing indicator
+        let typingEl = null;
+        function showTyping() {
+            removeTyping();
+            typingEl = document.createElement('div');
+            typingEl.className = 'message bot typing';
+            typingEl.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+            chatMsgs.appendChild(typingEl);
+            chatMsgs.scrollTop = chatMsgs.scrollHeight;
+        }
+        function removeTyping() {
+            if (typingEl) { typingEl.remove(); typingEl = null; }
+        }
+
+        chatForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const q = chatInput.value.trim();
             if (!q) return;
             addMsg(q, 'user');
             chatInput.value = '';
-            setTimeout(() => botRespond(q.toLowerCase()), 500);
-        };
+            showTyping();
+            setTimeout(() => {
+                removeTyping();
+                botRespond(q.toLowerCase());
+            }, 700);
+        });
 
         function addMsg(txt, type) {
             const m = document.createElement('div');
@@ -761,19 +2775,16 @@
             }
 
             // Priority 1: Check if the user is explicitly mentioning a NEW course code
-            // We search for tokens in the query that match course prefixes (case insensitive)
             const newRepo = kbData.find(r => {
                 const prefix = r.name.toLowerCase().split('-')[0];
-                const words = q.split(/[\s\-_\\\/]/);
+                const words = q.split(/[\s\-_\\/]/);
                 return words.includes(prefix) || q.includes(r.name.toLowerCase());
             });
 
-            // If a new repo is found, we switch context immediately
             if (newRepo) {
                 contextSubject = newRepo;
             }
 
-            // Use context (either newly found or previous)
             const repo = contextSubject;
 
             if (repo) {
@@ -781,7 +2792,6 @@
                 const setM = q.match(/(?:set|lab|s|chapter)\s*(\d+)/);
                 if (setM) {
                     const sNum = setM[1];
-                    // Flexible matching for set folders (s1 vs set 1)
                     const sPath = repo.sets.find(s => {
                         const sClean = s.toLowerCase().replace(/\s+/g, '');
                         return sClean === `s${sNum}` || sClean === `set${sNum}`;
@@ -797,10 +2807,8 @@
                     }
                 }
 
-                // If no specific set was asked, or if we just switched context, show repo overview
                 const setList = repo.sets.length ? `<strong>Sets:</strong> ${repo.sets.join(', ')}` : "General lab programs and documentation.";
 
-                // Detection for important documents (PDFs, etc)
                 const importantFiles = repo.files.filter(f => f.toLowerCase().endsWith('.pdf') || f.toLowerCase().endsWith('.docx') || f.toLowerCase().endsWith('.pptx'))
                     .map(f => f.split(/[\\/]/).pop())
                     .slice(0, 3);
@@ -809,11 +2817,74 @@
                     ? `<p style="margin-top:8px; font-size:0.85rem"><strong>Key Resources:</strong> ${importantFiles.join(', ')}</p>`
                     : "";
 
-                addMsg(`<strong>${repo.name.replace(/-/g, ' ')}</strong><div class="bot-card"><p>${setList}</p>${resourceList}<div class="links"><a href="${repo.url}" target="_blank" class="icon-link" title="Source Code">${icons.github}</a><a href="https://saveetha-labs.github.io/${repo.name}/" target="_blank" class="icon-link" title="Live Preview">${icons.web}</a></div></div>`);
-            } else {
+                addMsg(`<strong>${repo.name.replace(/-/g, ' ')}</strong><div class="bot-card"><p>${setList}</p>${resourceList}<div class="links"><a href="${repo.url}" target="_blank" class="icon-link" title="Source Code">${icons.github}</a><a href="https://saveetha-labs.github.io/repo/?repo=${encodeURIComponent(repo.name)}" target="_blank" class="icon-link" title="Live Preview">${icons.web}</a></div></div>`);            } else {
                 addMsg("I'm not sure which course you mean. Type <code>list</code> to see all available labs!");
             }
         }
+
+        // ---------- Contact form ----------
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactStatus');
+        const contactSubmit = document.getElementById('cf-submit');
+        const FORM_ENDPOINT = 'https://submit.formpost.ai/l522cv2f';
+
+        function showFormStatus(type, msg) {
+            contactStatus.className = 'form-status ' + type;
+            contactStatus.innerHTML = (type === 'success'
+                ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+                : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>') + '<span></span>';
+            contactStatus.querySelector('span').textContent = msg;
+            contactStatus.hidden = false;
+        }
+
+        // ---------- PWA / offline support ----------
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => { /* optional */ });
+            });
+        }
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Honeypot: silently accept bots
+            if (contactForm.querySelector('.hp-field').value) {
+                showFormStatus('success', 'Message sent — thank you!');
+                contactForm.reset();
+                return;
+            }
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            contactSubmit.classList.add('loading');
+            const data = new FormData(contactForm);
+            try {
+                const res = await fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: data
+                });
+                let ok = res.ok;
+                try {
+                    const json = await res.json();
+                    if (json && json.success === false) ok = false;
+                } catch (err) { /* non-JSON response */ }
+                if (ok) {
+                    showFormStatus('success', 'Message sent — thank you! We\u2019ll get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    showFormStatus('error', 'Something went wrong on our end. Please try again.');
+                }
+            } catch (err) {
+                // Fetch blocked (CORS/offline) → fall back to native form post
+                contactForm.submit();
+            } finally {
+                contactSubmit.classList.remove('loading');
+            }
+        });
     </script>
 </body>
 

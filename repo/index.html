@@ -1,0 +1,4185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030712" />
+    <link rel="manifest" href="../manifest.json" />
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Universal file explorer for saveetha-labs repositories. Open any repo with ?repo=NAME." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Saveetha Labs" />
+    <meta property="og:title" content="Saveetha Labs — Repository Explorer" />
+    <meta property="og:description" content="Browse every saveetha-labs course repository — file tree, README, source code previews and resources." />
+    <meta property="og:url" content="https://saveetha-labs.github.io/repo/" />
+    <meta property="og:image" content="https://saveetha-labs.github.io/icons/og-banner.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saveetha Labs — Repository Explorer" />
+    <meta name="twitter:description" content="Browse every saveetha-labs course repository." />
+    <meta name="twitter:image" content="https://saveetha-labs.github.io/icons/og-banner.png" />
+    <link rel="apple-touch-icon" href="../icons/icon-192.png" />
+    <title>Explorer — Saveetha Labs</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Rendering helpers (gracefully degrade if CDN unavailable) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-clike.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-go.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-rust.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+    <link rel="preconnect" href="https://api.github.com">
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+
+    <script>
+        try {
+            if (localStorage.getItem('sl-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        } catch (e) { }
+    </script>
+
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(17, 24, 39, 0.6);
+            --card-solid: #111827;
+            --text: #f9fafb;
+            --muted: #94a3b8;
+            --muted-2: #64748b;
+            --accent: #38bdf8;
+            --accent-2: #818cf8;
+            --accent-soft: rgba(56, 189, 248, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --radius: 20px;
+            --nav-h: 62px;
+            --danger: #fb7185;
+            --ok: #34d399;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.06) 0%, transparent 40%);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            border: 2px solid var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* ---------- Navigation (liquid glass pill, matches hub) ---------- */
+        nav {
+            position: sticky;
+            top: 14px;
+            z-index: 300;
+            width: min(1180px, calc(100% - 32px));
+            margin: 14px auto 0;
+            background: rgba(15, 22, 38, 0.45);
+            backdrop-filter: blur(26px) saturate(180%);
+            -webkit-backdrop-filter: blur(26px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 999px;
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.04),
+                0 10px 40px -18px rgba(0, 0, 0, 0.55);
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 22, 38, 0.6);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+                0 14px 44px -16px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-inner {
+            height: var(--nav-h);
+            padding: 0 10px 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
+            transition: opacity 0.2s;
+            min-width: 0;
+        }
+
+        .brand:hover {
+            opacity: 0.85;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #38bdf8, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #030712;
+            box-shadow: 0 6px 18px -6px var(--accent-glow);
+            flex-shrink: 0;
+        }
+
+        .brand-sub {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .brand-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.93rem;
+            font-weight: 500;
+            transition: 0.25s;
+            padding: 9px 14px;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .nav-cta {
+            background: var(--text) !important;
+            color: var(--bg) !important;
+            font-weight: 600;
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent) !important;
+            color: var(--bg) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px -8px var(--accent);
+        }
+
+        .theme-toggle,
+        .menu-toggle {
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            flex-shrink: 0;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .theme-toggle:hover,
+        .menu-toggle:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -8px var(--accent);
+        }
+
+        /* ---------- Header strip ---------- */
+        /* No position:relative / overflow:hidden here — clipping the hero orbs at the
+           header box edges is what created the visible rectangle look. The orbs anchor
+           to .explorer-wrap (positioned) and bleed offscreen; body has overflow-x:hidden. */
+        header {
+            width: 100%;
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb-a {
+            width: 460px;
+            height: 460px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.32), transparent 65%);
+            top: -220px;
+            left: -140px;
+        }
+
+        .orb-b {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.26), transparent 65%);
+            top: -180px;
+            right: -140px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 46px 24px 54px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: var(--accent-soft);
+            color: #bae6fd;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            margin-bottom: 24px;
+            backdrop-filter: blur(8px);
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34d399;
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+            }
+        }
+
+        header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.1rem, 6vw, 3.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            background: linear-gradient(110deg, #ffffff 20%, #7dd3fc 45%, #a5b4fc 60%, #ffffff 85%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            animation: shimmer 7s linear infinite;
+            word-break: break-word;
+        }
+
+        @keyframes shimmer {
+            from {
+                background-position: 200% 0;
+            }
+
+            to {
+                background-position: -100% 0;
+            }
+        }
+
+        .owner-line {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.98rem;
+            color: var(--muted);
+            margin-bottom: 28px;
+            word-break: break-all;
+        }
+
+        .owner-line b {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .repo-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 34px -12px var(--accent);
+            filter: brightness(1.1);
+        }
+
+        .btn-ghost {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 34px -12px var(--accent);
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 0.84rem;
+            border-radius: 10px;
+        }
+
+        .repo-meta-chips {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .meta-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--muted);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 6px 13px;
+            backdrop-filter: blur(8px);
+        }
+
+        .meta-chip b {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .branch-chip {
+            color: var(--accent);
+            border-color: rgba(56, 189, 248, 0.3);
+            background: var(--accent-soft);
+        }
+
+        /* ---------- Explorer layout ---------- */
+        .explorer-wrap {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+        }
+
+        .explorer-body {
+            display: grid;
+            grid-template-columns: 340px minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: calc(var(--nav-h) + 28px);
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - (var(--nav-h) + 44px));
+        }
+
+        .side-search {
+            position: relative;
+            padding: 14px 14px 10px;
+        }
+
+        .side-search svg {
+            position: absolute;
+            left: 28px;
+            top: 27px;
+            color: var(--muted-2);
+            pointer-events: none;
+        }
+
+        #treeSearch {
+            width: 100%;
+            padding: 11px 38px 11px 38px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            outline: none;
+            transition: 0.25s;
+            font-size: 0.88rem;
+            font-family: inherit;
+        }
+
+        #treeSearch::placeholder {
+            color: var(--muted-2);
+        }
+
+        #treeSearch:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        #treeClear {
+            position: absolute;
+            right: 26px;
+            top: 27px;
+            width: 22px;
+            height: 22px;
+            border: none;
+            background: transparent;
+            color: var(--muted-2);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        #treeClear:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .side-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 16px 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .side-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        #loadAllBtn {
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 5px 11px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        #loadAllBtn:hover {
+            background: rgba(56, 189, 248, 0.2);
+            transform: translateY(-1px);
+        }
+
+        #loadAllBtn:disabled {
+            opacity: 0.5;
+            cursor: wait;
+            transform: none;
+        }
+
+        .tree {
+            overflow-y: auto;
+            padding: 10px 10px 14px;
+            flex: 1;
+        }
+
+        .tree::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .tree::-webkit-scrollbar-thumb {
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .tree-note {
+            font-size: 0.78rem;
+            color: var(--muted-2);
+            padding: 8px 14px 2px;
+        }
+
+        .tree-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 9px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 0.86rem;
+            transition: background 0.18s, color 0.18s;
+            user-select: none;
+            min-width: 0;
+        }
+
+        .tree-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+        }
+
+        .tree-row.active {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .tree-row .t-icon {
+            flex-shrink: 0;
+            display: flex;
+            color: var(--muted-2);
+        }
+
+        .tree-row.dir > .t-icon {
+            color: #fbbf24;
+        }
+
+        .tree-row.file > .t-icon {
+            color: var(--muted-2);
+        }
+
+        /* File-type icon colors */
+        .t-icon svg.pdf {
+            color: #ef4444;
+        }
+
+        .t-icon svg.image {
+            color: #8b5cf6;
+        }
+
+        .t-icon svg.code {
+            color: #22d3ee;
+        }
+
+        .t-icon svg.markdown {
+            color: #60a5fa;
+        }
+
+        .t-icon svg.json {
+            color: #fbbf24;
+        }
+
+        .t-icon svg.config {
+            color: #34d399;
+        }
+
+        .t-icon svg.doc {
+            color: #7dd3fc;
+        }
+
+        .t-icon svg.sheet {
+            color: #4ade80;
+        }
+
+        .t-icon svg.slides {
+            color: #fb7185;
+        }
+
+        .t-icon svg.terminal {
+            color: #94a3b8;
+        }
+
+        .t-icon svg.database {
+            color: #38bdf8;
+        }
+
+        .t-icon svg.archive {
+            color: #fb923c;
+        }
+
+        .t-icon svg.audio {
+            color: #f472b6;
+        }
+
+        .t-icon svg.video {
+            color: #c084fc;
+        }
+
+        .t-icon svg.font {
+            color: #2dd4bf;
+        }
+
+        .t-icon svg.key {
+            color: #facc15;
+        }
+
+        .t-icon svg.lock {
+            color: #fde047;
+        }
+
+        .t-icon svg.text {
+            color: var(--muted-2);
+        }
+
+        .tree-row.active .t-icon {
+            color: var(--accent);
+        }
+
+        .tree-row .t-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tree-row .t-meta {
+            font-size: 0.7rem;
+            color: var(--muted-2);
+            flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .chev {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted-2);
+            transition: transform 0.2s;
+        }
+
+        .chev svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .tree-row.open .chev {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+
+        .tree-children {
+            margin-left: 20px;
+            border-left: 1px solid var(--border);
+            padding-left: 6px;
+            display: none;
+        }
+
+        .tree-children.open {
+            display: block;
+        }
+
+        .tree-status {
+            padding: 12px 16px;
+            font-size: 0.8rem;
+            color: var(--muted-2);
+            text-align: center;
+        }
+
+        .tree-loading {
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            color: var(--muted-2);
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .spinner {
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .side-error {
+            padding: 12px 16px;
+            font-size: 0.8rem;
+            color: var(--danger);
+            line-height: 1.5;
+        }
+
+        .side-back {
+            padding: 0 16px 14px;
+        }
+
+        .side-back a {
+            font-size: 0.82rem;
+            color: var(--accent);
+        }
+
+        /* Search results (flat list) */
+        .result-row {
+            padding: 7px 9px;
+        }
+
+        .result-path {
+            font-size: 0.7rem;
+            color: var(--muted-2);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .result-empty {
+            padding: 22px 16px;
+            text-align: center;
+            color: var(--muted-2);
+            font-size: 0.84rem;
+        }
+
+        /* Content */
+        .content {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .content-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: nowrap;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 10px 14px;
+            position: sticky;
+            top: calc(var(--nav-h) + 26px);
+            z-index: 50;
+        }
+
+        #openSidebar {
+            display: none;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        #openSidebar:hover {
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        #crumbs {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: nowrap;
+            min-width: 0;
+            flex: 1;
+            margin: 0;
+            font-size: 0.88rem;
+            overflow: hidden;
+        }
+
+        .crumb {
+            color: var(--muted);
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: 0.2s;
+            white-space: nowrap;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 0.88rem;
+            font-family: inherit;
+            /* Long paths stay on one line — each crumb truncates with an
+               ellipsis instead of wrapping the bar to a second row. */
+            flex-shrink: 1;
+            min-width: 0;
+            max-width: 210px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .crumb:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .crumb.sep {
+            color: var(--muted-2);
+            padding: 4px 1px;
+            cursor: default;
+            flex-shrink: 0;
+        }
+
+        .crumb.cur {
+            color: var(--accent);
+            font-weight: 600;
+            cursor: default;
+            /* Keep the current file name as readable as possible */
+            max-width: min(46%, 320px);
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .file-actions .btn {
+            gap: 6px;
+        }
+
+        /* Preview */
+        .preview {
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            min-height: 68vh;
+            overflow: hidden;
+            animation: fadeUp 0.35s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preview-pad {
+            padding: 30px 32px;
+        }
+
+        .preview-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-height: 40vh;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .preview-error {
+            padding: 40px 30px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .preview-error h3 {
+            color: var(--danger);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* Welcome / folder listing */
+        .welcome {
+            text-align: center;
+            padding: 46px 30px;
+        }
+
+        .welcome .big-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 18px;
+            border-radius: 18px;
+            background: var(--accent-soft);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .welcome h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: var(--muted);
+            max-width: 480px;
+            margin: 0 auto 22px;
+            font-size: 0.95rem;
+        }
+
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 22px;
+            text-align: left;
+        }
+
+        .f-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 13px 15px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: 0.25s;
+            min-width: 0;
+        }
+
+        .f-item:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateY(-3px);
+        }
+
+        .f-item .f-ic {
+            flex-shrink: 0;
+            display: flex;
+            color: var(--muted-2);
+        }
+
+        .f-item.dir .f-ic {
+            color: #fbbf24;
+        }
+
+        .f-ic svg.pdf {
+            color: #ef4444;
+        }
+
+        .f-ic svg.image {
+            color: #8b5cf6;
+        }
+
+        .f-ic svg.code {
+            color: #22d3ee;
+        }
+
+        .f-ic svg.markdown {
+            color: #60a5fa;
+        }
+
+        .f-ic svg.json {
+            color: #fbbf24;
+        }
+
+        .f-ic svg.config {
+            color: #34d399;
+        }
+
+        .f-ic svg.doc {
+            color: #7dd3fc;
+        }
+
+        .f-ic svg.sheet {
+            color: #4ade80;
+        }
+
+        .f-ic svg.slides {
+            color: #fb7185;
+        }
+
+        .f-ic svg.terminal {
+            color: #94a3b8;
+        }
+
+        .f-ic svg.database {
+            color: #38bdf8;
+        }
+
+        .f-ic svg.archive {
+            color: #fb923c;
+        }
+
+        .f-ic svg.audio {
+            color: #f472b6;
+        }
+
+        .f-ic svg.video {
+            color: #c084fc;
+        }
+
+        .f-ic svg.font {
+            color: #2dd4bf;
+        }
+
+        .f-ic svg.key {
+            color: #facc15;
+        }
+
+        .f-ic svg.lock {
+            color: #fde047;
+        }
+
+        .f-ic svg.text {
+            color: var(--muted-2);
+        }
+
+        .f-item .f-name {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .f-item .f-size {
+            flex-shrink: 0;
+            font-size: 0.72rem;
+            color: var(--muted-2);
+        }
+
+        .readme-box {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 6px 6px;
+            margin-top: 22px;
+        }
+
+        .readme-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 7px 15px;
+            margin: 4px;
+        }
+
+        .readme-tab .rd {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        /* Preview / Code toggle tabs */
+        .view-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 12px 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .view-tab {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 9px 9px 0 0;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .view-tab:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .view-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .code-pane pre {
+            margin: 0;
+            border-radius: 0 0 var(--radius) var(--radius);
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
+        .md-body {
+            padding: 10px 12px 22px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            word-wrap: break-word;
+        }
+
+        .md-body > :first-child {
+            margin-top: 0;
+        }
+
+        .md-body h1,
+        .md-body h2,
+        .md-body h3,
+        .md-body h4 {
+            font-family: 'Crimson Pro', serif;
+            line-height: 1.25;
+            margin: 1.4em 0 0.55em;
+            letter-spacing: -0.01em;
+        }
+
+        .md-body h1 {
+            font-size: 1.75rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.35em;
+        }
+
+        .md-body h2 {
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.3em;
+        }
+
+        .md-body h3 {
+            font-size: 1.15rem;
+        }
+
+        .md-body p {
+            margin: 0.8em 0;
+        }
+
+        .md-body ul,
+        .md-body ol {
+            margin: 0.7em 0;
+            padding-left: 1.5em;
+        }
+
+        .md-body li {
+            margin: 0.25em 0;
+        }
+
+        .md-body a:hover {
+            text-decoration: underline;
+        }
+
+        .md-body blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 4px 16px;
+            margin: 1em 0;
+            color: var(--muted);
+            background: var(--accent-soft);
+            border-radius: 0 10px 10px 0;
+        }
+
+        .md-body code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.84em;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 2px 7px;
+            border-radius: 6px;
+        }
+
+        .md-body pre {
+            background: rgba(3, 7, 18, 0.75);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            margin: 1.1em 0;
+        }
+
+        .md-body pre code {
+            background: none;
+            color: #e2e8f0;
+            padding: 0;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .md-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+            font-size: 0.9em;
+        }
+
+        .md-body th,
+        .md-body td {
+            border: 1px solid var(--border);
+            padding: 9px 13px;
+            text-align: left;
+        }
+
+        .md-body th {
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 600;
+        }
+
+        .md-body tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .md-body img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .md-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.6em 0;
+        }
+
+        /* File viewer */
+        .code-block {
+            margin: 0;
+            padding: 20px 24px;
+            overflow-x: auto;
+            background: rgba(3, 7, 18, 0.75);
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.86rem;
+            line-height: 1.65;
+            color: #e2e8f0;
+            white-space: pre;
+        }
+
+        .code-block .plain {
+            color: #e2e8f0;
+        }
+
+        /* ---------- Copy button on code blocks ---------- */
+        .code-frame {
+            position: relative;
+        }
+
+        .code-frame .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 11px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(15, 22, 38, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: opacity 0.2s, transform 0.2s, color 0.2s, border-color 0.2s, background 0.2s;
+            font-family: inherit;
+        }
+
+        .code-frame:hover .copy-btn,
+        .copy-btn:focus-visible,
+        .copy-btn.copied {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .copy-btn:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: rgba(15, 22, 38, 0.95);
+        }
+
+        .copy-btn.copied {
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.5);
+            background: rgba(52, 211, 153, 0.12);
+        }
+
+        .preview-img-wrap {
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            background: repeating-conic-gradient(rgba(255, 255, 255, 0.04) 0% 25%, transparent 0% 50%) 50% / 22px 22px;
+        }
+
+        .preview-img-wrap img {
+            max-width: 100%;
+            max-height: 72vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+        }
+
+        .embed-frame {
+            width: 100%;
+            height: 76vh;
+            border: none;
+            display: block;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .file-meta-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.82rem;
+            color: var(--muted);
+            flex-wrap: wrap;
+        }
+
+        .file-meta-line .path-code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            color: var(--text);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-meta-line .size {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            color: var(--muted-2);
+            flex-shrink: 0;
+        }
+
+        .preview-tip {
+            padding: 26px 30px;
+            text-align: center;
+            color: var(--muted-2);
+            font-size: 0.88rem;
+        }
+
+        /* Prism dark (site palette) */
+        code[class*="language-"],
+        pre[class*="language-"] {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.86rem;
+            line-height: 1.65;
+            color: #e2e8f0;
+            text-shadow: none;
+        }
+
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .token.punctuation {
+            color: #94a3b8;
+        }
+
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #7dd3fc;
+        }
+
+        .token.boolean,
+        .token.number {
+            color: #fbbf24;
+        }
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #86efac;
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url {
+            color: #67e8f9;
+        }
+
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword {
+            color: #c4b5fd;
+        }
+
+        .token.function,
+        .token.class-name {
+            color: #93c5fd;
+        }
+
+        .token.regex,
+        .token.important,
+        .token.variable {
+            color: #fda4af;
+        }
+
+        /* ---------- Full-page state screens ---------- */
+        .state-screen {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+        }
+
+        .state-screen[hidden] {
+            display: none;
+            padding: 0;
+        }
+
+        .state-card {
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+            background: var(--card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 46px 38px;
+            animation: fadeUp 0.4s ease-out;
+        }
+
+        .state-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 22px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .state-icon.err {
+            background: rgba(244, 63, 94, 0.12);
+            border-color: rgba(244, 63, 94, 0.35);
+            color: var(--danger);
+        }
+
+        .state-icon.info {
+            background: var(--accent-soft);
+            border-color: rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+        }
+
+        .state-card h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .state-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .state-card code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.84em;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 6px;
+            word-break: break-all;
+        }
+
+        .state-example {
+            display: block;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 13px 16px;
+            margin: 18px 0 4px;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-align: left;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .state-example b {
+            color: var(--accent);
+        }
+
+        .state-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        /* ---------- Token button state ---------- */
+        .theme-toggle.token-set {
+            border-color: rgba(52, 211, 153, 0.5);
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        /* ---------- Token modal ---------- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-backdrop[hidden] {
+            display: none;
+        }
+
+        .modal-card {
+            width: 100%;
+            max-width: 470px;
+            background: var(--card-solid);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px 26px 20px;
+            box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.06);
+            animation: fadeUp 0.25s ease-out;
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .modal-head b {
+            font-size: 1.05rem;
+        }
+
+        .modal-close {
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        .modal-intro {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .modal-intro b {
+            color: var(--text);
+        }
+
+        /* ---------- Token form (modal + state screen) ---------- */
+        .token-box {
+            text-align: left;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            margin-top: 18px;
+        }
+
+        .token-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .token-head svg {
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .token-head b {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .token-state {
+            font-size: 0.72rem;
+            color: var(--muted-2);
+        }
+
+        .token-state.on {
+            color: #34d399;
+        }
+
+        .token-state.off {
+            color: #fbbf24;
+        }
+
+        .token-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .token-row .btn {
+            flex-shrink: 0;
+        }
+
+        .token-row input {
+            flex: 1;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            color: var(--text);
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.78rem;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        .token-row input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .token-status {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+            border-radius: 10px;
+            line-height: 1.45;
+        }
+
+        .token-status.ok {
+            color: #34d399;
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .token-status.err {
+            color: var(--danger);
+            background: rgba(244, 63, 94, 0.08);
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .token-status[hidden] {
+            display: none;
+        }
+
+        .token-help {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .token-help summary {
+            cursor: pointer;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.8rem;
+            user-select: none;
+        }
+
+        .token-help ol {
+            margin: 8px 0 0 18px;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        .token-help li {
+            margin: 2px 0;
+        }
+
+        .token-help code {
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            background: var(--accent-soft);
+            color: var(--accent);
+            padding: 1px 6px;
+            border-radius: 5px;
+        }
+
+        /* ---------- Footer (compact, tight on desktop) ---------- */
+        footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 48px;
+            padding: 30px 24px 22px;
+            border-top: 1px solid var(--border);
+            background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.03));
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1.7fr;
+            gap: 18px 36px;
+            align-items: start;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .footer-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            color: var(--text);
+        }
+
+        .footer-name::before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        .footer-sub {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 5px 13px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            transition: 0.25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            border-color: var(--border);
+            background: rgba(56, 189, 248, 0.06);
+        }
+
+        .footer-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-powered {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .footer-powered b {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .footer-copy {
+            color: var(--muted);
+        }
+
+        .disclaimer-box {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.6;
+            padding: 12px 16px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .disclaimer-box strong {
+            color: var(--text);
+        }
+
+        .disclaimer-box code {
+            color: var(--accent);
+            font-size: 0.75rem;
+            background: rgba(56, 189, 248, 0.08);
+            padding: 1px 6px;
+            border-radius: 5px;
+        }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 560px) {
+            footer {
+                margin-top: 32px;
+                padding: 24px 16px 20px;
+            }
+
+            .footer-grid {
+                text-align: center;
+            }
+
+            .footer-brand {
+                align-items: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+
+            .footer-meta {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        /* ---------- Light theme ---------- */
+        html[data-theme="light"] {
+            --bg: #f5f7fb;
+            --card: rgba(255, 255, 255, 0.85);
+            --card-solid: #ffffff;
+            --text: #0f172a;
+            --muted: #55647a;
+            --muted-2: #8a99af;
+            --accent: #0284c7;
+            --accent-2: #6366f1;
+            --accent-soft: rgba(2, 132, 199, 0.1);
+            --border: rgba(15, 23, 42, 0.12);
+            --accent-glow: rgba(2, 132, 199, 0.35);
+        }
+
+        html[data-theme="light"] body {
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.07) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.06) 0%, transparent 40%);
+        }
+
+        html[data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.42);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.35),
+                0 10px 40px -18px rgba(2, 132, 199, 0.22);
+        }
+
+        html[data-theme="light"] nav.scrolled {
+            background: rgba(255, 255, 255, 0.62);
+            border-color: rgba(255, 255, 255, 0.85);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+                0 14px 44px -16px rgba(2, 132, 199, 0.3);
+        }
+
+        html[data-theme="light"] .nav-links {
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.9), 0 30px 60px -20px rgba(2, 132, 199, 0.25);
+        }
+
+        html[data-theme="light"] header h1 {
+            background: linear-gradient(110deg, #0f172a 20%, #0284c7 45%, #6366f1 60%, #0f172a 85%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 7s linear infinite;
+        }
+
+        html[data-theme="light"] .badge {
+            color: #0369a1;
+        }
+
+        html[data-theme="light"] .badge-dot {
+            background: #059669;
+            box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.6);
+        }
+
+        html[data-theme="light"] .tree-row:hover {
+            background: rgba(15, 23, 42, 0.06);
+        }
+
+        html[data-theme="light"] .f-item {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .f-item:hover {
+            background: var(--accent-soft);
+        }
+
+        html[data-theme="light"] .md-body pre {
+            background: #ffffff;
+        }
+
+        html[data-theme="light"] .md-body pre code {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .code-block {
+            background: #ffffff;
+            color: #334155;
+        }
+
+        html[data-theme="light"] .code-block .plain {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .copy-btn {
+            background: rgba(255, 255, 255, 0.92);
+            border-color: var(--border);
+            color: var(--muted);
+        }
+
+        html[data-theme="light"] .copy-btn:hover {
+            background: #ffffff;
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        html[data-theme="light"] .copy-btn.copied {
+            background: rgba(52, 211, 153, 0.12);
+        }
+
+        html[data-theme="light"] .state-example {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        html[data-theme="light"] #treeSearch,
+        html[data-theme="light"] .side-search input {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .tree::-webkit-scrollbar-thumb {
+            background: rgba(15, 23, 42, 0.2);
+        }
+
+        html[data-theme="light"] ::-webkit-scrollbar-thumb {
+            background: rgba(15, 23, 42, 0.2);
+        }
+
+        html[data-theme="light"] .md-body th {
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        html[data-theme="light"] .md-body tr:nth-child(even) td {
+            background: rgba(15, 23, 42, 0.02);
+        }
+
+        html[data-theme="light"] .readme-tab {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .embed-frame {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        html[data-theme="light"] .token-row input {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        html[data-theme="light"] .token-box {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        /* Prism light overrides */
+        html[data-theme="light"] code[class*="language-"],
+        html[data-theme="light"] pre[class*="language-"] {
+            color: #334155;
+        }
+
+        html[data-theme="light"] .token.comment,
+        html[data-theme="light"] .token.prolog,
+        html[data-theme="light"] .token.doctype,
+        html[data-theme="light"] .token.cdata {
+            color: #94a3b8;
+        }
+
+        html[data-theme="light"] .token.punctuation {
+            color: #64748b;
+        }
+
+        html[data-theme="light"] .token.property,
+        html[data-theme="light"] .token.tag,
+        html[data-theme="light"] .token.constant,
+        html[data-theme="light"] .token.symbol,
+        html[data-theme="light"] .token.deleted {
+            color: #0369a1;
+        }
+
+        html[data-theme="light"] .token.boolean,
+        html[data-theme="light"] .token.number {
+            color: #b45309;
+        }
+
+        html[data-theme="light"] .token.selector,
+        html[data-theme="light"] .token.attr-name,
+        html[data-theme="light"] .token.string,
+        html[data-theme="light"] .token.char,
+        html[data-theme="light"] .token.builtin,
+        html[data-theme="light"] .token.inserted {
+            color: #15803d;
+        }
+
+        html[data-theme="light"] .token.operator,
+        html[data-theme="light"] .token.entity,
+        html[data-theme="light"] .token.url {
+            color: #0e7490;
+        }
+
+        html[data-theme="light"] .token.atrule,
+        html[data-theme="light"] .token.attr-value,
+        html[data-theme="light"] .token.keyword {
+            color: #6d28d9;
+        }
+
+        html[data-theme="light"] .token.function,
+        html[data-theme="light"] .token.class-name {
+            color: #1d4ed8;
+        }
+
+        html[data-theme="light"] .token.regex,
+        html[data-theme="light"] .token.important,
+        html[data-theme="light"] .token.variable {
+            color: #be123c;
+        }
+
+        /* ---------- Sidebar overlay / drawer (mobile) ---------- */
+        /* Sidebar overlay / drawer (mobile). Layered ABOVE the sticky nav pill
+           (z-index 300) so the file-menu drawer never slides under the navbar. */
+        #sideOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 310;
+            border: none;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        #sideOverlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ---------- Toast (transient feedback) ---------- */
+        #toast {
+            position: fixed;
+            left: 50%;
+            bottom: 26px;
+            transform: translateX(-50%) translateY(16px);
+            z-index: 500;
+            max-width: min(420px, calc(100vw - 32px));
+            background: var(--card-solid);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            padding: 12px 18px;
+            border-radius: 14px;
+            box-shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s, transform 0.25s;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #toast.err {
+            border-color: rgba(244, 63, 94, 0.45);
+            color: var(--danger);
+        }
+
+        /* Laptops with long paths: collapse the GitHub / Raw / Download actions
+           to icon-only buttons (like mobile) so the breadcrumb keeps the room.
+           Full-width desktops keep the text labels. */
+        @media (max-width: 1280px) {
+            .file-actions .btn-label {
+                display: none;
+            }
+
+            .file-actions .btn-sm {
+                width: 38px;
+                height: 38px;
+                padding: 0;
+                justify-content: center;
+                gap: 0;
+                font-size: 0;
+            }
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .explorer-body {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: min(340px, 86vw);
+                max-height: none;
+                /* Above nav (300) so the drawer covers the navbar, not slides under it */
+                z-index: 320;
+                border-radius: 0 22px 22px 0;
+                transform: translateX(-105%);
+                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+                box-shadow: 30px 0 80px -30px rgba(0, 0, 0, 0.8);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            #openSidebar {
+                display: inline-flex;
+            }
+
+            .content-bar {
+                position: static;
+                flex-wrap: wrap;
+            }
+
+            #crumbs {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 12px;
+                right: 12px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                background: rgba(15, 22, 38, 0.6);
+                backdrop-filter: blur(28px) saturate(180%);
+                -webkit-backdrop-filter: blur(28px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: 22px;
+                padding: 14px;
+                display: none;
+                box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px 14px;
+            }
+
+            .nav-cta {
+                margin-left: 0;
+                justify-content: center;
+            }
+
+            .brand-tag {
+                display: none;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .explorer-wrap {
+                padding: 0 14px 30px;
+            }
+
+            .preview-pad {
+                padding: 20px 16px;
+            }
+
+            .state-card {
+                padding: 36px 22px;
+            }
+
+            .repo-actions .btn {
+                padding: 10px 14px;
+            }
+        }
+
+        /* Phones & tablets (up to 900px, matching the sidebar-drawer breakpoint):
+           compact icon-only file actions and hide the repo-name crumb — the repo
+           name already lives in the page header. */
+        @media (max-width: 900px) {
+            .file-actions .btn-label,
+            .repo-actions .btn-label {
+                display: none;
+            }
+
+            .file-actions .btn-sm {
+                width: 38px;
+                height: 38px;
+                padding: 0;
+                justify-content: center;
+                gap: 0;
+            }
+        }
+
+        /* Hide the repo-name crumb (home icon + repo name) on tablets & phones —
+           the repo name is already in the page hero h1. */
+        @media (max-width: 1024px) {
+            .crumb[data-go=""] {
+                display: none;
+            }
+        }
+
+        /* Tidy README + filename rendering on mobile — names wrap cleanly, tighter type */
+        @media (max-width: 640px) {
+            .md-body {
+                font-size: 0.92rem;
+                padding: 8px 10px 18px;
+            }
+
+            .md-body h1 {
+                font-size: 1.5rem;
+                word-break: break-word;
+            }
+
+            .md-body h2 {
+                font-size: 1.25rem;
+            }
+
+            .readme-box {
+                padding: 3px;
+            }
+
+            .readme-tab {
+                font-size: 0.68rem;
+                padding: 6px 12px;
+                margin: 3px;
+            }
+
+            .crumb {
+                max-width: 150px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .file-meta-line .path-code {
+                white-space: normal;
+                word-break: break-all;
+                line-height: 1.4;
+            }
+
+            .preview {
+                border-radius: 16px;
+            }
+        }
+
+        /* Neater glass menu on mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                background: rgba(15, 22, 38, 0.72);
+                backdrop-filter: blur(32px) saturate(180%);
+                -webkit-backdrop-filter: blur(32px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.16);
+                box-shadow:
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+                    0 30px 60px -18px rgba(0, 0, 0, 0.85);
+                animation: menuDrop 0.22s ease-out;
+            }
+
+            @keyframes menuDrop {
+                from {
+                    opacity: 0;
+                    transform: translateY(-8px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            html[data-theme="light"] .nav-links {
+                background: rgba(255, 255, 255, 0.85);
+                border-color: rgba(255, 255, 255, 0.9);
+                box-shadow:
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+                    0 30px 60px -18px rgba(2, 132, 199, 0.25);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript>
+        <style>
+            .explorer-wrap,
+            .state-screen {
+                display: block !important;
+            }
+        </style>
+        <div style="padding:60px 24px;text-align:center;color:#94a3b8">
+            This explorer needs JavaScript to load the GitHub file tree. Please enable JavaScript and reload.
+        </div>
+    </noscript>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 3h6M10 3v6.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9.5V3" />
+                        <path d="M7.5 15h9" />
+                    </svg>
+                </span>
+                <span>Saveetha <span class="brand-sub">Labs</span></span>
+                <span class="brand-tag">Explorer</span>
+            </a>
+            <div class="nav-right">
+                <button class="theme-toggle" id="tokenToggle" aria-label="GitHub token settings" title="GitHub token (rate limit)">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="7.5" cy="15.5" r="4.5" />
+                        <path d="M10.7 12.3L21 2M15 6.8l2.2 2.2" />
+                    </svg>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="12" cy="12" r="4.5" />
+                        <path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+                    </svg>
+                    <svg class="icon-moon" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 7h16M4 12h16M4 17h16" />
+                    </svg>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="../index.html">Home</a>
+                    <a href="../docs.html">Docs</a>
+                    <a class="nav-cta" href="https://github.com/saveetha-labs" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full-page state (error / welcome) -->
+    <div class="state-screen" id="stateScreen" hidden></div>
+
+    <!-- Explorer -->
+    <div class="explorer-wrap" id="explorerWrap" hidden>
+        <header>
+            <div class="hero-orb orb-a"></div>
+            <div class="hero-orb orb-b"></div>
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    Repository Explorer
+                </div>
+                <h1 id="explorerTitle">Loading…</h1>
+                <div class="owner-line" id="ownerLine">saveetha-labs / …</div>
+                <div class="repo-actions">
+                    <a class="btn btn-primary" id="ghRepoBtn" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z" />
+                        </svg>
+                        <span class="btn-label">View on GitHub</span>
+                    </a>
+                    <a class="btn btn-ghost" id="liveBtn" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                        <span class="btn-label">Live Pages</span>
+                    </a>
+                </div>
+                <div class="repo-meta-chips" id="repoChips">
+                    <span class="meta-chip branch-chip" id="branchChip"></span>
+                    <span class="meta-chip" id="starsChip" hidden></span>
+                    <span class="meta-chip" id="forksChip" hidden></span>
+                    <span class="meta-chip" id="sizeChip" hidden></span>
+                    <span class="meta-chip" id="updatedChip" hidden></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="explorer-body">
+            <aside class="sidebar" id="sidebar">
+                <div class="side-search">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.3-4.3" />
+                    </svg>
+                    <input type="text" id="treeSearch" placeholder="Search files…" autocomplete="off" spellcheck="false" />
+                    <button id="treeClear" aria-label="Clear search">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                            <path d="M18 6L6 18M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="side-head">
+                    <span class="side-title" id="sideTitle">Files</span>
+                    <button id="loadAllBtn" title="Load every folder (uses GitHub API quota)">Load all</button>
+                </div>
+                <div class="tree" id="tree"></div>
+                <div class="tree-status" id="treeStatus"></div>
+            </aside>
+
+            <button id="sideOverlay" aria-label="Close sidebar"></button>
+            <div id="toast" role="status" aria-live="polite"></div>
+
+            <section class="content">
+                <div class="content-bar">
+                    <button id="openSidebar">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M3 6h18M3 12h18M3 18h12" />
+                        </svg>
+                        Files
+                    </button>
+                    <nav id="crumbs" aria-label="Breadcrumb"></nav>
+                    <div class="file-actions" id="fileActions"></div>
+                </div>
+                <div class="preview" id="preview"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- GitHub token modal -->
+    <div class="modal-backdrop" id="tokenModal" hidden>
+        <div class="modal-card">
+            <div class="modal-head">
+                <b>GitHub Token</b>
+                <button class="modal-close" id="tokenModalClose" aria-label="Close">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <p class="modal-intro">The GitHub API allows 60 requests/hour without a token. Adding a personal access token raises that to <b>5,000</b> — stored only in this browser (localStorage), never sent anywhere except GitHub.</p>
+            <div id="modalTokenBox"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-line"><b>Saveetha Labs</b></div>
+            <div class="footer-sub">Student-built open-source resources · Explore any course repository</div>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../docs.html">Docs</a>
+                <a href="https://github.com/saveetha-labs" target="_blank" rel="noopener">GitHub Org</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-powered">
+                Powered by
+                <b>GitHub API</b>
+                · Maintained with ❤️ by students
+            </div>
+            <div class="disclaimer-box">
+                <b>Tip:</b> open any repository with <code>/?repo=REPO_NAME</code> — e.g. <code>/?repo=CSA04-OperatingSystems</code>.
+                Data is fetched from the public GitHub API and cached locally for a few minutes.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        'use strict';
+
+        /* ============================================================
+           0. Constants & URL parsing (query params are UNTRUSTED input)
+           ============================================================ */
+        const OWNER = 'saveetha-labs';
+        const BRANCH = 'main';
+        const GITHUB_ORG = 'https://github.com/saveetha-labs';
+        const HUB_URL = 'https://saveetha-labs.github.io/';
+
+        const params = new URLSearchParams(window.location.search);
+        const rawRepo = (params.get('repo') || '').trim();
+        const REPO = /^[A-Za-z0-9._-]{1,100}$/.test(rawRepo) ? rawRepo : '';
+
+        const TTL_CONTENTS = 10 * 60 * 1000;  // 10 min
+        const TTL_FILE = 30 * 60 * 1000;      // 30 min
+        const TTL_META = 30 * 60 * 1000;
+        const MAX_FILE_PREVIEW = 1.5 * 1024 * 1024; // 1.5 MB text cap
+        const MAX_LOAD_DIRS = 80;             // deep-load budget
+
+        /* ============================================================
+           1. URL builders (repo name is validated + encoded everywhere)
+           ============================================================ */
+        const enc = (s) => encodeURIComponent(String(s));
+        const encPath = (p) => String(p).split('/').map(encodeURIComponent).join('/');
+
+        const apiContentsUrl = (path) =>
+            `https://api.github.com/repos/${enc(OWNER)}/${enc(REPO)}/contents/${path ? encPath(path) : ''}?ref=${enc(BRANCH)}`;
+        const apiRepoUrl = () =>
+            `https://api.github.com/repos/${enc(OWNER)}/${enc(REPO)}`;
+        const rawUrl = (path) =>
+            `https://raw.githubusercontent.com/${enc(OWNER)}/${enc(REPO)}/${enc(BRANCH)}/${encPath(path)}`;
+        const ghRepoUrl = () => `https://github.com/${enc(OWNER)}/${enc(REPO)}`;
+        const ghFileUrl = (path) =>
+            `https://github.com/${enc(OWNER)}/${enc(REPO)}/blob/${enc(BRANCH)}/${encPath(path)}`;
+        const liveUrl = () => `${HUB_URL}${enc(REPO)}/`;
+
+        /* ============================================================
+           2. Escaping / helpers
+           ============================================================ */
+        const esc = (s) => String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+        const fmtSize = (n) => {
+            if (n == null) return '';
+            if (n < 1024) return n + ' B';
+            if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+            return (n / 1048576).toFixed(1) + ' MB';
+        };
+
+        const fmtDate = (iso) => {
+            if (!iso) return '';
+            try {
+                const d = new Date(iso);
+                return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+            } catch (e) { return ''; }
+        };
+
+        /* ============================================================
+           3. localStorage cache — repo-specific keys, never shared
+           ============================================================ */
+        const cacheKey = (kind, path) =>
+            `gh_cache_${OWNER}_${REPO}_${kind}_${path ? path : '_root'}`;
+
+        function cacheGet(key, ttl) {
+            try {
+                const raw = localStorage.getItem(key);
+                if (!raw) return null;
+                const o = JSON.parse(raw);
+                if (!o || !o.t || !o.d) return null;
+                if (Date.now() - o.t > ttl) { localStorage.removeItem(key); return null; }
+                return o.d;
+            } catch (e) { return null; }
+        }
+
+        function cacheSet(key, data) {
+            try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data })); } catch (e) { /* quota */ }
+        }
+
+        /* ---------- GitHub token (stored in localStorage, raises limit to 5,000 req/hr) ---------- */
+        const TOKEN_KEY = 'sl-gh-token';
+        const getToken = () => { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } };
+        const setToken = (t) => { try { if (t) localStorage.setItem(TOKEN_KEY, t.trim()); else localStorage.removeItem(TOKEN_KEY); } catch (e) { /* ignore */ } };
+        const hasToken = () => !!getToken();
+
+        /* ============================================================
+           4. GitHub API fetching with typed errors
+           ============================================================ */
+        class ApiError extends Error {
+            constructor(code, message, resetAt) {
+                super(message);
+                this.code = code;       // 'not_found' | 'rate' | 'network' | 'http'
+                this.resetAt = resetAt || null;
+            }
+        }
+
+        async function fetchApi(url, cacheTtl, cacheKeyStr) {
+            const cached = cacheGet(cacheKeyStr, cacheTtl);
+            if (cached !== null) return cached;
+
+            const headers = { Accept: 'application/vnd.github+json' };
+            const token = getToken();
+            if (token) headers.Authorization = 'Bearer ' + token;
+
+            let res;
+            try {
+                res = await fetch(url, { headers });
+            } catch (e) {
+                throw new ApiError('network', 'Network error while reaching the GitHub API.');
+            }
+
+            if (!res.ok) {
+                if (res.status === 404) throw new ApiError('not_found', 'This repository does not exist (or is private).');
+
+                let resetAt = null;
+                try {
+                    const rt = res.headers.get('X-RateLimit-Reset');
+                    if (rt) resetAt = new Date(parseInt(rt, 10) * 1000);
+                } catch (e) { /* ignore */ }
+
+                if (res.status === 403 || res.status === 429) {
+                    const remaining = res.headers.get('X-RateLimit-Remaining');
+                    if (remaining === '0' || res.status === 429) {
+                        throw new ApiError('rate', 'GitHub API rate limit reached.', resetAt);
+                    }
+                }
+                throw new ApiError('http', `GitHub API responded with HTTP ${res.status}.`);
+            }
+
+            let data;
+            try { data = await res.json(); } catch (e) {
+                throw new ApiError('http', 'GitHub API returned an unreadable response.');
+            }
+
+            if (data && typeof data.message === 'string' && /rate limit/i.test(data.message)) {
+                throw new ApiError('rate', 'GitHub API rate limit reached.', null);
+            }
+
+            cacheSet(cacheKeyStr, data);
+            return data;
+        }
+
+        const fetchContents = (path) =>
+            fetchApi(apiContentsUrl(path), TTL_CONTENTS, cacheKey('contents', path));
+
+        /* Raw file contents are plain text — NEVER run them through fetchApi (it parses JSON). */
+        async function fetchRawText(path) {
+            const key = cacheKey('file', path);
+            const cached = cacheGet(key, TTL_FILE);
+            if (cached !== null) return cached;
+
+            let res;
+            try {
+                res = await fetch(rawUrl(path));
+            } catch (e) {
+                throw new ApiError('network', 'Network error while fetching the file.');
+            }
+
+            if (!res.ok) {
+                if (res.status === 404) throw new ApiError('not_found', 'File not found in the repository.');
+                throw new ApiError('http', `Could not fetch the file (HTTP ${res.status}).`);
+            }
+
+            const text = await res.text();
+            cacheSet(key, text);
+            return text;
+        }
+
+        /* ============================================================
+           5. Icons
+           ============================================================ */
+        const icons = {
+            folder: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10,4H4C2.9,4 2.01,4.9 2.01,6L2,18c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2V8c0,-1.1 -0.9,-2 -2,-2h-8l-2,-2z"/></svg>',
+            file: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6,2C4.9,2 4.01,2.9 4.01,4L4,20c0,1.1 0.89,2 1.99,2H18c1.1,0 2,-0.9 2,-2V8l-6,-6H6zM13,9V3.5L18.5,9H13z"/></svg>',
+            chev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>',
+            home: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>',
+            github: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.74.5 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.39-3.87-1.39-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.73-1.52-2.56-.29-5.25-1.28-5.25-5.72 0-1.27.45-2.3 1.18-3.11-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.19a11.06 11.06 0 0 1 5.79 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.11 0 4.45-2.7 5.42-5.28 5.7.41.36.78 1.08.78 2.18v3.23c0 .31.2.68.8.56a11.53 11.53 0 0 0 7.85-10.95C23.5 5.74 18.27.5 12 .5z"/></svg>',
+            raw: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+            external: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>',
+            star: '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+            fork: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M12 9v6M8.2 16.2 7 17.5M15.8 16.2 17 17.5"/></svg>',
+            searchNo: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+            // File-type icons (Material Design, filled)
+            pdf: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20,2L8,2c-1.1,0 -2,0.9 -2,2v12c0,1.1 0.9,2 2,2h12c1.1,0 2,-0.9 2,-2L22,4c0,-1.1 -0.9,-2 -2,-2zM12.5,11.5h-1L11.5,8h1v3.5zM15.5,11.5h-1L14.5,8h1v3.5zM17.5,12.5v3h-1.5v-2h-1.5v2h-1.5v-3c0,-0.28 0.22,-0.5 0.5,-0.5h3.5c0.28,0 0.5,0.22 0.5,0.5zM4,6L2,6v14c0,1.1 0.9,2 2,2h14v-2L4,20L4,6z"/></svg>',
+            image: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21,19V5c0,-1.1 -0.9,-2 -2,-2H5c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2zM8.5,13.5l2.5,3.01L14.5,12l4.5,6H5l3.5,-4.5z"/></svg>',
+            code: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4,16.6L4.8,12l4.6,-4.6L8,6l-6,6l6,6l1.4,-1.4zM14.6,16.6l4.6,-4.6l-4.6,-4.6L16,6l6,6l-6,6l-1.4,-1.4z"/></svg>',
+            text: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14,17H4v2h10v-2zM20,8H4v2h16V8zM4,13h16v-2H4v2z"/></svg>',
+            markdown: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14,2H6C4.9,2 4.01,2.9 4.01,4L4,20c0,1.1 0.89,2 1.99,2H18c1.1,0 2,-0.9 2,-2V8l-6,-6zM16,18H8v-2h8V18zM16,14H8v-2h8V14zM13,9V3.5L18.5,9H13z"/></svg>',
+            json: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4,7v2c0,0.55 -0.45,1 -1,1L2,10v2h1c0.55,0 1,0.45 1,1v2c0,1.65 1.35,3 3,3h3v-2L7,17c-0.55,0 -1,-0.45 -1,-1v-2c0,-0.55 -0.45,-1 -1,-1L4,13v-2c0.55,0 1,-0.45 1,-1L5,8c0,-0.55 0.45,-1 1,-1h3L9,5L7,5c-1.65,0 -3,1.35 -3,3zM20,7v2c0,0.55 0.45,1 1,1h1v2h-1c-0.55,0 -1,0.45 -1,1v2c0,1.65 -1.35,3 -3,3h-3v-2l3,0c0.55,0 1,-0.45 1,-1v-2c0,-0.55 0.45,-1 1,-1h1v-2h-1c-0.55,0 -1,-0.45 -1,-1L17,8c0,-0.55 -0.45,-1 -1,-1h-3L13,5h3c1.65,0 3,1.35 3,3z"/></svg>',
+            config: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3,17v2h6v-2L3,17zM3,5v2h10L13,5L3,5zM13,21v-2h8v-2h-8v-2h-2v6h2zM7,9v2L3,11v2h4v2h2L9,9L7,9zM21,13v-2L11,11v2h10zM15,9h2L17,7h4L21,5h-4L17,3h-2v6z"/></svg>',
+            doc: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19,3L5,3c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2L21,5c0,-1.1 -0.9,-2 -2,-2zM14,17L7,17v-2h7L14,17zM17,13L7,13v-2h10L17,13zM17,9L7,9L7,7h10L17,9z"/></svg>',
+            sheet: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10,10.02h5L15,21h-5L10,10.02zM17,21h3c1.1,0 2,-0.9 2,-2v-9h-5L17,21zM19,3L5,3c-1.1,0 -2,0.9 -2,2v3h5L8,5h2v3h10L20,5c0,-1.1 -0.9,-2 -2,-2zM3,9v10c0,1.1 0.9,2 2,2h3L8,9L3,9z"/></svg>',
+            slides: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10,8v8l5,-4l-5,-4zM19,3L5,3c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2L21,5c0,-1.1 -0.9,-2 -2,-2z"/></svg>',
+            terminal: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20,4L4,4c-1.1,0 -2,0.9 -2,2v12c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,6c0,-1.1 -0.9,-2 -2,-2zM11,17.5l-1.41,-1.41L12.67,13l-3.08,-3.09L11,8.5L16.5,14L11,17.5z"/></svg>',
+            database: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12,3C7.58,3 4,4.79 4,7s3.58,4 8,4s8,-1.79 8,-4S16.42,3 12,3zM4,9v3c0,2.21 3.58,4 8,4s8,-1.79 8,-4L20,9c0,2.21 -3.58,4 -8,4s-8,-1.79 -8,-4zM4,13v3c0,2.21 3.58,4 8,4s8,-1.79 8,-4v-3c0,2.21 -3.58,4 -8,4s-8,-1.79 -8,-4z"/></svg>',
+            archive: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20,2L4,2c-1,0 -2,0.9 -2,2v3.01c0,0.72 0.43,1.34 1,1.69L3,20c0,1.1 1.1,2 2,2h14c0.9,0 2,-0.9 2,-2l0,-11.3c0.57,-0.35 1,-0.97 1,-1.69L22,4C22,2.9 21,2 20,2zM15,14L9,14v-2h6L15,14z"/></svg>',
+            audio: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12,3v10.55c-0.59,-0.34 -1.27,-0.55 -2,-0.55 -2.21,0 -4,1.79 -4,4s1.79,4 4,4 4,-1.79 4,-4L14,7h4L18,3h-6z"/></svg>',
+            video: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18,4l2,4h-3l-2,-4h-2l2,4h-3l-2,-4H8l2,4H7L5,4H4c-1.1,0 -2,0.9 -2,2v12c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2V4h-4z"/></svg>',
+            font: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9.93,13.5h4.14L12,7.98L9.93,13.5zM20.05,2L3.95,2c-1.1,0 -1.95,0.9 -1.95,2L2,20c0,1.1 0.9,2 2,2h16.05c1.1,0 1.95,-0.9 1.95,-2L22,4c0,-1.1 -0.9,-2 -1.95,-2zM17.73,18h-2.22l-1.2,-3.5L9.69,14.5L8.48,18L6.27,18l3.92,-11.01h2.66L17.73,18z"/></svg>',
+            key: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21,10h-8.35C11.83,7.67 9.61,6 7,6c-3.31,0 -6,2.69 -6,6s2.69,6 6,6c2.61,0 4.83,-1.67 5.65,-4L13,14l2,2l2,-2l2,2l4,-4L21,10zM7,15c-1.65,0 -3,-1.35 -3,-3s1.35,-3 3,-3s3,1.35 3,3S8.65,15 7,15z"/></svg>',
+            lock: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18,8h-1L17,6c0,-2.76 -2.24,-5 -5,-5S7,3.24 7,6v2L6,8c-1.1,0 -2,0.9 -2,2v10c0,1.1 0.9,2 2,2h12c1.1,0 2,-0.9 2,-2L20,10c0,-1.1 -0.9,-2 -2,-2zM12,17c-1.1,0 -2,-0.9 -2,-2s0.9,-2 2,-2 2,0.9 2,2S13.1,17 12,17zM15.1,8L8.9,8L8.9,6c0,-1.71 1.39,-3.1 3.1,-3.1s3.1,1.39 3.1,3.1L15.1,8z"/></svg>'
+        };
+
+        /* ============================================================
+           6. DOM refs
+           ============================================================ */
+        const $ = (id) => document.getElementById(id);
+        const els = {
+            navbar: $('navbar'),
+            menuToggle: $('menuToggle'),
+            navLinks: $('navLinks'),
+            themeToggle: $('themeToggle'),
+            stateScreen: $('stateScreen'),
+            explorerWrap: $('explorerWrap'),
+            explorerTitle: $('explorerTitle'),
+            ownerLine: $('ownerLine'),
+            ghRepoBtn: $('ghRepoBtn'),
+            liveBtn: $('liveBtn'),
+            branchChip: $('branchChip'),
+            starsChip: $('starsChip'),
+            forksChip: $('forksChip'),
+            sizeChip: $('sizeChip'),
+            updatedChip: $('updatedChip'),
+            sidebar: $('sidebar'),
+            sideOverlay: $('sideOverlay'),
+            openSidebar: $('openSidebar'),
+            tree: $('tree'),
+            treeStatus: $('treeStatus'),
+            treeSearch: $('treeSearch'),
+            treeClear: $('treeClear'),
+            loadAllBtn: $('loadAllBtn'),
+            sideTitle: $('sideTitle'),
+            crumbs: $('crumbs'),
+            fileActions: $('fileActions'),
+            preview: $('preview')
+        };
+
+        /* ============================================================
+           7. Theme + nav (matches hub behavior)
+           ============================================================ */
+        function applyTheme(t) {
+            document.documentElement.setAttribute('data-theme', t);
+            try { localStorage.setItem('sl-theme', t); } catch (e) { }
+            els.themeToggle.querySelector('.icon-sun').style.display = t === 'light' ? 'none' : 'block';
+            els.themeToggle.querySelector('.icon-moon').style.display = t === 'light' ? 'block' : 'none';
+            const mt = document.querySelector('meta[name="theme-color"]');
+            if (mt) mt.setAttribute('content', t === 'light' ? '#f5f7fb' : '#030712');
+        }
+        applyTheme((document.documentElement.getAttribute('data-theme') || 'dark') === 'light' ? 'light' : 'dark');
+        els.themeToggle.addEventListener('click', () => {
+            applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        });
+
+        window.addEventListener('scroll', () => {
+            els.navbar.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
+        els.menuToggle.addEventListener('click', () => els.navLinks.classList.toggle('open'));
+        document.addEventListener('click', (e) => {
+            if (!els.navLinks.classList.contains('open')) return;
+            if (!els.navLinks.contains(e.target) && !els.menuToggle.contains(e.target)) {
+                els.navLinks.classList.remove('open');
+            }
+        });
+
+        /* ---------- Token modal (nav key button) ---------- */
+        const tokenToggle = document.getElementById('tokenToggle');
+        const tokenModal = document.getElementById('tokenModal');
+
+        function openTokenModal() {
+            const box = document.getElementById('modalTokenBox');
+            box.innerHTML = tokenFormHTML('md');
+            wireTokenForm(box, null, 'md');
+            tokenModal.hidden = false;
+        }
+
+        tokenToggle.addEventListener('click', openTokenModal);
+        document.getElementById('tokenModalClose').addEventListener('click', () => { tokenModal.hidden = true; });
+        tokenModal.addEventListener('click', (e) => {
+            if (e.target === tokenModal) tokenModal.hidden = true;
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !tokenModal.hidden) tokenModal.hidden = true;
+        });
+
+        updateTokenIndicator();
+
+        /* ============================================================
+           8. State screens
+           ============================================================ */
+        function showState(kind, detail) {
+            els.explorerWrap.hidden = true;
+            els.stateScreen.hidden = false;
+            // The bare /repo/ (no ?repo=) only shows the "No repository specified" screen —
+            // keep search engines from indexing that error state.
+            if (!REPO) {
+                let rb = document.querySelector('meta[name="robots"]');
+                if (!rb) {
+                    rb = document.createElement('meta');
+                    rb.name = 'robots';
+                    document.head.appendChild(rb);
+                }
+                rb.setAttribute('content', 'noindex');
+            }
+
+            const states = {
+                norepo: {
+                    icon: 'info',
+                    iconSvg: icons.searchNo,
+                    title: 'No repository specified',
+                    body: 'This explorer loads a repository from the <code>repo</code> URL parameter. ' +
+                        'Open any course repository like this:',
+                    example: 'https://saveetha-labs.github.io/repo/?repo=<b>CSA04-OperatingSystems</b>\nhttps://saveetha-labs.github.io/repo/?repo=<b>CSA13</b>\nhttps://saveetha-labs.github.io/repo/?repo=<b>CSA51</b>',
+                    actions: [
+                        { label: 'Back to Hub', href: HUB_URL, cls: 'btn-primary' },
+                        { label: 'Docs', href: '../docs.html', cls: 'btn-ghost' },
+                        { label: 'GitHub Org', href: GITHUB_ORG, cls: 'btn-ghost' }
+                    ]
+                },
+                notfound: {
+                    icon: 'err',
+                    iconSvg: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
+                    title: 'Repository not found',
+                    body: `We couldn't find <code>${esc(REPO)}</code> under <code>saveetha-labs</code>. ` +
+                        'It may not exist, may be private, or the name may be misspelled.',
+                    actions: [
+                        { label: 'Back to Hub', href: HUB_URL, cls: 'btn-primary' },
+                        { label: 'Browse the Org', href: GITHUB_ORG, cls: 'btn-ghost' },
+                        { label: 'Docs', href: '../docs.html', cls: 'btn-ghost' }
+                    ]
+                },
+                rate: {
+                    icon: 'err',
+                    iconSvg: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></svg>',
+                    title: 'GitHub API rate limit reached',
+                    body: (detail && detail.resetAt
+                        ? `The unauthenticated GitHub API allows 60 requests per hour. This limit resets at <code>${esc(detail.resetAt.toLocaleTimeString())}</code>. `
+                        : 'The unauthenticated GitHub API allows 60 requests per hour. Please wait a bit and try again. ') +
+                        'Cached files are still available locally.',
+                    token: true,
+                    actions: [
+                        { label: 'Retry', href: null, cls: 'btn-primary', retry: true },
+                        { label: 'Back to Hub', href: HUB_URL, cls: 'btn-ghost' }
+                    ]
+                },
+                network: {
+                    icon: 'err',
+                    iconSvg: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+                    title: 'Network error',
+                    body: 'We couldn\u2019t reach the GitHub API. Check your connection and try again.',
+                    actions: [
+                        { label: 'Retry', href: null, cls: 'btn-primary', retry: true },
+                        { label: 'Back to Hub', href: HUB_URL, cls: 'btn-ghost' }
+                    ]
+                },
+                generic: {
+                    icon: 'err',
+                    iconSvg: '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9a2 2 0 0 1 3.4 0l7 12A2 2 0 0 1 19 19H5a2 2 0 0 1-1.7-3z"/><path d="M12 9v4M12 17h.01"/></svg>',
+                    title: 'Something went wrong',
+                    body: `<code>${esc(detail && detail.message ? detail.message : 'Unexpected error')}</code>`,
+                    token: true,
+                    actions: [
+                        { label: 'Retry', href: null, cls: 'btn-primary', retry: true },
+                        { label: 'Back to Hub', href: HUB_URL, cls: 'btn-ghost' }
+                    ]
+                }
+            };
+
+            const s = states[kind] || states.generic;
+            document.title = `${s.title} — Saveetha Labs`;
+
+            const actions = s.actions.map((a) => {
+                const el = `<a class="btn ${a.cls}" ${a.href ? `href="${esc(a.href)}" target="_blank" rel="noopener"` : ''} data-retry="${a.retry ? '1' : ''}">${esc(a.label)}</a>`;
+                return el;
+            }).join('');
+
+            els.stateScreen.innerHTML =
+                `<div class="state-card">
+                    <div class="state-icon ${s.icon}">${s.iconSvg}</div>
+                    <h2>${esc(s.title)}</h2>
+                    <p>${s.body}</p>
+                    ${s.example ? `<div class="state-example">${s.example}</div>` : ''}
+                    ${s.token ? `<div class="token-box" id="stateTokenBox"></div>` : ''}
+                    <div class="state-actions">${actions}</div>
+                </div>`;
+
+            els.stateScreen.querySelectorAll('[data-retry="1"]').forEach((b) => {
+                b.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    b.textContent = 'Retrying…';
+                    init();
+                });
+            });
+
+            if (s.token) {
+                const box = els.stateScreen.querySelector('#stateTokenBox');
+                if (box) {
+                    box.innerHTML = tokenFormHTML('st');
+                    wireTokenForm(box, () => init(), 'st'); // after saving a valid token, retry immediately
+                }
+            }
+        }
+
+        /* ============================================================
+           8b. GitHub token form (used by state screens + nav modal)
+           ============================================================ */
+        function tokenFormHTML(prefix) {
+            const p = prefix || 'tk';
+            const has = hasToken();
+            return `
+                <div class="token-box" id="${p}-tokenBox">
+                    <div class="token-head">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L21 2M15 6.8l2.2 2.2"/></svg>
+                        <div>
+                            <b>GitHub Token</b>
+                            <span class="token-state ${has ? 'on' : 'off'}">${has ? '✓ Connected — 5,000 requests/hour' : 'Not set — 60 requests/hour'}</span>
+                        </div>
+                    </div>
+                    <div class="token-row">
+                        <input type="password" id="${p}-tokenInput" aria-label="GitHub personal access token" autocomplete="off" spellcheck="false"
+                            placeholder="${has ? 'Paste a new token to replace the saved one' : 'ghp_… or github_pat_…'}" />
+                        <button type="button" class="btn btn-primary btn-sm" id="${p}-tokenSave">${has ? 'Replace' : 'Save token'}</button>
+                        ${has ? `<button type="button" class="btn btn-ghost btn-sm" id="${p}-tokenClear">Clear</button>` : ''}
+                    </div>
+                    <div class="token-status" id="${p}-tokenStatus" hidden></div>
+                    <details class="token-help">
+                        <summary>How to create a GitHub token (2 minutes)</summary>
+                        <ol>
+                            <li>Open <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a> and sign in.</li>
+                            <li>Click <b>Generate new token</b> → <b>Generate new token (classic)</b>.</li>
+                            <li>Name it (e.g. “Saveetha Explorer”) and pick an expiration.</li>
+                            <li>Tick only the <b>public_repo</b> scope — the explorer just reads public files.</li>
+                            <li>Click <b>Generate token</b> at the bottom and copy the value (it’s shown only once).</li>
+                            <li>Paste it above and click <b>Save token</b>. It’s stored only in this browser’s localStorage.</li>
+                        </ol>
+                    </details>
+                </div>`;
+        }
+
+        function wireTokenForm(root, onSaved, prefix) {
+            const p = prefix || 'tk';
+            const input = root.querySelector('#' + p + '-tokenInput');
+            const save = root.querySelector('#' + p + '-tokenSave');
+            const clear = root.querySelector('#' + p + '-tokenClear');
+            const status = root.querySelector('#' + p + '-tokenStatus');
+
+            const showStatus = (msg, ok) => {
+                status.hidden = false;
+                status.textContent = msg;
+                status.className = 'token-status ' + (ok ? 'ok' : 'err');
+            };
+
+            const finishSave = (label) => {
+                save.disabled = false;
+                save.textContent = label;
+            };
+
+            save.addEventListener('click', async () => {
+                const val = (input.value || '').trim();
+                if (!val) { showStatus('Paste your token first, then click Save.', false); return; }
+                save.disabled = true;
+                save.textContent = 'Verifying…';
+                try {
+                    const res = await fetch('https://api.github.com/rate_limit', {
+                        headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + val }
+                    });
+                    if (!res.ok) {
+                        const body = await res.json().catch(() => null);
+                        showStatus(body && body.message
+                            ? 'Token rejected: ' + body.message
+                            : 'Token rejected (HTTP ' + res.status + '). Double-check the scope and value.', false);
+                        finishSave('Save token');
+                        return;
+                    }
+                    setToken(val);
+                    input.value = '';
+                    showStatus('Token saved ✓ — you now get 5,000 requests/hour.', true);
+                    updateTokenIndicator();
+                    finishSave('Saved ✓');
+                    if (onSaved) onSaved();
+                } catch (e) {
+                    showStatus('Couldn\u2019t verify the token (network error). Try again.', false);
+                    finishSave('Save token');
+                }
+            });
+
+            if (clear) {
+                clear.addEventListener('click', () => {
+                    setToken('');
+                    updateTokenIndicator();
+                    // Re-render with the updated state, then surface the confirmation on the fresh status element.
+                    const box = root.querySelector('[id$="-tokenBox"], #tokenBox');
+                    if (box) {
+                        const prefix = box.id.replace('-tokenBox', '').replace('tokenBox', 'tk');
+                        box.outerHTML = tokenFormHTML(prefix);
+                        wireTokenForm(root, onSaved, prefix);
+                        const fresh = root.querySelector('#' + prefix + '-tokenStatus');
+                        if (fresh) {
+                            fresh.hidden = false;
+                            fresh.textContent = 'Token removed — back to 60 requests/hour.';
+                            fresh.className = 'token-status ok';
+                        }
+                    }
+                });
+            }
+        }
+
+        function updateTokenIndicator() {
+            const btn = document.getElementById('tokenToggle');
+            if (btn) btn.classList.toggle('token-set', hasToken());
+        }
+
+        /* ============================================================
+           9. App state
+           ============================================================ */
+        const app = {
+            dirCache: new Map(),   // path -> array of contents items (validated)
+            currentPath: '',       // currently open file path
+            currentDir: '',        // currently browsed folder path
+            searchMode: false,
+            deepLoaded: false,
+            rootReady: false,
+            activeRowEl: null
+        };
+
+        function setStatus(msg, isErr) {
+            els.treeStatus.textContent = msg || '';
+            els.treeStatus.style.color = isErr ? 'var(--danger)' : '';
+        }
+
+        let toastTimer = null;
+        function showToast(msg, isErr) {
+            const t = document.getElementById('toast');
+            if (!t) return;
+            t.textContent = msg;
+            t.classList.toggle('err', !!isErr);
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 4200);
+        }
+
+        function setTitle() {
+            document.title = `${REPO} — Explorer`;
+            els.explorerTitle.textContent = `${REPO} Explorer`;
+            els.ownerLine.innerHTML = `${esc(OWNER)} / <b>${esc(REPO)}</b>`;
+            els.branchChip.innerHTML = `branch: <b>${esc(BRANCH)}</b>`;
+        }
+
+        function setLinks() {
+            els.ghRepoBtn.href = ghRepoUrl();
+            els.liveBtn.href = liveUrl();
+        }
+
+        async function loadRepoMeta() {
+            try {
+                const meta = await fetchApi(apiRepoUrl(), TTL_META, cacheKey('meta', '_repo'));
+                if (meta && meta.stargazers_count != null) {
+                    els.starsChip.hidden = false;
+                    els.starsChip.innerHTML = `${icons.star} <b>${meta.stargazers_count}</b>`;
+                    els.forksChip.hidden = false;
+                    els.forksChip.innerHTML = `${icons.fork} <b>${meta.forks_count}</b>`;
+                    if (meta.default_branch) els.branchChip.innerHTML = `branch: <b>${esc(meta.default_branch)}</b>`;
+                }
+                if (meta && meta.size) {
+                    els.sizeChip.hidden = false;
+                    els.sizeChip.textContent = `${Math.max(1, Math.round(meta.size / 1024))} MB`;
+                }
+                if (meta && meta.updated_at) {
+                    els.updatedChip.hidden = false;
+                    els.updatedChip.textContent = `Updated ${fmtDate(meta.updated_at)}`;
+                }
+            } catch (e) { /* non-fatal */ }
+        }
+
+        /* ============================================================
+           10. File classification
+           ============================================================ */
+        const EXT_KIND = {
+            md: 'md', markdown: 'md',
+            png: 'img', jpg: 'img', jpeg: 'img', gif: 'img', webp: 'img', svg: 'img', bmp: 'img', ico: 'img', avif: 'img',
+            pdf: 'pdf',
+            docx: 'office', xlsx: 'office', pptx: 'office',
+            html: 'html', htm: 'html',
+            txt: 'text', log: 'text', csv: 'text', tsv: 'text', ini: 'text', cfg: 'text', conf: 'text', env: 'text',
+            properties: 'text', gitignore: 'text', dockerignore: 'text',
+            json: 'code', yml: 'code', yaml: 'code', xml: 'code', toml: 'code',
+            js: 'code', mjs: 'code', cjs: 'code', jsx: 'code', ts: 'code', tsx: 'code',
+            css: 'code', scss: 'code', less: 'code',
+            py: 'code', java: 'code', c: 'code', h: 'code', cpp: 'code', hpp: 'code', cc: 'code',
+            cs: 'code', go: 'code', rb: 'code', rs: 'code', php: 'code', sh: 'code', bash: 'code',
+            zsh: 'code', bat: 'code', ps1: 'code', sql: 'code', kt: 'code', kts: 'code', swift: 'code',
+            lua: 'code', r: 'code', pl: 'code', scala: 'code', dart: 'code', gradle: 'code', vue: 'code', svelte: 'code'
+        };
+
+        const PRISM_LANG = {
+            json: 'json', yml: 'yaml', yaml: 'yaml', toml: 'ini', xml: 'markup',
+            js: 'javascript', mjs: 'javascript', cjs: 'javascript', jsx: 'jsx', ts: 'typescript', tsx: 'tsx',
+            css: 'css', scss: 'scss', less: 'css',
+            py: 'python', java: 'java', c: 'c', h: 'c', cpp: 'cpp', hpp: 'cpp', cc: 'cpp',
+            cs: 'csharp', go: 'go', rb: 'ruby', rs: 'rust', php: 'php', sh: 'bash', bash: 'bash',
+            zsh: 'bash', bat: 'bash', ps1: 'powershell', sql: 'sql', kt: 'kotlin', kts: 'kotlin',
+            swift: 'swift', lua: 'lua', r: 'r', gradle: 'groovy', vue: 'markup', svelte: 'markup'
+        };
+
+        const OFFICE_EXT = { docx: 'Word', xlsx: 'Excel', pptx: 'PowerPoint' };
+
+        function classifyFile(name) {
+            const lower = name.toLowerCase();
+            const dot = lower.lastIndexOf('.');
+            const ext = dot >= 0 ? lower.slice(dot + 1) : lower;
+            return EXT_KIND[ext] || 'text';
+        }
+
+        /* ============================================================
+           11. Tree rendering (lazy folder expansion)
+           ============================================================ */
+        function nameOnly(p) { return p.split('/').pop(); }
+
+        function guessMime(name) {
+            const ext = name.split('.').pop().toLowerCase();
+            const map = {
+                html: 'text/html', htm: 'text/html', css: 'text/css',
+                js: 'text/javascript', mjs: 'text/javascript', ts: 'text/typescript',
+                json: 'application/json', xml: 'application/xml',
+                md: 'text/markdown', txt: 'text/plain', csv: 'text/csv',
+                py: 'text/x-python', java: 'text/x-java', c: 'text/x-c',
+                cpp: 'text/x-c++', h: 'text/x-c', cs: 'text/x-csharp',
+                go: 'text/x-go', rb: 'text/x-ruby', rs: 'text/x-rust',
+                sh: 'text/x-shellscript', bash: 'text/x-shellscript',
+                sql: 'application/sql', yaml: 'text/yaml', yml: 'text/yaml',
+                png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg',
+                gif: 'image/gif', svg: 'image/svg+xml', webp: 'image/webp',
+                pdf: 'application/pdf', zip: 'application/zip',
+            };
+            return map[ext] || 'application/octet-stream';
+        }
+
+        async function loadDir(path) {
+            if (app.dirCache.has(path)) return app.dirCache.get(path);
+            const items = await fetchContents(path);
+            if (!Array.isArray(items)) throw new ApiError('http', 'Unexpected API payload.');
+            const clean = items
+                .filter((it) => it && typeof it.name === 'string')
+                .map((it) => ({
+                    name: it.name,
+                    path: typeof it.path === 'string' ? it.path : (path ? path + '/' : '') + it.name,
+                    type: it.type === 'dir' ? 'dir' : 'file',
+                    size: typeof it.size === 'number' ? it.size : 0
+                }))
+                .sort((a, b) => {
+                    if (a.type !== b.type) return a.type === 'dir' ? -1 : 1;
+                    return a.name.localeCompare(b.name);
+                });
+            app.dirCache.set(path, clean);
+            return clean;
+        }
+
+        function dirIcon() { return icons.folder; }
+        function fileIcon(name) {
+            if (!name) return icons.file;
+            const ext = name.split('.').pop().toLowerCase();
+            const map = {
+                pdf: 'pdf',
+                doc: 'doc', docx: 'doc', rtf: 'doc', odt: 'doc',
+                xls: 'sheet', xlsx: 'sheet', csv: 'sheet', ods: 'sheet',
+                ppt: 'slides', pptx: 'slides', odp: 'slides',
+                png: 'image', jpg: 'image', jpeg: 'image', gif: 'image',
+                svg: 'image', webp: 'image', bmp: 'image', ico: 'image',
+                avif: 'image', tiff: 'image', psd: 'image',
+                js: 'code', mjs: 'code', cjs: 'code', ts: 'code', jsx: 'code', tsx: 'code',
+                py: 'code', java: 'code', c: 'code', cpp: 'code', h: 'code', hpp: 'code',
+                cs: 'code', go: 'code', rb: 'code', rs: 'code',
+                php: 'code', swift: 'code', kt: 'code', kts: 'code',
+                dart: 'code', lua: 'code', pl: 'code', r: 'code',
+                html: 'code', htm: 'code', vue: 'code', svelte: 'code',
+                css: 'code', scss: 'code', sass: 'code', less: 'code',
+                sh: 'terminal', bash: 'terminal', zsh: 'terminal', fish: 'terminal',
+                bat: 'terminal', cmd: 'terminal',
+                sql: 'database', db: 'database', sqlite: 'database', sqlite3: 'database',
+                md: 'markdown', mdx: 'markdown', rst: 'markdown',
+                json: 'json', json5: 'json',
+                yaml: 'config', yml: 'config', toml: 'config',
+                ini: 'config', cfg: 'config', conf: 'config',
+                env: 'config', properties: 'config', xml: 'config',
+                dockerfile: 'config', gitignore: 'config', gitattributes: 'config',
+                zip: 'archive', gz: 'archive', tar: 'archive', rar: 'archive',
+                '7z': 'archive', bz2: 'archive', xz: 'archive',
+                mp3: 'audio', wav: 'audio', ogg: 'audio', flac: 'audio',
+                m4a: 'audio', aac: 'audio',
+                mp4: 'video', mkv: 'video', mov: 'video', webm: 'video',
+                avi: 'video', m4v: 'video',
+                ttf: 'font', otf: 'font', woff: 'font', woff2: 'font', eot: 'font',
+                pem: 'key', key: 'key', p12: 'key', pfx: 'key', crt: 'key', pub: 'key',
+                lock: 'lock',
+                txt: 'text', log: 'text',
+            };
+            const key = map[ext];
+            if (!key) return icons.file;
+            // Add CSS class to SVG for color coding
+            return icons[key].replace('<svg ', `<svg class="${key}" `);
+        }
+
+        function buildTreeNode(item, path) {
+            const node = document.createElement('div');
+            node.className = 'tree-node';
+
+            if (item.type === 'dir') {
+                const row = document.createElement('div');
+                row.className = 'tree-row dir';
+                row.setAttribute('data-path', item.path);
+                row.setAttribute('role', 'treeitem');
+                row.tabIndex = 0;
+                row.innerHTML =
+                    `<span class="chev">${icons.chev}</span>` +
+                    `<span class="t-icon">${dirIcon()}</span>` +
+                    `<span class="t-name">${esc(item.name)}</span>` +
+                    `<span class="t-meta"></span>`;
+
+                const children = document.createElement('div');
+                children.className = 'tree-children';
+                children.setAttribute('role', 'group');
+                node.appendChild(row);
+                node.appendChild(children);
+
+                row.addEventListener('click', () => toggleDir(row, children, path));
+                row.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDir(row, children, path); }
+                });
+            } else {
+                const row = document.createElement('div');
+                row.className = 'tree-row file';
+                row.setAttribute('data-path', item.path);
+                row.setAttribute('role', 'treeitem');
+                row.tabIndex = 0;
+                row.innerHTML =
+                    `<span class="chev"></span>` +
+                    `<span class="t-icon">${fileIcon(item.name)}</span>` +
+                    `<span class="t-name">${esc(item.name)}</span>` +
+                    `<span class="t-meta">${fmtSize(item.size)}</span>`;
+                node.appendChild(row);
+
+                row.addEventListener('click', () => {
+                    setActiveRow(row);
+                    openFile(item.path);
+                });
+                row.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveRow(row); openFile(item.path); }
+                });
+            }
+            return node;
+        }
+
+        async function toggleDir(row, children, path, forceOpen) {
+            const willOpen = forceOpen != null ? forceOpen : !children.classList.contains('open');
+            if (willOpen) {
+                children.classList.add('open');
+                row.classList.add('open');
+                if (!children.dataset.loaded) {
+                    children.dataset.loading = '1';
+                    const loader = document.createElement('div');
+                    loader.className = 'tree-loading';
+                    loader.innerHTML = '<span class="spinner"></span><span>Loading…</span>';
+                    children.appendChild(loader);
+                    try {
+                        const items = await loadDir(path);
+                        loader.remove();
+                        delete children.dataset.loading;
+                        children.dataset.loaded = '1';
+                        const frag = document.createDocumentFragment();
+                        items.forEach((it) => frag.appendChild(buildTreeNode(it, it.path)));
+                        children.appendChild(frag);
+                    } catch (e) {
+                        loader.remove();
+                        delete children.dataset.loading;
+                        const errDiv = document.createElement('div');
+                        errDiv.className = 'side-error';
+                        errDiv.textContent = 'Couldn\u2019t load this folder. ' + (e && e.message ? e.message : '');
+                        children.appendChild(errDiv);
+                    }
+                }
+                expandAncestors(row);
+            } else {
+                children.classList.remove('open');
+                row.classList.remove('open');
+            }
+        }
+
+        function expandAncestors(row) {
+            let p = row.parentElement;
+            while (p && p !== els.tree) {
+                if (p.classList.contains('tree-children')) p.classList.add('open');
+                if (p.previousElementSibling && p.previousElementSibling.classList.contains('tree-row')) {
+                    p.previousElementSibling.classList.add('open');
+                }
+                p = p.parentElement;
+            }
+        }
+
+        function setActiveRow(row) {
+            if (app.activeRowEl) app.activeRowEl.classList.remove('active');
+            app.activeRowEl = row;
+            row.classList.add('active');
+        }
+
+        async function renderRootTree() {
+            els.tree.innerHTML = '';
+            setStatus('Loading file tree…');
+            try {
+                const items = await loadDir('');
+                app.rootReady = true;
+                els.tree.innerHTML = '';
+                const frag = document.createDocumentFragment();
+                items.forEach((it) => frag.appendChild(buildTreeNode(it, it.path)));
+                els.tree.appendChild(frag);
+                setStatus('');
+
+                // Auto-open README
+                const readme = items.find((it) => it.type === 'file' && /^readme(\.md|\.markdown|\.txt)?$/i.test(it.name));
+                if (readme) {
+                    openFile(readme.path);
+                } else {
+                    renderDirListing('', items, { welcome: true });
+                }
+            } catch (e) {
+                handleLoadError(e);
+            }
+        }
+
+        /* Deep-load every folder (bounded) so search can cover the whole repo */
+        async function deepLoadAll() {
+            if (app.deepLoaded) return;
+            els.loadAllBtn.disabled = true;
+            els.loadAllBtn.textContent = 'Loading…';
+            setStatus('Scanning all folders…');
+            let dirs = [''];
+            let visited = 0;
+            try {
+                while (dirs.length && visited < MAX_LOAD_DIRS) {
+                    const dir = dirs.shift();
+                    const items = await loadDir(dir);
+                    visited++;
+                    items.forEach((it) => {
+                        if (it.type === 'dir') dirs.push(it.path);
+                    });
+                }
+                app.deepLoaded = true;
+                setStatus(visited >= MAX_LOAD_DIRS ? `Scanned ${visited} folders (limit reached) — expand individual folders to go deeper.` : '');
+                if (els.treeSearch.value.trim()) doSearch(); // refresh results now that more of the tree is loaded
+            } catch (e) {
+                setStatus('Partial scan: ' + (e.message || 'error'), true);
+            } finally {
+                els.loadAllBtn.disabled = false;
+                els.loadAllBtn.textContent = 'Load all';
+            }
+        }
+
+        els.loadAllBtn.addEventListener('click', async () => {
+            await deepLoadAll();
+            if (els.treeSearch.value.trim()) doSearch();
+            else renderRootTree();
+        });
+
+        /* Search: flat result list over deep-loaded dirs */
+        function doSearch() {
+            const q = els.treeSearch.value.trim().toLowerCase();
+            els.treeClear.style.display = q ? 'flex' : 'none';
+            if (!q) {
+                app.searchMode = false;
+                renderRootTree();
+                return;
+            }
+            app.searchMode = true;
+
+            const matches = [];
+            const visited = [];
+            app.dirCache.forEach((items, path) => visited.push(path));
+            app.dirCache.forEach((items) => {
+                items.forEach((it) => {
+                    if (it.name.toLowerCase().includes(q)) {
+                        matches.push(it);
+                    }
+                });
+            });
+
+            els.tree.innerHTML = '';
+            if (matches.length === 0) {
+                els.tree.innerHTML =
+                    `<div class="result-empty">${icons.searchNo}<br><br>No files match \u201c${esc(els.treeSearch.value.trim())}\u201d<br>` +
+                    `<span style="font-size:0.75rem">Try \u201cLoad all\u201d first to search every folder.</span></div>`;
+                return;
+            }
+            const frag = document.createDocumentFragment();
+            matches.slice(0, 200).forEach((it) => {
+                const row = document.createElement('div');
+                row.className = 'tree-row ' + (it.type === 'dir' ? 'dir' : 'file') + ' result-row';
+                const icon = it.type === 'dir' ? dirIcon() : fileIcon(it.name);
+                row.innerHTML =
+                    `<span class="t-icon">${icon}</span>` +
+                    `<span class="t-name">${esc(it.name)}</span>`;
+                const sub = document.createElement('div');
+                sub.className = 'result-path';
+                sub.textContent = it.path || it.name;
+                row.appendChild(sub);
+                if (it.type === 'dir') {
+                    row.addEventListener('click', async () => {
+                        const items = await loadDir(it.path);
+                        renderDirListing(it.path, items, {});
+                    });
+                } else {
+                    row.addEventListener('click', () => openFile(it.path));
+                }
+                frag.appendChild(row);
+            });
+            els.tree.appendChild(frag);
+            if (matches.length > 200) {
+                setStatus(`Showing first 200 of ${matches.length} matches`);
+            } else {
+                setStatus(`${matches.length} match${matches.length === 1 ? '' : 'es'}`);
+            }
+        }
+
+        els.treeSearch.addEventListener('input', () => {
+            if (!app.rootReady) return;
+            if (!app.deepLoaded) deepLoadAll(); // fire-and-forget; results refresh when loaded
+            doSearch();
+        });
+        els.treeClear.addEventListener('click', () => {
+            els.treeSearch.value = '';
+            doSearch();
+        });
+
+        /* ============================================================
+           12. Breadcrumbs
+           ============================================================ */
+        function renderCrumbs(path, isFile) {
+            const parts = path ? path.split('/').filter(Boolean) : [];
+            let html = `<button class="crumb" data-go="" title="Repository root">${icons.home} ${esc(REPO)}</button>`;
+            let acc = '';
+            parts.forEach((seg, i) => {
+                acc = acc ? acc + '/' + seg : seg;
+                const last = i === parts.length - 1;
+                html += `<span class="crumb sep">/</span>`;
+                if (last && isFile) {
+                    html += `<span class="crumb cur" title="${esc(seg)}">${esc(seg)}</span>`;
+                } else {
+                    html += `<button class="crumb" data-go="${esc(acc)}" title="${esc(seg)}">${esc(seg)}</button>`;
+                }
+            });
+            els.crumbs.innerHTML = html;
+            els.crumbs.querySelectorAll('[data-go]').forEach((c) => {
+                c.addEventListener('click', () => {
+                    const dir = c.getAttribute('data-go');
+                    if (!dir) {
+                        // Root → back to README / welcome
+                        els.tree.querySelectorAll('.tree-row.active').forEach(r => r.classList.remove('active'));
+                        app.activeRowEl = null;
+                        renderRootTree();
+                    } else {
+                        openDir(dir);
+                    }
+                });
+            });
+        }
+
+        async function openDir(dir) {
+            app.currentDir = dir;
+            if (app.activeRowEl) { app.activeRowEl.classList.remove('active'); app.activeRowEl = null; }
+            renderCrumbs(dir, false);
+            setPreviewLoading('Loading folder…');
+            try {
+                const items = await loadDir(dir);
+                renderDirListing(dir, items, {});
+            } catch (e) {
+                renderPreviewError(e);
+            }
+        }
+
+        /* ============================================================
+           13. Preview rendering
+           ============================================================ */
+        let pendingObjectUrl = null;
+
+        function setPreviewLoading(msg) {
+            if (pendingObjectUrl) {
+                try { URL.revokeObjectURL(pendingObjectUrl); } catch (e) { /* ignore */ }
+                pendingObjectUrl = null;
+            }
+            els.fileActions.innerHTML = '';
+            els.preview.innerHTML = `<div class="preview-loading"><span class="spinner"></span><span>${esc(msg || 'Loading…')}</span></div>`;
+        }
+
+        /* raw.githubusercontent.com sends X-Frame-Options: deny, so we can't iframe it.
+           Fetch the bytes (CORS is allowed: Access-Control-Allow-Origin: *) and load a blob URL. */
+        async function loadPdfInto(frame, url) {
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const blob = await res.blob();
+                const objUrl = URL.createObjectURL(blob);
+                pendingObjectUrl = objUrl;
+                frame.src = objUrl;
+            } catch (e) {
+                frame.outerHTML = `<div class="preview-error"><h3>Couldn\u2019t load PDF</h3><p>${esc(e.message || 'Network error')}. <a href="${esc(url)}" target="_blank" rel="noopener">Open raw →</a></p></div>`;
+            }
+        }
+
+        function renderPreviewError(e) {
+            els.preview.innerHTML =
+                `<div class="preview-error">
+                    <h3>${e && e.code === 'not_found' ? 'File not found' : 'Couldn\u2019t load this file'}</h3>
+                    <p>${esc(e && e.message ? e.message : 'An unexpected error occurred.')}</p>
+                    <p style="margin-top:14px"><a href="#" onclick="window.location.reload();return false;">Reload page</a></p>
+                </div>`;
+        }
+
+        function renderDirListing(dir, items, opts) {
+            const welcome = opts && opts.welcome;
+            const readme = items.find((it) => it.type === 'file' && /^readme(\.md|\.markdown|\.txt)?$/i.test(it.name));
+
+            els.fileActions.innerHTML = '';
+            els.preview.innerHTML =
+                `<div class="preview-pad">
+                    <div class="welcome">
+                        <div class="big-icon">${icons.folder}</div>
+                        <h2>${welcome ? esc(REPO) : esc(nameOnly(dir))}</h2>
+                        <p>${welcome
+                            ? `Browse <b>${esc(REPO)}</b> — ${items.filter(i => i.type === 'file').length} files across ${items.filter(i => i.type === 'dir').length} folders at the root.`
+                            : `${items.filter(i => i.type === 'file').length} files · ${items.filter(i => i.type === 'dir').length} folders`}</p>
+                    </div>
+                    <div class="folder-grid">
+                        ${items.map((it) => it.type === 'dir'
+                            ? `<div class="f-item dir" data-path="${esc(it.path)}"><span class="f-ic">${dirIcon()}</span><span class="f-name">${esc(it.name)}</span><span class="f-size">folder</span></div>`
+                            : `<div class="f-item" data-path="${esc(it.path)}"><span class="f-ic">${fileIcon(it.name)}</span><span class="f-name">${esc(it.name)}</span><span class="f-size">${fmtSize(it.size)}</span></div>`
+                        ).join('')}
+                    </div>
+                </div>`;
+
+            els.preview.querySelectorAll('.f-item').forEach((el) => {
+                el.addEventListener('click', async () => {
+                    const p = el.getAttribute('data-path');
+                    if (el.classList.contains('dir')) {
+                        try {
+                            const sub = await loadDir(p);
+                            renderDirListing(p, sub, {});
+                        } catch (e) { renderPreviewError(e); }
+                    } else {
+                        openFile(p);
+                    }
+                });
+            });
+
+            if (readme) {
+                const box = document.createElement('div');
+                box.className = 'readme-box';
+                box.innerHTML = `<div class="readme-tab"><span class="rd"></span>README</div>`;
+                const body = document.createElement('div');
+                body.className = 'md-body';
+                body.id = 'readmeBody';
+                box.appendChild(body);
+                els.preview.querySelector('.preview-pad').appendChild(box);
+                loadMarkdownInto(readme.path, body);
+            }
+        }
+
+        async function loadMarkdownInto(path, el) {
+            el.innerHTML = '<div class="preview-loading" style="min-height:120px"><span class="spinner"></span><span>Loading README…</span></div>';
+            try {
+                const text = await fetchRawText(path);
+                el.innerHTML = renderMarkdown(text);
+                highlightCode(el);
+            } catch (e) {
+                el.innerHTML = `<p style="color:var(--muted);font-size:0.85rem">README preview unavailable (${esc(e.message || 'error')}). <a href="${esc(rawUrl(path))}" target="_blank" rel="noopener">Open raw →</a></p>`;
+            }
+        }
+
+        function renderMarkdown(text) {
+            if (window.marked && window.DOMPurify) {
+                try {
+                    const rawHtml = window.marked.parse(text, { gfm: true, breaks: true });
+                    return window.DOMPurify.sanitize(rawHtml, { ADD_ATTR: ['target'] });
+                } catch (e) { /* fall through */ }
+            }
+            // Fallback: plain escaped text
+            return `<pre class="code-block"><span class="plain">${esc(text)}</span></pre>`;
+        }
+
+        function highlightCode(container) {
+            if (!window.Prism) return;
+            try {
+                container.querySelectorAll('pre code').forEach((block) => {
+                    window.Prism.highlightElement(block);
+                });
+            } catch (e) { /* ignore */ }
+        }
+
+        /* ---------- Copy-code button (delegated on the preview pane) ---------- */
+        const COPY_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        const COPY_CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+        let copyResetTimer = null;
+        let copyResetBtn = null;
+
+        function resetCopyBtn() {
+            if (copyResetBtn) {
+                copyResetBtn.classList.remove('copied');
+                copyResetBtn.innerHTML = `${COPY_ICON}<span>Copy</span>`;
+            }
+            copyResetBtn = null;
+            copyResetTimer = null;
+        }
+
+        async function copyCode(text, btn) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    // Fallback for non-secure contexts (plain http / file://)
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.setAttribute('readonly', '');
+                    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
+                }
+                clearTimeout(copyResetTimer);
+                resetCopyBtn();
+                copyResetBtn = btn;
+                btn.classList.add('copied');
+                btn.innerHTML = `${COPY_CHECK}<span>Copied!</span>`;
+                copyResetTimer = setTimeout(resetCopyBtn, 1800);
+            } catch (e) {
+                // Last resort: select the code so the user can copy it manually
+                try {
+                    const pre = btn.closest('.code-frame') && btn.closest('.code-frame').querySelector('.code-block');
+                    const range = document.createRange();
+                    range.selectNodeContents(pre);
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } catch (e2) { /* ignore */ }
+            }
+        }
+
+        els.preview.addEventListener('click', (e) => {
+            const btn = e.target.closest('.copy-btn');
+            if (!btn) return;
+            const pre = btn.closest('.code-frame') && btn.closest('.code-frame').querySelector('.code-block');
+            if (!pre) return;
+            copyCode(pre.innerText || pre.textContent || '', btn);
+        });
+
+        function renderTextPreview(text, lang) {
+            let inner;
+            if (window.Prism && lang && window.Prism.languages[lang]) {
+                let highlighted;
+                try { highlighted = window.Prism.highlight(text, window.Prism.languages[lang], lang); }
+                catch (e) { highlighted = esc(text); }
+                inner = `<code class="language-${esc(lang)}">${highlighted}</code>`;
+            } else {
+                inner = `<span class="plain">${esc(text)}</span>`;
+            }
+            return `<div class="code-frame">` +
+                `<button type="button" class="copy-btn" title="Copy code">${COPY_ICON}<span>Copy</span></button>` +
+                `<pre class="code-block">${inner}</pre></div>`;
+        }
+
+        async function openFile(path) {
+            app.currentPath = path;
+            renderCrumbs(path, true);
+            setPreviewLoading('Loading file…');
+
+            const name = nameOnly(path);
+            const kind = classifyFile(name);
+            const raw = rawUrl(path);
+
+            // Action buttons (text labels hide on small screens — icons stay compact)
+            els.fileActions.innerHTML =
+                `<a class="btn btn-ghost btn-sm" href="${esc(ghFileUrl(path))}" target="_blank" rel="noopener" title="Open on GitHub">${icons.github}<span class="btn-label">GitHub</span></a>` +
+                `<a class="btn btn-ghost btn-sm" href="${esc(raw)}" target="_blank" rel="noopener" title="View raw in new tab">${icons.raw}<span class="btn-label">Raw</span></a>` +
+                `<button type="button" class="btn btn-primary btn-sm" id="downloadBtn" title="Download file"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg><span class="btn-label">Download</span></button>`;
+
+            // Download = real file save. Downloading the file should NEVER open
+            // the raw source in a new tab — that looks like a broken download.
+            // Mobile (esp. iOS) tries the native share/save sheet first; if the
+            // user cancels it we fall through to a reliable blob download.
+            const dlBtn = els.fileActions.querySelector('#downloadBtn');
+            if (dlBtn) {
+                dlBtn.addEventListener('click', async () => {
+                    dlBtn.disabled = true;
+                    dlBtn.style.opacity = '0.6';
+                    try {
+                        const res = await fetch(raw);
+                        if (!res.ok) throw new Error('HTTP ' + res.status);
+                        const blob = await res.blob();
+                        const mimeType = blob.type || guessMime(name);
+
+                        // 1) Mobile: native share/save sheet first
+                        const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || '');
+                        if (isMobile && navigator.share && navigator.canShare) {
+                            const file = new File([blob], name, { type: mimeType });
+                            if (navigator.canShare({ files: [file] })) {
+                                try {
+                                    await navigator.share({ files: [file] });
+                                    return; // saved/shared via the native sheet
+                                } catch (shareErr) { /* cancelled — fall through to blob download */ }
+                            }
+                        }
+
+                        // 2) Reliable blob download (desktop + mobile)
+                        const objUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = objUrl;
+                        a.download = name;
+                        a.style.display = 'none';
+                        document.body.appendChild(a);
+                        a.click();
+                        setTimeout(() => { a.remove(); URL.revokeObjectURL(objUrl); }, 60000);
+                    } catch (e) {
+                        // 3) Never dump raw content into a new tab — show feedback.
+                        // The separate Raw button is the intended "view source" path.
+                        showToast(`Couldn't download ${esc(name)} (${e.message || 'network error'}). Use the Raw button to view the source.`, true);
+                    } finally {
+                        dlBtn.disabled = false;
+                        dlBtn.style.opacity = '';
+                    }
+                });
+            }
+
+            // Binary-style previews (no text fetch needed)
+            if (kind === 'img') {
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span></div>` +
+                    `<div class="preview-img-wrap"><img src="${esc(raw)}" alt="${esc(name)}" /></div>`;
+                const img = els.preview.querySelector('img');
+                img.addEventListener('error', () => {
+                    const tip = document.createElement('div');
+                    tip.className = 'preview-tip';
+                    tip.textContent = 'Image failed to load. ';
+                    const a = document.createElement('a');
+                    a.href = raw;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.textContent = 'Open raw file →';
+                    tip.appendChild(a);
+                    img.closest('.preview-img-wrap').innerHTML = '';
+                    img.closest('.preview-img-wrap').appendChild(tip);
+                });
+                return;
+            }
+            if (kind === 'pdf') {
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">PDF</span></div>` +
+                    `<div class="embed-wrap"><iframe class="embed-frame" id="pdfFrame" title="${esc(name)}"></iframe></div>` +
+                    `<div class="preview-tip" style="padding:10px">Rendered from a local copy (raw.githubusercontent.com can't be framed). If it stays blank, <a href="${esc(raw)}" target="_blank" rel="noopener">open the raw file</a>.</div>`;
+                loadPdfInto(els.preview.querySelector('#pdfFrame'), raw);
+                return;
+            }
+            if (kind === 'office') {
+                const viewer = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(raw);
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">${OFFICE_EXT[name.slice(name.lastIndexOf('.') + 1).toLowerCase()] || 'Office'} preview</span></div>` +
+                    `<iframe class="embed-frame" src="${esc(viewer)}" title="${esc(name)}"></iframe>` +
+                    `<div class="preview-tip" style="padding:10px">Preview rendered by Microsoft Office Online. If it stays blank, <a href="${esc(raw)}" target="_blank" rel="noopener">open the raw file</a>.</div>`;
+                return;
+            }
+            if (kind === 'html') {
+                // HTML: Preview / Code tabs (default = Code, like a code editor)
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">HTML</span></div>` +
+                    `<div class="view-tabs">` +
+                    `<button class="view-tab" data-view="preview" type="button">Preview</button>` +
+                    `<button class="view-tab active" data-view="code" type="button">Code</button>` +
+                    `</div>` +
+                    `<div class="embed-wrap" id="htmlPreviewPane" hidden>` +
+                    `<iframe class="embed-frame" id="htmlFrame" title="${esc(name)}" sandbox="allow-scripts allow-popups"></iframe>` +
+                    `<div class="preview-tip" style="padding:10px">Sandboxed live preview (raw.githubusercontent.com can't be framed, so the page is rendered inline). <a href="${esc(raw)}" target="_blank" rel="noopener">Open raw →</a></div>` +
+                    `</div>` +
+                    `<div class="code-pane" id="htmlCodePane">` +
+                    `<div class="preview-loading" style="min-height:160px"><span class="spinner"></span><span>Loading source…</span></div>` +
+                    `</div>`;
+
+                const previewPane = els.preview.querySelector('#htmlPreviewPane');
+                const codePane = els.preview.querySelector('#htmlCodePane');
+                let previewReady = false;
+                let codeReady = false;
+
+                const loadHtmlCode = (text) => {
+                    if (codeReady) return;
+                    codeReady = true;
+                    codePane.innerHTML = renderTextPreview(text, 'markup');
+                    highlightCode(codePane);
+                };
+                const loadHtmlPreview = (text) => {
+                    if (previewReady) return;
+                    previewReady = true;
+                    const frame = previewPane.querySelector('#htmlFrame');
+                    const dirRaw = raw.slice(0, raw.lastIndexOf('/') + 1);
+                    let doc = text;
+                    const base = `<base href="${esc(dirRaw)}">`;
+                    if (/<head[^>]*>/i.test(doc)) {
+                        doc = doc.replace(/<head([^>]*)>/i, (m, attrs) => `<head${attrs}>${base}`);
+                    } else {
+                        doc = base + doc;
+                    }
+                    frame.srcdoc = doc;
+                };
+
+                fetchRawText(path)
+                    .then((text) => {
+                        // Default view is Code
+                        loadHtmlCode(text);
+                        // Prepare the preview in the background too
+                        loadHtmlPreview(text);
+                    })
+                    .catch((e) => {
+                        codePane.innerHTML = `<div class="preview-error"><h3>Couldn\u2019t load HTML</h3><p>${esc(e.message || 'Network error')}</p></div>`;
+                    });
+
+                els.preview.querySelectorAll('.view-tab').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        els.preview.querySelectorAll('.view-tab').forEach((b) => b.classList.toggle('active', b === btn));
+                        const showPreview = btn.dataset.view === 'preview';
+                        previewPane.hidden = !showPreview;
+                        codePane.hidden = showPreview;
+                    });
+                });
+                return;
+            }
+
+            // Markdown: Preview / Code tabs (default = Preview)
+            if (kind === 'md') {
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">Markdown</span></div>` +
+                    `<div class="view-tabs">` +
+                    `<button class="view-tab active" data-view="preview" type="button">Preview</button>` +
+                    `<button class="view-tab" data-view="code" type="button">Code</button>` +
+                    `</div>` +
+                    `<div class="md-body" id="mdBody"></div>` +
+                    `<div class="code-pane" id="mdCodePane" hidden></div>`;
+                const mdBody = els.preview.querySelector('#mdBody');
+                const codePane = els.preview.querySelector('#mdCodePane');
+                let codeLoaded = false;
+                loadMarkdownInto(path, mdBody);
+                els.preview.querySelectorAll('.view-tab').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        els.preview.querySelectorAll('.view-tab').forEach((b) => b.classList.toggle('active', b === btn));
+                        const showPreview = btn.dataset.view === 'preview';
+                        mdBody.hidden = !showPreview;
+                        codePane.hidden = showPreview;
+                        if (!showPreview && !codeLoaded) {
+                            codeLoaded = true;
+                            codePane.innerHTML = '<div class="preview-loading" style="min-height:160px"><span class="spinner"></span><span>Loading source…</span></div>';
+                            fetchRawText(path)
+                                .then((text) => {
+                                    codePane.innerHTML = renderTextPreview(text, 'markdown');
+                                    highlightCode(codePane);
+                                })
+                                .catch((e) => {
+                                    codePane.innerHTML = `<div class="preview-error"><h3>Couldn\u2019t load source</h3><p>${esc(e.message || 'Network error')}</p></div>`;
+                                });
+                        }
+                    });
+                });
+                return;
+            }
+
+            // Text / code: fetch raw (cached)
+            try {
+                const text = await fetchRawText(path);
+                if (text.length > MAX_FILE_PREVIEW) {
+                    els.preview.innerHTML =
+                        `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">${fmtSize(text.length)}</span></div>` +
+                        `<div class="preview-tip" style="padding:40px 30px">This file is too large to preview (${fmtSize(text.length)}).<br><br>` +
+                        `<a class="btn btn-primary btn-sm" href="${esc(raw)}" target="_blank" rel="noopener">${icons.external} Open raw</a></div>`;
+                    return;
+                }
+                const lang = PRISM_LANG[name.slice(name.lastIndexOf('.') + 1).toLowerCase()] || null;
+                els.preview.innerHTML =
+                    `<div class="file-meta-line"><span class="path-code">${esc(path)}</span><span class="size">${fmtSize(text.length)} · ${esc(lang || 'text')}</span></div>` +
+                    renderTextPreview(text, lang);
+                if (window.Prism && lang) highlightCode(els.preview);
+            } catch (e) {
+                renderPreviewError(e);
+            }
+        }
+
+        /* ============================================================
+           14. Sidebar (mobile drawer)
+           ============================================================ */
+        els.openSidebar.addEventListener('click', () => {
+            els.sidebar.classList.add('open');
+            els.sideOverlay.classList.add('show');
+        });
+        els.sideOverlay.addEventListener('click', closeSidebar);
+        function closeSidebar() {
+            els.sidebar.classList.remove('open');
+            els.sideOverlay.classList.remove('show');
+        }
+
+        /* ============================================================
+           15. Error handling for the root load
+           ============================================================ */
+        function handleLoadError(e) {
+            els.tree.innerHTML = '';
+            if (e instanceof ApiError) {
+                if (e.code === 'not_found') showState('notfound');
+                else if (e.code === 'rate') showState('rate', { resetAt: e.resetAt });
+                else if (e.code === 'network') showState('network');
+                else showState('generic', { message: e.message });
+            } else {
+                showState('generic', { message: e && e.message ? e.message : 'Unexpected error' });
+            }
+        }
+
+        /* ============================================================
+           16. Init
+           ============================================================ */
+        function init() {
+            app.dirCache.clear();
+            app.currentPath = '';
+            app.currentDir = '';
+            app.deepLoaded = false;
+            app.rootReady = false;
+            app.activeRowEl = null;
+            els.treeSearch.value = '';
+            els.treeClear.style.display = 'none';
+
+            if (!REPO) {
+                showState('norepo');
+                return;
+            }
+
+            els.explorerWrap.hidden = false;
+            els.stateScreen.hidden = true;
+
+            setTitle();
+            setLinks();
+            loadRepoMeta();
+            renderRootTree();
+        }
+
+        /* Re-init if the query param changes via back/forward */
+        window.addEventListener('popstate', () => {
+            const p2 = new URLSearchParams(window.location.search);
+            const r2 = (p2.get('repo') || '').trim();
+            if (r2 !== REPO) window.location.reload();
+        });
+
+        /* ============================================================
+           17. Boot
+           ============================================================ */
+        function boot() {
+            init();
+            // PWA / offline support (only on http/https — harmless on file://)
+            if ('serviceWorker' in navigator && /^https?:$/.test(window.location.protocol)) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('../sw.js').catch(() => { /* optional */ });
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', boot);
+        } else {
+            boot();
+        }
+    </script>
+</body>
+
+</html>
