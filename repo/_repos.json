@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-08-12T09:11:17Z",
+  "generated_at": "2026-08-13T04:21:59Z",
   "org": "saveetha-labs",
   "base": "https://saveetha-labs.github.io",
   "repos": [
+    {
+      "name": "CSA08-PythonProgramming",
+      "description": "CSA08: Python Programming",
+      "pushed_at": "2026-08-12T09:37:15Z",
+      "lastmod": "2026-08-12",
+      "default_branch": "main",
+      "github_url": "https://github.com/saveetha-labs/CSA08-PythonProgramming",
+      "page": "https://saveetha-labs.github.io/repo/CSA08-PythonProgramming.html"
+    },
     {
       "name": "CSA09-ProgrammingInJava",
       "description": "CSA09: Programming in Java",
@@ -263,15 +272,6 @@
       "default_branch": "main",
       "github_url": "https://github.com/saveetha-labs/CSA10-SoftwareEngineering",
       "page": "https://saveetha-labs.github.io/repo/CSA10-SoftwareEngineering.html"
-    },
-    {
-      "name": "CSA08-PythonProgramming",
-      "description": "CSA08: Python Programming",
-      "pushed_at": "2026-08-12T06:57:50Z",
-      "lastmod": "2026-08-12",
-      "default_branch": "main",
-      "github_url": "https://github.com/saveetha-labs/CSA08-PythonProgramming",
-      "page": "https://saveetha-labs.github.io/repo/CSA08-PythonProgramming.html"
     },
     {
       "name": "CSA07-ComputerNetworks",

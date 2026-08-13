@@ -3,6 +3,7 @@
   <url><loc>https://saveetha-labs.github.io/</loc><priority>1.0</priority></url>
   <url><loc>https://saveetha-labs.github.io/docs.html</loc><priority>0.8</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/</loc><priority>0.7</priority></url>
+  <url><loc>https://saveetha-labs.github.io/repo/CSA08-PythonProgramming.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA09-ProgrammingInJava.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/UBA49-EngineeringChemistry.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/UBA48-EngineeringPhysics.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
@@ -32,7 +33,6 @@
   <url><loc>https://saveetha-labs.github.io/repo/CSA12-ComputerArchitecture.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA11-ObjectOrientedAnalysisAndDesign.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA10-SoftwareEngineering.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
-  <url><loc>https://saveetha-labs.github.io/repo/CSA08-PythonProgramming.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA07-ComputerNetworks.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA06-DesignAndAnalysisOfAlgorithms.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
   <url><loc>https://saveetha-labs.github.io/repo/CSA05-DatabaseManagementSystems.html</loc><lastmod>2026-08-12</lastmod><priority>0.6</priority></url>
