@@ -25,6 +25,10 @@
     <meta name="twitter:image" content="https://saveetha-labs.github.io/icons/og-banner.png" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
@@ -802,6 +806,8 @@
         }
 
         .repo {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 240px;
             position: relative;
             background: var(--card);
             backdrop-filter: blur(16px);
@@ -813,6 +819,16 @@
             gap: 13px;
             transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
             overflow: hidden;
+        }
+
+        .grid.list-view .repo {
+            contain-intrinsic-size: 0 64px;
+        }
+
+        #contribute,
+        #contact {
+            content-visibility: auto;
+            contain-intrinsic-size: 0 420px;
         }
 
         .repo::after {
@@ -2257,7 +2273,7 @@
     <main>
         <!-- Projects / Resources -->
         <section id="projects">
-            <div class="section-head reveal">
+            <div class="section-head">
                 <span class="eyebrow">Explore</span>
                 <h2>Course Resources</h2>
                 <p>Search by course code or subject — every repository is student-curated, organized by lab sets, and
@@ -2706,7 +2722,7 @@
             const setChips = kb && kb.sets.length ? kb.sets.slice(0, 4) : [];
             const moreSets = kb && kb.sets.length > 4 ? kb.sets.length - 4 : 0;
             return `
-                <div class="repo reveal">
+                <div class="repo">
                     <div class="repo-top">
                         <span class="repo-code">${code}</span>
                         ${updated ? `<span class="repo-updated">updated ${updated}</span>` : ''}
@@ -2742,6 +2758,19 @@
             applyFilter();
         }
 
+        function normalizeStaticRepos(list) {
+            return list.map(r => ({
+                name: r.name,
+                html_url: r.github_url || `https://github.com/saveetha-labs/${r.name}`,
+                description: r.description || '',
+                stargazers_count: r.stargazers_count || 0,
+                forks_count: r.forks_count || 0,
+                language: r.language || '',
+                size: r.size || 0,
+                updated_at: r.pushed_at || r.lastmod || null
+            }));
+        }
+
         function buildPseudoRepos() {
             return kbData.map(k => ({
                 name: k.name,
@@ -2754,7 +2783,23 @@
             }));
         }
 
-        function fetchRepos() {
+        async function fetchRepos() {
+            let loadedStatic = false;
+
+            // 1. Instant load from local static pre-generated repo index (<20ms)
+            try {
+                const staticRes = await fetch('repo/_repos.json');
+                if (staticRes.ok) {
+                    const staticData = await staticRes.json();
+                    if (staticData && Array.isArray(staticData.repos)) {
+                        const staticRepos = normalizeStaticRepos(staticData.repos);
+                        applyRepos(staticRepos);
+                        loadedStatic = true;
+                    }
+                }
+            } catch (err) { }
+
+            // 2. Background live sync from GitHub API for live stars, forks, languages
             fetch('https://api.github.com/users/saveetha-labs/repos?per_page=100&sort=updated')
                 .then(res => {
                     if (!res.ok) throw new Error('GitHub API error');
@@ -2768,14 +2813,15 @@
                     applyRepos(repos);
                 })
                 .catch(() => {
-                    // Fallback: cached copy first, then knowledge-base derived cards
-                    const fallback = cachedRepos && cachedRepos.length ? cachedRepos : (kbData.length ? buildPseudoRepos() : []);
-                    if (fallback.length) {
-                        applyRepos(fallback);
-                        showRateNote();
-                    } else {
-                        grid.innerHTML = '';
-                        showEmpty('Couldn\u2019t load repositories', 'There was a problem reaching the GitHub API. Please try again in a moment.');
+                    if (!loadedStatic) {
+                        const fallback = cachedRepos && cachedRepos.length ? cachedRepos : (kbData.length ? buildPseudoRepos() : []);
+                        if (fallback.length) {
+                            applyRepos(fallback);
+                            showRateNote();
+                        } else {
+                            grid.innerHTML = '';
+                            showEmpty('Couldn\u2019t load repositories', 'There was a problem reaching the GitHub API. Please try again in a moment.');
+                        }
                     }
                 });
         }
@@ -2797,7 +2843,7 @@
 
         function showRateNote() {
             const meta = document.getElementById('resultCount');
-            if (!meta) return;
+            if (!meta || document.getElementById('rateNote')) return;
             const note = document.createElement('div');
             note.id = 'rateNote';
             note.style.cssText = 'display:inline-flex;align-items:center;gap:7px;margin-bottom:14px;padding:8px 14px;border-radius:999px;border:1px solid rgba(245,158,11,0.35);background:rgba(245,158,11,0.08);color:#fbbf24;font-size:0.8rem;font-weight:500';
@@ -2805,14 +2851,19 @@
             meta.prepend(note);
         }
 
+        let searchDebounce = null;
         searchInput.addEventListener('input', () => {
             searchClear.style.display = searchInput.value ? 'flex' : 'none';
-            applyFilter();
+            if (searchDebounce) cancelAnimationFrame(searchDebounce);
+            searchDebounce = requestAnimationFrame(() => {
+                applyFilter();
+            });
         });
 
         searchClear.addEventListener('click', () => {
             searchInput.value = '';
             searchClear.style.display = 'none';
+            if (searchDebounce) cancelAnimationFrame(searchDebounce);
             applyFilter();
             searchInput.focus();
         });

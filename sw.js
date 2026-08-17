@@ -1,5 +1,5 @@
 /* Saveetha Labs service worker — offline-first for static pages */
-const VERSION = 'sl-v1';
+const VERSION = 'sl-v2';
 const CORE_CACHE = `sl-core-${VERSION}`;
 const RUNTIME_CACHE = `sl-runtime-${VERSION}`;
 
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   '/index.html',
   '/docs.html',
   '/repo/index.html',
+  '/repo/_repos.json',
   '/manifest.json',
   '/knowledgebase.txt',
   '/favicon-16x16.png',
